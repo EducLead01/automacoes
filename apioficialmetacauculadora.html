@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Custos | API Oficial Meta · EDUC LEAD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            color: #FFFFFF;
+            scroll-behavior: smooth;
+        }
+
+        .neon-text { color: #00FF88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
+
+        .neon-border {
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+        .neon-border:hover {
+            border-color: #00FF88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .neon-bg {
+            background-color: #00FF88;
+            color: #0A0A0A;
+            transition: all 0.3s ease;
+        }
+        .neon-bg:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .glass {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pulse-neon { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70%  { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
+        /* Slider customizado */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 999px;
+            background: #1A1A1A;
+            outline: none;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #00FF88;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+            transition: box-shadow 0.2s;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.9);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #00FF88;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+            border: none;
+        }
+
+        .tab-active {
+            background-color: #00FF88;
+            color: #0A0A0A;
+        }
+        .tab-inactive {
+            background: transparent;
+            color: #9CA3AF;
+            border: 1px solid #374151;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #1A1A1A; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00FF88; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HEADER -->
+    <header class="glass border-b border-gray-900 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <span class="text-2xl font-black tracking-tighter text-white">
+                    EDUC <span class="neon-text">LEAD</span>
+                </span>
+                <div class="flex items-center space-x-3">
+                    <span class="hidden sm:flex items-center px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold">
+                        <i class="fab fa-meta mr-1.5"></i> Meta Business Partner
+                    </span>
+                    <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20API%20Oficial%20Meta!"
+                       class="neon-bg px-5 py-2.5 rounded-full text-sm font-black uppercase tracking-wide">
+                        <i class="fab fa-whatsapp mr-1.5"></i> Falar agora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="relative pt-28 pb-20 overflow-hidden">
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 30%, rgba(0,255,136,0.07) 0%, transparent 60%);"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-gray-800 text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">
+                <span class="w-2 h-2 rounded-full bg-[#00FF88] mr-2 animate-ping"></span>
+                API Oficial WhatsApp Business · Meta
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-black mb-5 leading-tight">
+                Calculadora de Custos<br><span class="neon-text">API Oficial Meta</span>
+            </h1>
+            <p class="text-gray-400 text-lg mb-4 max-w-2xl mx-auto">
+                Simule em segundos quanto custa enviar mensagens via WhatsApp API Oficial. Sem surpresas, sem taxas escondidas.
+            </p>
+            <a href="#calculadora" class="inline-flex items-center text-[#00FF88] font-bold text-sm mt-2 hover:underline">
+                <i class="fas fa-arrow-down mr-2"></i> Ir para a calculadora
+            </a>
+        </div>
+    </section>
+
+    <!-- TABELA DE PREÇOS -->
+    <section class="py-20 bg-[#0D0D0D]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-3">Transparência total</p>
+                <h2 class="text-3xl lg:text-4xl font-black">Tabela de Preços</h2>
+                <p class="text-gray-400 mt-3 max-w-xl mx-auto text-sm">A API Oficial Meta cobra por tipo de conversa, não por mensagem individual.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+
+                <!-- MARKETING -->
+                <div class="bg-[#1A1A1A] rounded-3xl p-8 border-2 border-[#00FF88] shadow-[0_0_30px_rgba(0,255,136,0.1)] relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00FF88] text-black text-xs font-black px-4 py-1 rounded-full uppercase whitespace-nowrap">Marketing</div>
+                    <div class="flex items-center mb-5 mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-[#00FF88]/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-bullhorn text-[#00FF88] text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">Mensagens de Marketing</p>
+                            <p class="text-gray-500 text-xs">Campanhas e promoções</p>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <span class="text-5xl font-black text-[#00FF88]">R$ 0,50</span>
+                        <span class="text-gray-400 text-sm ml-1">/ mensagem</span>
+                    </div>
+                    <div class="bg-[#00FF88]/5 border border-[#00FF88]/20 rounded-xl p-3 mb-5">
+                        <p class="text-xs text-gray-400">Mínimo: <strong class="text-white">100 mensagens · R$ 50,00</strong></p>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-[#00FF88] mr-2 text-xs"></i> Promoções e ofertas</li>
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-[#00FF88] mr-2 text-xs"></i> Campanhas de lançamento</li>
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-[#00FF88] mr-2 text-xs"></i> Convites e eventos</li>
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-[#00FF88] mr-2 text-xs"></i> Recuperação de carrinho</li>
+                    </ul>
+                </div>
+
+                <!-- UTILIDADE -->
+                <div class="bg-[#1A1A1A] rounded-3xl p-8 border border-gray-800 neon-border relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-700 text-white text-xs font-black px-4 py-1 rounded-full uppercase whitespace-nowrap">Utilidade</div>
+                    <div class="flex items-center mb-5 mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-bell text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-black text-lg">Mensagens de Utilidade</p>
+                            <p class="text-gray-500 text-xs">Notificações e alertas</p>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <span class="text-5xl font-black text-white">R$ 0,05</span>
+                        <span class="text-gray-400 text-sm ml-1">/ mensagem</span>
+                    </div>
+                    <div class="bg-white/5 border border-gray-700 rounded-xl p-3 mb-5">
+                        <p class="text-xs text-gray-400">Mínimo: <strong class="text-white">200 mensagens · R$ 10,00</strong></p>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-blue-400 mr-2 text-xs"></i> Confirmações de pedido</li>
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-blue-400 mr-2 text-xs"></i> Atualizações de status</li>
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-blue-400 mr-2 text-xs"></i> Lembretes e agendamentos</li>
+                        <li class="flex items-center text-sm text-gray-300"><i class="fas fa-check text-blue-400 mr-2 text-xs"></i> Alertas e notificações</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULADORA -->
+    <section id="calculadora" class="py-24 bg-[#111111] relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-[#00FF88] opacity-5 blur-[150px]"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-14">
+                <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-3">Simule agora</p>
+                <h2 class="text-3xl lg:text-4xl font-black">Calculadora de Custos</h2>
+                <p class="text-gray-400 mt-3 text-sm">Arraste os sliders e veja o custo em tempo real</p>
+            </div>
+
+            <div class="glass rounded-[2rem] p-8 lg:p-12 border border-gray-800">
+
+                <!-- TABS -->
+                <div class="flex rounded-xl overflow-hidden border border-gray-800 mb-10 w-fit mx-auto">
+                    <button onclick="setTab('marketing')" id="tab-marketing"
+                        class="px-6 py-3 text-sm font-black uppercase tracking-wide transition tab-active rounded-l-xl">
+                        <i class="fas fa-bullhorn mr-2"></i> Marketing
+                    </button>
+                    <button onclick="setTab('utilidade')" id="tab-utilidade"
+                        class="px-6 py-3 text-sm font-black uppercase tracking-wide transition tab-inactive rounded-r-xl">
+                        <i class="fas fa-bell mr-2"></i> Utilidade
+                    </button>
+                </div>
+
+                <!-- SLIDER -->
+                <div class="mb-10">
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="text-sm font-bold text-gray-300 uppercase tracking-wider">Quantidade de mensagens</label>
+                        <span id="qtd-display" class="text-2xl font-black neon-text">100</span>
+                    </div>
+                    <input type="range" id="slider-qtd"
+                        min="100" max="5000" step="50" value="100"
+                        oninput="calcular()"
+                        class="w-full mb-2">
+                    <div class="flex justify-between text-xs text-gray-600">
+                        <span>100 msgs</span>
+                        <span>5.000 msgs</span>
+                    </div>
+                </div>
+
+                <!-- RESULTADO -->
+                <div class="grid md:grid-cols-3 gap-4 mb-10">
+                    <div class="bg-[#0A0A0A] rounded-2xl p-6 text-center border border-gray-800">
+                        <p class="text-gray-500 text-xs uppercase tracking-widest mb-2">Mensagens</p>
+                        <p id="res-qtd" class="text-3xl font-black text-white">100</p>
+                    </div>
+                    <div class="bg-[#0A0A0A] rounded-2xl p-6 text-center border border-[#00FF88]/30 shadow-[0_0_20px_rgba(0,255,136,0.08)]">
+                        <p class="text-gray-500 text-xs uppercase tracking-widest mb-2">Custo por msg</p>
+                        <p id="res-unit" class="text-3xl font-black text-[#00FF88]">R$ 0,50</p>
+                    </div>
+                    <div class="bg-[#0A0A0A] rounded-2xl p-6 text-center border border-gray-800">
+                        <p class="text-gray-500 text-xs uppercase tracking-widest mb-2">Total estimado</p>
+                        <p id="res-total" class="text-3xl font-black text-white">R$ 50,00</p>
+                    </div>
+                </div>
+
+                <!-- BARRA DE CUSTO VISUAL -->
+                <div class="mb-8">
+                    <div class="flex justify-between text-xs text-gray-500 mb-2">
+                        <span>Custo total</span>
+                        <span id="bar-label">R$ 50,00 / R$ 2.500,00 máx.</span>
+                    </div>
+                    <div class="w-full bg-gray-800 rounded-full h-3">
+                        <div id="barra-custo" class="h-3 rounded-full bg-[#00FF88] transition-all duration-300 shadow-[0_0_8px_rgba(0,255,136,0.6)]" style="width: 2%"></div>
+                    </div>
+                </div>
+
+                <div class="bg-[#00FF88]/5 border border-[#00FF88]/20 rounded-2xl p-5 flex items-start space-x-4">
+                    <i class="fas fa-info-circle text-[#00FF88] text-lg mt-0.5 flex-shrink-0"></i>
+                    <p id="info-box" class="text-gray-400 text-sm leading-relaxed">
+                        Com <strong class="text-white">100 mensagens de marketing</strong>, você alcança 100 contatos com campanhas, promoções ou lançamentos por apenas <strong class="text-[#00FF88]">R$ 50,00</strong>.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="py-24 bg-[#0A0A0A]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-3">Passo a passo</p>
+                <h2 class="text-3xl lg:text-4xl font-black">Como funciona</h2>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-[#00FF88]/10 border border-[#00FF88]/20 flex items-center justify-center mx-auto mb-5">
+                        <span class="text-2xl font-black neon-text">1</span>
+                    </div>
+                    <h4 class="font-black text-base mb-2">Conexão da API</h4>
+                    <p class="text-gray-500 text-sm">Integramos sua conta WhatsApp Business à API Oficial Meta</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-[#00FF88]/10 border border-[#00FF88]/20 flex items-center justify-center mx-auto mb-5">
+                        <span class="text-2xl font-black neon-text">2</span>
+                    </div>
+                    <h4 class="font-black text-base mb-2">Escolha o tipo</h4>
+                    <p class="text-gray-500 text-sm">Selecione entre mensagens de marketing ou utilidade conforme seu objetivo</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-[#00FF88]/10 border border-[#00FF88]/20 flex items-center justify-center mx-auto mb-5">
+                        <span class="text-2xl font-black neon-text">3</span>
+                    </div>
+                    <h4 class="font-black text-base mb-2">Carregue o saldo</h4>
+                    <p class="text-gray-500 text-sm">Adicione créditos de acordo com o volume de envios planejado</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-[#00FF88]/10 border border-[#00FF88]/20 flex items-center justify-center mx-auto mb-5">
+                        <span class="text-2xl font-black neon-text">4</span>
+                    </div>
+                    <h4 class="font-black text-base mb-2">Dispare e converta</h4>
+                    <p class="text-gray-500 text-sm">Suas mensagens chegam com o selo oficial Meta, garantindo maior abertura</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICADO META -->
+    <section class="py-16 bg-[#0D0D0D]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass rounded-3xl p-10 border border-blue-500/20 text-center">
+                <div class="w-20 h-20 rounded-2xl bg-blue-500/10 flex items-center justify-center mx-auto mb-6">
+                    <i class="fab fa-meta text-blue-400 text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-3">Certificado Meta Business Partner</h3>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed mb-6">
+                    Operamos como parceiros oficiais Meta, garantindo total conformidade com as políticas da plataforma, entrega confiável e máxima segurança nos envios.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="flex items-center bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-bold px-4 py-2 rounded-full">
+                        <i class="fas fa-shield-alt mr-2"></i> Segurança garantida
+                    </span>
+                    <span class="flex items-center bg-[#00FF88]/10 border border-[#00FF88]/20 text-[#00FF88] text-xs font-bold px-4 py-2 rounded-full">
+                        <i class="fas fa-check-circle mr-2"></i> Conformidade total
+                    </span>
+                    <span class="flex items-center bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-bold px-4 py-2 rounded-full">
+                        <i class="fas fa-paper-plane mr-2"></i> Entrega confiável
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 bg-[#111111]">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-3">Dúvidas</p>
+                <h2 class="text-3xl font-black italic uppercase">Perguntas Frequentes</h2>
+                <div class="w-12 h-1 bg-[#00FF88] mx-auto mt-4"></div>
+            </div>
+            <div class="space-y-4">
+                <details class="group glass rounded-2xl border border-gray-800 overflow-hidden" open>
+                    <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-white/5 transition">
+                        <span class="font-bold text-sm">O que é a API Oficial Meta?</span>
+                        <span class="transition group-open:rotate-180 flex-shrink-0 ml-4"><i class="fas fa-chevron-down text-[#00FF88]"></i></span>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                        É a integração oficial do WhatsApp Business com sistemas externos, permitindo envio em escala de mensagens com total segurança e conformidade com as políticas da Meta — incluindo o selo oficial no perfil da empresa.
+                    </div>
+                </details>
+                <details class="group glass rounded-2xl border border-gray-800 overflow-hidden">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-white/5 transition">
+                        <span class="font-bold text-sm">Qual a diferença entre Marketing e Utilidade?</span>
+                        <span class="transition group-open:rotate-180 flex-shrink-0 ml-4"><i class="fas fa-chevron-down text-[#00FF88]"></i></span>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                        <strong class="text-white">Marketing (R$ 0,50):</strong> mensagens proativas com fins comerciais — promoções, lançamentos, campanhas. <br><br>
+                        <strong class="text-white">Utilidade (R$ 0,05):</strong> mensagens transacionais vinculadas a uma ação do usuário — confirmações, atualizações de pedido, lembretes de agendamento.
+                    </div>
+                </details>
+                <details class="group glass rounded-2xl border border-gray-800 overflow-hidden">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-white/5 transition">
+                        <span class="font-bold text-sm">Os créditos expiram?</span>
+                        <span class="transition group-open:rotate-180 flex-shrink-0 ml-4"><i class="fas fa-chevron-down text-[#00FF88]"></i></span>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                        Não. Os créditos adquiridos não possuem prazo de validade. Você usa no seu ritmo, de acordo com o volume de envios do seu negócio.
+                    </div>
+                </details>
+                <details class="group glass rounded-2xl border border-gray-800 overflow-hidden">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-white/5 transition">
+                        <span class="font-bold text-sm">Preciso ter uma conta Meta Business para usar?</span>
+                        <span class="transition group-open:rotate-180 flex-shrink-0 ml-4"><i class="fas fa-chevron-down text-[#00FF88]"></i></span>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                        Sim. A API Oficial exige uma conta Meta Business verificada. Nossa equipe te auxilia em todo o processo de configuração e verificação da conta.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="py-24 bg-[#0A0A0A] relative overflow-hidden">
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 100%, rgba(0,255,136,0.10) 0%, transparent 70%);"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-4xl lg:text-5xl font-black mb-5 uppercase italic">
+                Pronto para enviar<br><span class="neon-text">na escala certa?</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+                Fale com a EDUC LEAD, configure sua API Oficial Meta e comece a automatizar seu atendimento e vendas hoje mesmo.
+            </p>
+            <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Fiz%20a%20calculadora%20da%20API%20Oficial%20Meta%20e%20quero%20come%C3%A7ar!"
+               class="inline-block neon-bg px-12 py-6 rounded-2xl font-black text-xl uppercase shadow-[0_0_50px_rgba(0,255,136,0.4)] pulse-neon transform hover:scale-105 transition duration-300">
+                <i class="fab fa-whatsapp mr-3"></i> Quero começar agora
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 bg-[#050505] border-t border-gray-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <span class="text-xl font-black tracking-tighter text-white mb-4 md:mb-0">
+                    EDUC <span class="neon-text">LEAD</span>
+                </span>
+                <p class="text-gray-600 text-xs text-center md:text-right">
+                    Maior sistema de captação de clientes para integradores solar do Brasil
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const precos = { marketing: 0.50, utilidade: 0.05 };
+        const maximos = { marketing: 2500, utilidade: 250 };
+        let tipoAtivo = 'marketing';
+
+        function setTab(tipo) {
+            tipoAtivo = tipo;
+            document.getElementById('tab-marketing').className = tipo === 'marketing'
+                ? 'px-6 py-3 text-sm font-black uppercase tracking-wide transition tab-active rounded-l-xl'
+                : 'px-6 py-3 text-sm font-black uppercase tracking-wide transition tab-inactive rounded-l-xl';
+            document.getElementById('tab-utilidade').className = tipo === 'utilidade'
+                ? 'px-6 py-3 text-sm font-black uppercase tracking-wide transition tab-active rounded-r-xl'
+                : 'px-6 py-3 text-sm font-black uppercase tracking-wide transition tab-inactive rounded-r-xl';
+
+            const slider = document.getElementById('slider-qtd');
+            slider.min = tipo === 'marketing' ? 100 : 200;
+            slider.value = tipo === 'marketing' ? 100 : 200;
+            calcular();
+        }
+
+        function calcular() {
+            const qtd = parseInt(document.getElementById('slider-qtd').value);
+            const preco = precos[tipoAtivo];
+            const total = qtd * preco;
+            const maximo = maximos[tipoAtivo];
+            const pct = Math.min((total / maximo) * 100, 100).toFixed(1);
+            const nome = tipoAtivo === 'marketing' ? 'marketing' : 'utilidade';
+
+            document.getElementById('qtd-display').textContent = qtd.toLocaleString('pt-BR');
+            document.getElementById('res-qtd').textContent = qtd.toLocaleString('pt-BR');
+            document.getElementById('res-unit').textContent = 'R$ ' + preco.toFixed(2).replace('.', ',');
+            document.getElementById('res-total').textContent = 'R$ ' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            document.getElementById('barra-custo').style.width = Math.max(2, pct) + '%';
+            document.getElementById('bar-label').textContent = 'R$ ' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' / R$ ' + maximo.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' máx.';
+            document.getElementById('info-box').innerHTML = `Com <strong style="color:#fff">${qtd.toLocaleString('pt-BR')} mensagens de ${nome}</strong>, você alcança ${qtd.toLocaleString('pt-BR')} contatos por apenas <strong style="color:#00FF88">R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>.`;
+        }
+
+        calcular();
+    </script>
+
+</body>
+</html>
