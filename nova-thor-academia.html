@@ -1,626 +1,661 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposta Comercial | Nova Thor Academia × EDUC LEAD</title>
+    <title>Thor Fitness | Desperte sua Força Interior</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'thor-black': '#0A0A0A',
+                        'thor-gray':  '#111111',
+                        'thor-yellow': '#E79E14',
+                        'thor-white': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        display: ['Inter', 'sans-serif'],
+                        sans:    ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0A0A0A;
-            color: #FFFFFF;
-            scroll-behavior: smooth;
-        }
+        * { scroll-behavior: smooth; }
+        ::selection { background: #E79E14; color: #0A0A0A; }
+        body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #fff; }
 
-        .neon-text { color: #00FF88; text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
-
-        .neon-border {
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            transition: all 0.3s ease;
-        }
-        .neon-border:hover {
-            border-color: #00FF88;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-        }
-
-        .neon-bg {
-            background-color: #00FF88;
-            color: #0A0A0A;
-            transition: all 0.3s ease;
-        }
-        .neon-bg:hover {
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .glass {
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .pulse-neon { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0%   { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-            70%  { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
-        }
-
-        .plan-recommended {
-            border: 2px solid #00FF88;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
-        }
-
-        .badge-promo {
-            background: linear-gradient(135deg, #00FF88, #00cc6a);
-            color: #0A0A0A;
-        }
-
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0A0A0A; }
-        ::-webkit-scrollbar-thumb { background: #1A1A1A; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00FF88; }
+        ::-webkit-scrollbar-thumb { background: #E79E14; border-radius: 10px; }
+
+        .hero-bg {
+            background-image: url('https://academiathorfitness.com.br/unidade2.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .estrutura-bg {
+            background-image: url('https://academiathorfitness.com.br/estrutura.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #E79E14, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .dot-pattern {
+            background-image: radial-gradient(circle, #E79E14 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .plan-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .plan-card:hover {
+            border-color: rgba(231,158,20,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(231,158,20,0.1);
+        }
+        .plan-featured {
+            border: 2px solid #E79E14;
+            box-shadow: 0 0 40px rgba(231,158,20,0.15);
+        }
+        .stat-card {
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .stat-card:hover { border-color: rgba(231,158,20,0.3); }
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: #E79E14; }
+        .review-card {
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s;
+        }
+        .review-card:hover { border-color: rgba(231,158,20,0.3); }
     </style>
 </head>
-<body class="antialiased">
+<body class="min-h-screen flex flex-col bg-thor-black text-thor-white">
 
-    <!-- HEADER -->
-    <header class="glass border-b border-gray-900 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <span class="text-2xl font-black tracking-tighter text-white">
-                    EDUC <span class="neon-text">LEAD</span>
-                </span>
-                <div class="flex items-center space-x-3">
-                    <span class="w-2 h-2 rounded-full bg-[#00FF88] animate-ping"></span>
-                    <span class="text-xs uppercase tracking-widest text-gray-400 font-semibold">Proposta Ativa</span>
-                </div>
+    <!-- NAV -->
+    <header class="fixed top-0 w-full z-50" style="background: rgba(10,10,10,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center gap-3">
+                    <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="Thor Fitness" class="w-10 h-10 object-contain">
+                    <span class="font-black text-xl uppercase tracking-tight">Thor <span class="text-thor-yellow">Fitness</span></span>
+                </a>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                    <a href="#planos" class="nav-link">Planos</a>
+                    <a href="#estrutura" class="nav-link">Estrutura</a>
+                    <a href="#unidades" class="nav-link">Unidades</a>
+                    <a href="#avaliacoes" class="nav-link">Avaliações</a>
+                </nav>
+                <a href="#planos" class="hidden md:block bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-yellow-400 transition-all duration-300">
+                    Matricule-se
+                </a>
+                <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-[#0A0A0A] px-4 pb-4 pt-2 space-y-3">
+            <a href="#planos" class="block nav-link py-2 text-sm font-semibold">Planos</a>
+            <a href="#estrutura" class="block nav-link py-2 text-sm font-semibold">Estrutura</a>
+            <a href="#unidades" class="block nav-link py-2 text-sm font-semibold">Unidades</a>
+            <a href="#avaliacoes" class="block nav-link py-2 text-sm font-semibold">Avaliações</a>
+            <a href="#planos" class="block bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg text-center">Matricule-se</a>
         </div>
     </header>
 
-    <!-- HERO — IDENTIFICAÇÃO DA PROPOSTA -->
-    <section class="relative pt-20 pb-16 overflow-hidden">
-        <div class="absolute inset-0" style="background: radial-gradient(circle at 60% 40%, rgba(0,255,136,0.07) 0%, transparent 65%);"></div>
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-gray-800 text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">
-                        <i class="fas fa-file-invoice-dollar text-[#00FF88] mr-2"></i>
-                        Proposta Comercial · Gerenciamento de Mídia Paga
-                    </div>
-                    <h1 class="text-5xl lg:text-6xl font-black mb-4 leading-tight">
-                        Nova Thor<br><span class="neon-text">Academia</span>
+    <main class="flex-grow">
+
+        <!-- HERO -->
+        <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden hero-bg">
+            <div class="absolute inset-0 bg-thor-black/80"></div>
+            <div class="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-thor-black to-transparent"></div>
+
+            <!-- Logo flutuante desktop -->
+            <div class="hidden lg:block absolute top-1/3 right-[10%] z-10 pointer-events-none select-none">
+                <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="w-80 h-80 object-contain opacity-20" style="transform: rotate(-5deg);">
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+                <div class="max-w-3xl">
+                    <h1 class="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase mb-6">
+                        Desperte sua<br>
+                        <span class="gradient-text">Força Interior</span><br>
+                        na Thor Fitness
                     </h1>
-                    <p class="text-gray-400 text-lg mb-8 max-w-lg">
-                        Preparamos esta proposta exclusiva de gestão de tráfego pago para atrair mais alunos para a <strong class="text-white">Nova Thor Academia</strong> via <strong class="text-white">Meta Ads</strong> e <strong class="text-white">Google Ads</strong>.
+                    <p class="text-lg sm:text-xl md:text-2xl text-white/80 mb-10 max-w-2xl font-light leading-relaxed">
+                        Estrutura completa, ambiente seguro e acolhedor para todas as idades! Mais que uma academia, um lugar onde você e sua família evoluem juntos.
                     </p>
-                    <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Vi%20a%20proposta%20da%20Nova%20Thor%20Academia%20e%20quero%20fechar!"
-                       class="inline-flex items-center neon-bg px-8 py-4 rounded-xl font-black uppercase tracking-wide text-sm pulse-neon">
-                        <i class="fab fa-whatsapp mr-2 text-lg"></i> Aceitar Proposta
-                    </a>
-                </div>
-
-                <!-- CARD IDENTIFICAÇÃO -->
-                <div class="glass rounded-3xl p-8 border border-gray-800">
-                    <p class="text-xs uppercase tracking-widest text-gray-500 mb-6 font-bold">Resumo da Proposta</p>
-                    <div class="space-y-5">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400 text-sm">Cliente</span>
-                            <span class="font-bold">Nova Thor Academia</span>
-                        </div>
-                        <div class="border-t border-gray-800"></div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400 text-sm">Agência</span>
-                            <span class="font-bold">EDUC LEAD</span>
-                        </div>
-                        <div class="border-t border-gray-800"></div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400 text-sm">Serviço</span>
-                            <span class="font-bold">Gestão de Tráfego Pago</span>
-                        </div>
-                        <div class="border-t border-gray-800"></div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400 text-sm">Plataformas</span>
-                            <div class="flex items-center space-x-3">
-                                <span class="flex items-center text-xs font-bold bg-blue-500/10 text-blue-400 px-2 py-1 rounded-lg">
-                                    <i class="fab fa-facebook-f mr-1"></i> Meta
-                                </span>
-                                <span class="flex items-center text-xs font-bold bg-red-500/10 text-red-400 px-2 py-1 rounded-lg">
-                                    <i class="fab fa-google mr-1"></i> Google
-                                </span>
-                            </div>
-                        </div>
-                        <div class="border-t border-gray-800"></div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400 text-sm">Data</span>
-                            <span class="font-bold">Maio · 2026</span>
-                        </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#planos" class="bg-thor-yellow text-thor-black font-black uppercase tracking-wider px-8 py-4 text-lg rounded-lg hover:bg-yellow-400 transition-all duration-300 text-center shadow-lg hover:shadow-xl">
+                            Matricule-se Agora
+                        </a>
+                        <a href="#unidades" class="border-2 border-white text-white font-black uppercase tracking-wider px-8 py-4 text-lg rounded-lg hover:bg-white hover:text-thor-black transition-all duration-300 text-center">
+                            Conheça Nossas Unidades
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ESCOPO DOS SERVIÇOS -->
-    <section class="py-20 bg-[#0D0D0D]">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-14">
-                <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-3">O que está incluso</p>
-                <h2 class="text-3xl lg:text-4xl font-black">Escopo dos Serviços</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-
-                <!-- META ADS -->
-                <div class="bg-[#111111] rounded-3xl p-8 border border-gray-800 neon-border">
-                    <div class="flex items-center mb-6">
-                        <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mr-4">
-                            <i class="fab fa-facebook-f text-blue-400 text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-black">Meta Ads</h3>
-                            <p class="text-gray-500 text-sm">Facebook + Instagram</p>
-                        </div>
-                    </div>
-                    <ul class="space-y-4">
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Criação e estruturação de campanhas, conjuntos de anúncios e criativos
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Segmentação de públicos para captação de novos alunos
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Monitoramento contínuo de desempenho
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Otimizações periódicas de lances e distribuição de orçamento
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Sugestão de valores de investimento alinhados aos leilões
-                        </li>
-                    </ul>
+        <!-- NÚMEROS -->
+        <section class="py-20 bg-thor-black relative overflow-hidden">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(17,17,17,0.8) 0%, #0A0A0A 70%);"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-14">
+                    <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Nossos Números</p>
+                    <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight mb-5">
+                        Por que escolher a <span class="text-thor-yellow">Thor Fitness?</span>
+                    </h2>
+                    <p class="text-white/50 max-w-2xl mx-auto text-base leading-relaxed">
+                        Números que comprovam nossa dedicação em transformar vidas através do esporte e da saúde.
+                    </p>
                 </div>
-
-                <!-- GOOGLE ADS -->
-                <div class="bg-[#111111] rounded-3xl p-8 border border-gray-800 neon-border">
-                    <div class="flex items-center mb-6">
-                        <div class="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center mr-4">
-                            <i class="fab fa-google text-red-400 text-2xl"></i>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Stat 1 -->
+                    <div class="stat-card bg-[#111111] rounded-2xl p-8 relative overflow-hidden group cursor-default">
+                        <div class="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-thor-yellow via-thor-yellow/60 to-transparent opacity-70 group-hover:opacity-100 transition-all duration-500"></div>
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute -top-4 -right-4 w-36 h-36 object-contain opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
+                        <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] border border-white/[0.07] flex items-center justify-center mb-6 ml-4 group-hover:border-thor-yellow/30 transition-all duration-400">
+                            <i class="fas fa-users text-thor-yellow text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-black">Google Ads</h3>
-                            <p class="text-gray-500 text-sm">Rede de Pesquisa</p>
+                        <div class="ml-4 mb-1">
+                            <span class="font-black text-5xl md:text-6xl text-thor-yellow leading-none">+1.500</span>
                         </div>
+                        <h3 class="ml-4 mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/90 group-hover:text-thor-yellow transition-colors duration-300">Alunos Ativos</h3>
+                        <div class="ml-4 mt-3 mb-4 h-px w-10 bg-thor-yellow/30 group-hover:w-20 transition-all duration-500"></div>
+                        <p class="ml-4 text-sm text-white/40 leading-relaxed font-medium">Fazendo parte da nossa comunidade</p>
                     </div>
-                    <ul class="space-y-4">
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Pesquisa e seleção de palavras-chave estratégicas para academia
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Criação dos anúncios de texto com alta taxa de cliques
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Configuração de extensões de anúncio
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Monitoramento de desempenho e otimizações contínuas
-                        </li>
-                        <li class="flex items-start text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 mt-0.5 flex-shrink-0"></i>
-                            Sugestão de investimento alinhado aos leilões do Google
-                        </li>
-                    </ul>
+                    <!-- Stat 2 -->
+                    <div class="stat-card bg-[#111111] rounded-2xl p-8 relative overflow-hidden group cursor-default">
+                        <div class="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-thor-yellow via-thor-yellow/60 to-transparent opacity-70 group-hover:opacity-100 transition-all duration-500"></div>
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute -top-4 -right-4 w-36 h-36 object-contain opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
+                        <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] border border-white/[0.07] flex items-center justify-center mb-6 ml-4 group-hover:border-thor-yellow/30 transition-all duration-400">
+                            <i class="fas fa-map-marker-alt text-thor-yellow text-xl"></i>
+                        </div>
+                        <div class="ml-4 mb-1">
+                            <span class="font-black text-5xl md:text-6xl text-thor-yellow leading-none">3</span>
+                        </div>
+                        <h3 class="ml-4 mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/90 group-hover:text-thor-yellow transition-colors duration-300">Unidades</h3>
+                        <div class="ml-4 mt-3 mb-4 h-px w-10 bg-thor-yellow/30 group-hover:w-20 transition-all duration-500"></div>
+                        <p class="ml-4 text-sm text-white/40 leading-relaxed font-medium">Em Goiás</p>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="stat-card bg-[#111111] rounded-2xl p-8 relative overflow-hidden group cursor-default">
+                        <div class="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-thor-yellow via-thor-yellow/60 to-transparent opacity-70 group-hover:opacity-100 transition-all duration-500"></div>
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute -top-4 -right-4 w-36 h-36 object-contain opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
+                        <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] border border-white/[0.07] flex items-center justify-center mb-6 ml-4 group-hover:border-thor-yellow/30 transition-all duration-400">
+                            <img src="https://academiathorfitness.com.br/icone.png" alt="" class="w-6 h-6">
+                        </div>
+                        <div class="ml-4 mb-1">
+                            <span class="font-black text-5xl md:text-6xl text-thor-yellow leading-none">+5 anos</span>
+                        </div>
+                        <h3 class="ml-4 mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/90 group-hover:text-thor-yellow transition-colors duration-300">De Mercado</h3>
+                        <div class="ml-4 mt-3 mb-4 h-px w-10 bg-thor-yellow/30 group-hover:w-20 transition-all duration-500"></div>
+                        <p class="ml-4 text-sm text-white/40 leading-relaxed font-medium">Experiência e solidez comprovadas</p>
+                    </div>
                 </div>
-
             </div>
+        </section>
 
-            <!-- AVISO ESCOPO -->
-            <div class="mt-8 glass rounded-2xl p-5 border border-yellow-500/20 flex items-start space-x-4">
-                <i class="fas fa-info-circle text-yellow-400 text-xl mt-0.5 flex-shrink-0"></i>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    <strong class="text-white">Escopo restrito:</strong> O serviço contempla exclusivamente o gerenciamento de mídia paga (tráfego pago) e não inclui gerenciamento de redes sociais, produção de conteúdo orgânico ou qualquer outra atividade não especificada nesta proposta.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- PLANOS E INVESTIMENTO -->
-    <section class="py-24 bg-[#111111] relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-[#00FF88] opacity-5 blur-[120px]"></div>
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16">
-                <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-3">Escolha o seu plano</p>
-                <h2 class="text-3xl lg:text-5xl font-black mb-4">Planos e Investimento</h2>
-                <p class="text-gray-400 max-w-xl mx-auto">Taxa de gerenciamento mensal — a verba de anúncios é paga diretamente às plataformas por você.</p>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-8 items-stretch">
-
-                <!-- PLANO META ADS -->
-                <div class="bg-[#1A1A1A] rounded-3xl p-8 border border-gray-800 hover:scale-105 transition duration-500 flex flex-col">
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center mr-3">
-                                <i class="fab fa-facebook-f text-blue-400"></i>
-                            </div>
-                            <span class="text-xs font-bold bg-white/10 px-3 py-1 rounded-full uppercase tracking-widest text-gray-300">Plano Meta Ads</span>
-                        </div>
-                        <h3 class="text-2xl font-black mb-1">Só Meta Ads</h3>
-                        <p class="text-gray-500 text-sm">Facebook + Instagram</p>
-                    </div>
-
-                    <div class="mb-8">
-                        <div class="flex items-end">
-                            <span class="text-5xl font-black text-white">R$ 500</span>
-                            <span class="text-gray-500 ml-2 mb-1">/mês</span>
-                        </div>
-                        <p class="text-gray-600 text-xs mt-1">Taxa de gerenciamento</p>
-                    </div>
-
-                    <ul class="space-y-3 mb-8 flex-grow">
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Gestão completa Meta Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Facebook + Instagram Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Otimização contínua de campanhas
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Segmentação de públicos
-                        </li>
-                        <li class="flex items-center text-sm text-gray-400 opacity-50">
-                            <i class="fas fa-times-circle text-gray-600 mr-3 flex-shrink-0"></i>
-                            Google Ads não incluso
-                        </li>
-                    </ul>
-
-                    <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20o%20Plano%20Meta%20Ads%20da%20proposta%20Nova%20Thor%20Academia!"
-                       class="w-full text-center py-4 border border-[#00FF88]/30 rounded-xl font-bold hover:bg-[#00FF88] hover:text-black transition">
-                        Escolher este plano
-                    </a>
-                </div>
-
-                <!-- PLANO COMBINADO PROMOCIONAL — DESTAQUE -->
-                <div class="bg-[#1A1A1A] rounded-3xl p-8 plan-recommended relative flex flex-col scale-105">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 badge-promo text-black text-xs font-black px-5 py-1.5 rounded-full uppercase tracking-wide whitespace-nowrap">
-                        ⚡ Recomendado — Melhor custo-benefício
-                    </div>
-
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4 space-x-2">
-                            <div class="w-8 h-8 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                                <i class="fab fa-facebook-f text-blue-400 text-xs"></i>
-                            </div>
-                            <div class="w-8 h-8 rounded-xl bg-red-500/10 flex items-center justify-center">
-                                <i class="fab fa-google text-red-400 text-xs"></i>
-                            </div>
-                            <span class="text-xs font-bold bg-[#00FF88]/20 text-[#00FF88] px-3 py-1 rounded-full uppercase tracking-widest">Combinado Promo</span>
-                        </div>
-                        <h3 class="text-2xl font-black mb-1">Meta + Google</h3>
-                        <p class="text-gray-500 text-sm">Plano Promocional · válido por 3 meses</p>
-                    </div>
-
-                    <div class="mb-2">
-                        <div class="flex items-end">
-                            <span class="text-6xl font-black text-[#00FF88]">R$ 500</span>
-                            <span class="text-gray-400 ml-2 mb-1">/mês</span>
-                        </div>
-                        <p class="text-gray-500 text-xs mt-1">Taxa de gerenciamento · primeiros 3 meses</p>
-                    </div>
-
-                    <div class="flex items-center mb-8 bg-[#00FF88]/5 border border-[#00FF88]/20 rounded-xl px-4 py-2">
-                        <i class="fas fa-tag text-[#00FF88] mr-2 text-xs"></i>
-                        <p class="text-xs text-gray-300">Após 3 meses: <span class="line-through text-gray-500">R$ 800/mês</span> — renegociação por aditivo</p>
-                    </div>
-
-                    <ul class="space-y-3 mb-8 flex-grow">
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Gestão completa Meta Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Facebook + Instagram Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Gestão completa Google Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Rede de Pesquisa Google
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Otimização contínua em ambas
-                        </li>
-                    </ul>
-
-                    <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20o%20Plano%20Combinado%20Promocional%20da%20proposta%20Nova%20Thor%20Academia!"
-                       class="w-full text-center py-4 neon-bg rounded-xl font-black text-sm uppercase tracking-wide">
-                        <i class="fab fa-whatsapp mr-2"></i> Fechar este plano
-                    </a>
-                </div>
-
-                <!-- PLANO COMBINADO REGULAR -->
-                <div class="bg-[#1A1A1A] rounded-3xl p-8 border border-gray-800 hover:scale-105 transition duration-500 flex flex-col">
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4 space-x-2">
-                            <div class="w-8 h-8 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                                <i class="fab fa-facebook-f text-blue-400 text-xs"></i>
-                            </div>
-                            <div class="w-8 h-8 rounded-xl bg-red-500/10 flex items-center justify-center">
-                                <i class="fab fa-google text-red-400 text-xs"></i>
-                            </div>
-                            <span class="text-xs font-bold bg-white/10 px-3 py-1 rounded-full uppercase tracking-widest text-gray-300">Combinado</span>
-                        </div>
-                        <h3 class="text-2xl font-black mb-1">Meta + Google</h3>
-                        <p class="text-gray-500 text-sm">Plano regular · sem prazo mínimo</p>
-                    </div>
-
-                    <div class="mb-8">
-                        <div class="flex items-end">
-                            <span class="text-5xl font-black text-white">R$ 800</span>
-                            <span class="text-gray-500 ml-2 mb-1">/mês</span>
-                        </div>
-                        <p class="text-gray-600 text-xs mt-1">Taxa de gerenciamento</p>
-                    </div>
-
-                    <ul class="space-y-3 mb-8 flex-grow">
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Gestão completa Meta Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Facebook + Instagram Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Gestão completa Google Ads
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Rede de Pesquisa Google
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-check-circle text-[#00FF88] mr-3 flex-shrink-0"></i>
-                            Otimização contínua em ambas
-                        </li>
-                    </ul>
-
-                    <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20o%20Plano%20Combinado%20Regular%20da%20proposta%20Nova%20Thor%20Academia!"
-                       class="w-full text-center py-4 border border-[#00FF88]/30 rounded-xl font-bold hover:bg-[#00FF88] hover:text-black transition">
-                        Escolher este plano
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SOBRE A VERBA DE ANÚNCIOS -->
-    <section class="py-20 bg-[#0A0A0A]">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-14">
-                <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-3">Importante entender</p>
-                <h2 class="text-3xl font-black">Verba de Anúncios (Mídia)</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-
-                <div class="glass p-8 rounded-3xl border border-gray-800 neon-border">
-                    <div class="w-14 h-14 rounded-2xl bg-[#00FF88]/10 flex items-center justify-center mb-5">
-                        <i class="fas fa-wallet text-[#00FF88] text-2xl"></i>
-                    </div>
-                    <h4 class="font-black text-lg mb-3">Investimento direto nas plataformas</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        O investimento em mídia (verba de anúncios) é realizado diretamente pela <strong class="text-white">Nova Thor Academia</strong> às plataformas Meta e Google. A EDUC LEAD atua exclusivamente na gestão estratégica das campanhas, <strong class="text-white">sem intermediar verbas publicitárias</strong>.
+        <!-- PLANOS -->
+        <section id="planos" class="py-28 bg-thor-gray relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.025] pointer-events-none dot-pattern"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Nossos Planos</p>
+                    <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tighter mb-5">
+                        Escolha seu <span class="text-thor-yellow">Plano</span>
+                    </h2>
+                    <p class="text-white/50 max-w-2xl mx-auto text-base leading-relaxed">
+                        Treine em uma das melhores estruturas do Brasil com planos que cabem no seu bolso. Sem taxas escondidas, apenas resultados.
                     </p>
                 </div>
 
-                <div class="glass p-8 rounded-3xl border border-gray-800 neon-border">
-                    <div class="w-14 h-14 rounded-2xl bg-[#00FF88]/10 flex items-center justify-center mb-5">
-                        <i class="fas fa-calendar-week text-[#00FF88] text-2xl"></i>
-                    </div>
-                    <h4 class="font-black text-lg mb-3">Aportes toda 6ª feira</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Os aportes de saldo nas contas de anúncios devem ser feitos toda <strong class="text-white">sexta-feira</strong>, conforme orientação do nosso time de sucesso do cliente.
-                    </p>
-                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
 
-                <div class="glass p-8 rounded-3xl border border-gray-800 neon-border">
-                    <div class="w-14 h-14 rounded-2xl bg-[#00FF88]/10 flex items-center justify-center mb-5">
-                        <i class="fas fa-lightbulb text-[#00FF88] text-2xl"></i>
-                    </div>
-                    <h4 class="font-black text-lg mb-3">Sugestão de valores</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                        Nossa equipe orienta o valor ideal de investimento em mídia com base nos leilões de Meta e Google, alinhado aos seus objetivos de captação de alunos.
-                    </p>
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between bg-blue-500/10 border border-blue-500/20 rounded-xl px-4 py-2.5">
-                            <div class="flex items-center">
-                                <i class="fab fa-facebook-f text-blue-400 mr-2 text-xs"></i>
-                                <span class="text-sm font-bold text-blue-300">Meta Ads</span>
-                            </div>
-                            <span class="text-white font-black text-sm">R$ 30,00/dia</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2.5">
-                            <div class="flex items-center">
-                                <i class="fab fa-google text-red-400 mr-2 text-xs"></i>
-                                <span class="text-sm font-bold text-red-300">Google Ads</span>
-                            </div>
-                            <span class="text-white font-black text-sm">R$ 30,00/dia</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass p-8 rounded-3xl border border-[#00FF88]/20 neon-border relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#00FF88] opacity-5 blur-[60px]"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-[#00FF88]/10 flex items-center justify-center mb-5">
-                        <i class="fas fa-chart-pie text-[#00FF88] text-2xl"></i>
-                    </div>
-                    <h4 class="font-black text-lg mb-3">Inteligência de resultados</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-5">
-                        Com nosso <strong class="text-white">sistema gerencial interno</strong>, atualizamos continuamente nossa central de relacionamento e identificamos exatamente de onde vêm seus leads — seja por vídeo, palavra-chave ou canal. Isso nos permite direcionar verba onde ela <strong class="text-white">realmente converte</strong>.
-                    </p>
-                    <div class="grid grid-cols-2 gap-2 mb-5">
-                        <div class="flex items-center bg-blue-500/10 border border-blue-500/20 rounded-xl px-3 py-2">
-                            <i class="fab fa-facebook-f text-blue-400 mr-2 text-xs"></i>
-                            <span class="text-xs font-bold text-blue-300">Meta Ads</span>
-                        </div>
-                        <div class="flex items-center bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2">
-                            <i class="fab fa-google text-red-400 mr-2 text-xs"></i>
-                            <span class="text-xs font-bold text-red-300">Google Ads</span>
-                        </div>
-                        <div class="flex items-center bg-[#00FF88]/10 border border-[#00FF88]/20 rounded-xl px-3 py-2">
-                            <i class="fas fa-seedling text-[#00FF88] mr-2 text-xs"></i>
-                            <span class="text-xs font-bold text-[#00FF88]">Orgânico</span>
-                        </div>
-                        <div class="flex items-center bg-purple-500/10 border border-purple-500/20 rounded-xl px-3 py-2">
-                            <i class="fas fa-user-friends text-purple-400 mr-2 text-xs"></i>
-                            <span class="text-xs font-bold text-purple-300">Indicação</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-500 text-xs leading-relaxed">
-                        Com esses dados em mãos, você sabe quais modalidades dar mais foco, onde alocar mais verba e como escalar as matrículas de forma inteligente.
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- AVISO INÍCIO INTERMEDIÁRIO -->
-            <div class="mt-8 bg-[#00FF88]/5 border border-[#00FF88]/20 rounded-2xl p-6 flex items-start space-x-4">
-                <i class="fas fa-clock text-[#00FF88] text-xl mt-0.5 flex-shrink-0"></i>
-                <div>
-                    <p class="font-bold text-white mb-1">Início em data intermediária?</p>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Se você iniciar a assessoria em uma data intermediária (ex: quarta-feira), o período de veiculação será computado como crédito proporcional, com vigência até a sexta-feira da semana seguinte, garantindo continuidade das campanhas sem interrupções.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TABELA COMPARATIVA RÁPIDA -->
-    <section class="py-20 bg-[#0D0D0D]">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-black">Comparativo de Planos</h2>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="border-b border-gray-800">
-                            <th class="text-left py-4 px-4 text-gray-500 text-xs uppercase tracking-widest font-bold">Plano</th>
-                            <th class="text-left py-4 px-4 text-gray-500 text-xs uppercase tracking-widest font-bold">Meta Ads</th>
-                            <th class="text-left py-4 px-4 text-gray-500 text-xs uppercase tracking-widest font-bold">Google Ads</th>
-                            <th class="text-right py-4 px-4 text-gray-500 text-xs uppercase tracking-widest font-bold">Taxa Mensal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-900 hover:bg-white/5 transition">
-                            <td class="py-5 px-4">
-                                <span class="font-bold">Meta Ads</span>
-                            </td>
-                            <td class="py-5 px-4">
-                                <i class="fas fa-check-circle text-[#00FF88]"></i>
-                            </td>
-                            <td class="py-5 px-4">
-                                <i class="fas fa-times-circle text-gray-700"></i>
-                            </td>
-                            <td class="py-5 px-4 text-right font-black text-white">R$ 500/mês</td>
-                        </tr>
-                        <tr class="border-b border-gray-900 hover:bg-white/5 transition">
-                            <td class="py-5 px-4">
-                                <span class="font-bold">Combinado</span>
-                            </td>
-                            <td class="py-5 px-4">
-                                <i class="fas fa-check-circle text-[#00FF88]"></i>
-                            </td>
-                            <td class="py-5 px-4">
-                                <i class="fas fa-check-circle text-[#00FF88]"></i>
-                            </td>
-                            <td class="py-5 px-4 text-right font-black text-white">R$ 800/mês</td>
-                        </tr>
-                        <tr class="bg-[#00FF88]/5 border border-[#00FF88]/20 rounded-2xl">
-                            <td class="py-5 px-4 rounded-l-2xl">
-                                <div class="flex items-center">
-                                    <span class="font-black text-[#00FF88]">Combinado Promo</span>
-                                    <span class="ml-2 bg-[#00FF88] text-black text-xs font-black px-2 py-0.5 rounded-full">RECOMENDADO</span>
+                    <!-- Bianual -->
+                    <div class="plan-card bg-[#0C0C0C] rounded-2xl p-6 flex flex-col relative overflow-hidden">
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-[0.04] pointer-events-none" style="padding: 20%;">
+                        <div class="relative z-10 flex flex-col h-full">
+                            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-thor-yellow/30 to-transparent"></div>
+                            <h3 class="font-black text-2xl uppercase tracking-wide mb-1">Bianual</h3>
+                            <span class="text-white/40 text-xs font-medium mb-5 flex items-center gap-1"><i class="fas fa-clock text-[10px]"></i> 24 meses</span>
+                            <div class="flex items-start mb-1">
+                                <span class="text-xs font-bold text-white/40 mt-1 mr-0.5">R$</span>
+                                <span class="font-black text-4xl text-thor-yellow leading-none">109</span>
+                                <div class="flex flex-col ml-0.5 mt-1">
+                                    <span class="text-sm font-black text-thor-yellow">,90</span>
+                                    <span class="text-[9px] uppercase font-bold text-white/40 tracking-widest">/mês</span>
                                 </div>
-                                <p class="text-xs text-gray-500 mt-1">Válido por 3 meses</p>
-                            </td>
-                            <td class="py-5 px-4">
-                                <i class="fas fa-check-circle text-[#00FF88]"></i>
-                            </td>
-                            <td class="py-5 px-4">
-                                <i class="fas fa-check-circle text-[#00FF88]"></i>
-                            </td>
-                            <td class="py-5 px-4 text-right rounded-r-2xl">
-                                <span class="text-2xl font-black text-[#00FF88]">R$ 500/mês</span>
-                                <p class="text-xs text-gray-500 mt-1">Depois: R$ 800/mês</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+                            </div>
+                            <p class="text-white/30 text-xs mb-6">Total R$2.637,60 em até 12x</p>
+                            <ul class="space-y-2 flex-grow mb-6 text-sm">
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Horário livre</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aulas coletivas</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Sem taxa de matrícula</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Treino personalizado</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aberto todos os dias</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> 5 convidados/mês</li>
+                            </ul>
+                            <a href="https://academiathorfitness.com.br/unidades" class="block w-full text-center py-3 border border-thor-yellow/30 text-thor-yellow font-bold rounded-xl text-sm hover:bg-thor-yellow hover:text-thor-black transition-all duration-300">
+                                Matricule-se
+                            </a>
+                        </div>
+                    </div>
 
-    <!-- CTA FINAL -->
-    <section class="py-24 bg-[#111111] relative overflow-hidden">
-        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 100%, rgba(0,255,136,0.12) 0%, transparent 70%);"></div>
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <p class="text-[#00FF88] text-xs font-black uppercase tracking-widest mb-4">Próximo passo</p>
-            <h2 class="text-4xl lg:text-5xl font-black mb-6 uppercase italic">
-                Pronto para<br>lotar a Nova Thor?
-            </h2>
-            <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
-                Clique abaixo, fale com nosso time e comece a captar novos alunos ainda esta semana.
-            </p>
-            <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Vi%20a%20proposta%20da%20Nova%20Thor%20Academia%20e%20quero%20fechar%20o%20Plano%20Combinado%20Promocional!"
-               class="inline-block neon-bg px-12 py-6 rounded-2xl font-black text-xl uppercase shadow-[0_0_50px_rgba(0,255,136,0.4)] pulse-neon transform hover:scale-105 transition duration-300">
-                <i class="fab fa-whatsapp mr-3"></i> Aceitar Proposta via WhatsApp
-            </a>
-            <p class="text-gray-600 text-sm mt-6">
-                <i class="fas fa-lock mr-1"></i> Proposta personalizada exclusiva para Nova Thor Academia
-            </p>
-        </div>
-    </section>
+                    <!-- Anual — RECOMENDADO -->
+                    <div class="plan-featured plan-card bg-[#0C0C0C] rounded-2xl p-6 flex flex-col relative overflow-hidden">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-thor-yellow text-thor-black text-xs font-black px-4 py-1 rounded-full uppercase tracking-wide whitespace-nowrap z-20">
+                            ⚡ Recomendado
+                        </div>
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-[0.06] pointer-events-none" style="padding: 20%;">
+                        <div class="relative z-10 flex flex-col h-full mt-3">
+                            <h3 class="font-black text-2xl uppercase tracking-wide mb-1 text-thor-yellow">Anual</h3>
+                            <span class="text-white/40 text-xs font-medium mb-5 flex items-center gap-1"><i class="fas fa-clock text-[10px]"></i> 12 meses</span>
+                            <div class="flex items-start mb-1">
+                                <span class="text-xs font-bold text-white/40 mt-1 mr-0.5">R$</span>
+                                <span class="font-black text-4xl text-thor-yellow leading-none">119</span>
+                                <div class="flex flex-col ml-0.5 mt-1">
+                                    <span class="text-sm font-black text-thor-yellow">,90</span>
+                                    <span class="text-[9px] uppercase font-bold text-white/40 tracking-widest">/mês</span>
+                                </div>
+                            </div>
+                            <p class="text-white/30 text-xs mb-6">Total R$1.438,80 em até 6x</p>
+                            <ul class="space-y-2 flex-grow mb-6 text-sm">
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Horário livre</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aulas coletivas</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Sem taxa de matrícula</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Treino personalizado</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aberto todos os dias</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> 5 convidados/mês</li>
+                            </ul>
+                            <a href="https://academiathorfitness.com.br/unidades" class="block w-full text-center py-3 bg-thor-yellow text-thor-black font-black rounded-xl text-sm hover:bg-yellow-400 transition-all duration-300 shadow-lg shadow-thor-yellow/20">
+                                Matricule-se
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Semestral -->
+                    <div class="plan-card bg-[#0C0C0C] rounded-2xl p-6 flex flex-col relative overflow-hidden">
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-[0.04] pointer-events-none" style="padding: 20%;">
+                        <div class="relative z-10 flex flex-col h-full">
+                            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-thor-yellow/30 to-transparent"></div>
+                            <h3 class="font-black text-2xl uppercase tracking-wide mb-1">Semestral</h3>
+                            <span class="text-white/40 text-xs font-medium mb-5 flex items-center gap-1"><i class="fas fa-clock text-[10px]"></i> 6 meses</span>
+                            <div class="flex items-start mb-1">
+                                <span class="text-xs font-bold text-white/40 mt-1 mr-0.5">R$</span>
+                                <span class="font-black text-4xl text-thor-yellow leading-none">129</span>
+                                <div class="flex flex-col ml-0.5 mt-1">
+                                    <span class="text-sm font-black text-thor-yellow">,90</span>
+                                    <span class="text-[9px] uppercase font-bold text-white/40 tracking-widest">/mês</span>
+                                </div>
+                            </div>
+                            <p class="text-white/30 text-xs mb-6">Total R$779,40 em até 6x</p>
+                            <ul class="space-y-2 flex-grow mb-6 text-sm">
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Horário livre</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aulas coletivas</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Sem taxa de matrícula</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Treino personalizado</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aberto todos os dias</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> 3 convidados/mês</li>
+                            </ul>
+                            <a href="https://academiathorfitness.com.br/unidades" class="block w-full text-center py-3 border border-thor-yellow/30 text-thor-yellow font-bold rounded-xl text-sm hover:bg-thor-yellow hover:text-thor-black transition-all duration-300">
+                                Matricule-se
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mensal Recorrente -->
+                    <div class="plan-card bg-[#0C0C0C] rounded-2xl p-6 flex flex-col relative overflow-hidden">
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-[0.04] pointer-events-none" style="padding: 20%;">
+                        <div class="relative z-10 flex flex-col h-full">
+                            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-thor-yellow/30 to-transparent"></div>
+                            <h3 class="font-black text-xl uppercase tracking-wide mb-1">Mensal Recorrente</h3>
+                            <span class="text-white/40 text-xs font-medium mb-5 flex items-center gap-1"><i class="fas fa-sync-alt text-[10px]"></i> Renovação automática</span>
+                            <div class="flex items-start mb-1">
+                                <span class="text-xs font-bold text-white/40 mt-1 mr-0.5">R$</span>
+                                <span class="font-black text-4xl text-thor-yellow leading-none">139</span>
+                                <div class="flex flex-col ml-0.5 mt-1">
+                                    <span class="text-sm font-black text-thor-yellow">,90</span>
+                                    <span class="text-[9px] uppercase font-bold text-white/40 tracking-widest">/mês</span>
+                                </div>
+                            </div>
+                            <p class="text-white/30 text-xs mb-6">Sem anuidade</p>
+                            <ul class="space-y-2 flex-grow mb-6 text-sm">
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Horário livre</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aulas coletivas</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Sem taxa de matrícula</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Treino personalizado</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aberto todos os dias</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> 2 convidados/mês</li>
+                            </ul>
+                            <a href="https://academiathorfitness.com.br/unidades" class="block w-full text-center py-3 border border-thor-yellow/30 text-thor-yellow font-bold rounded-xl text-sm hover:bg-thor-yellow hover:text-thor-black transition-all duration-300">
+                                Matricule-se
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mensal -->
+                    <div class="plan-card bg-[#0C0C0C] rounded-2xl p-6 flex flex-col relative overflow-hidden">
+                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-[0.04] pointer-events-none" style="padding: 20%;">
+                        <div class="relative z-10 flex flex-col h-full">
+                            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-thor-yellow/30 to-transparent"></div>
+                            <h3 class="font-black text-2xl uppercase tracking-wide mb-1">Mensal</h3>
+                            <span class="text-white/40 text-xs font-medium mb-5 flex items-center gap-1"><i class="fas fa-calendar text-[10px]"></i> Sem fidelidade</span>
+                            <div class="flex items-start mb-1">
+                                <span class="text-xs font-bold text-white/40 mt-1 mr-0.5">R$</span>
+                                <span class="font-black text-4xl text-thor-yellow leading-none">179</span>
+                                <div class="flex flex-col ml-0.5 mt-1">
+                                    <span class="text-sm font-black text-thor-yellow">,90</span>
+                                    <span class="text-[9px] uppercase font-bold text-white/40 tracking-widest">/mês</span>
+                                </div>
+                            </div>
+                            <p class="text-white/30 text-xs mb-6">Sem anuidade</p>
+                            <ul class="space-y-2 flex-grow mb-6 text-sm">
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Horário livre</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aulas coletivas</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Sem taxa de matrícula</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Treino personalizado</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> Aberto todos os dias</li>
+                                <li class="flex items-center gap-2 text-white/70"><i class="fas fa-check text-thor-yellow text-xs"></i> 2 convidados/mês</li>
+                            </ul>
+                            <a href="https://academiathorfitness.com.br/unidades" class="block w-full text-center py-3 border border-thor-yellow/30 text-thor-yellow font-bold rounded-xl text-sm hover:bg-thor-yellow hover:text-thor-black transition-all duration-300">
+                                Matricule-se
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTRUTURA -->
+        <section id="estrutura" class="py-24 bg-thor-black relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Nossa Estrutura</p>
+                        <h2 class="font-black text-4xl md:text-5xl uppercase tracking-tight mb-6">
+                            A Estrutura que você <span class="text-thor-yellow">Merece</span>
+                        </h2>
+                        <p class="text-white/60 text-lg mb-10 leading-relaxed">
+                            Tudo foi pensado para oferecer a melhor experiência de treino. Desde a recepção até o vestiário, a qualidade Thor Fitness está presente.
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="bg-[#111111] rounded-2xl p-5 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                                <i class="fas fa-dumbbell text-thor-yellow text-xl mb-3 block"></i>
+                                <h4 class="font-black text-sm uppercase tracking-wide mb-2">Equipamentos Modernos</h4>
+                                <p class="text-white/40 text-xs leading-relaxed">Aparelhos de última geração das melhores marcas mundiais.</p>
+                            </div>
+                            <div class="bg-[#111111] rounded-2xl p-5 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                                <i class="fas fa-wind text-thor-yellow text-xl mb-3 block"></i>
+                                <h4 class="font-black text-sm uppercase tracking-wide mb-2">Ambiente Climatizado</h4>
+                                <p class="text-white/40 text-xs leading-relaxed">Treine com conforto em qualquer época do ano.</p>
+                            </div>
+                            <div class="bg-[#111111] rounded-2xl p-5 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                                <i class="fas fa-user-tie text-thor-yellow text-xl mb-3 block"></i>
+                                <h4 class="font-black text-sm uppercase tracking-wide mb-2">Professores Qualificados</h4>
+                                <p class="text-white/40 text-xs leading-relaxed">Profissionais formados e experientes prontos para você.</p>
+                            </div>
+                            <div class="bg-[#111111] rounded-2xl p-5 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                                <i class="fas fa-music text-thor-yellow text-xl mb-3 block"></i>
+                                <h4 class="font-black text-sm uppercase tracking-wide mb-2">Aulas Coletivas</h4>
+                                <p class="text-white/40 text-xs leading-relaxed">Ritmos, pilates, funcional, glúteo e muito mais.</p>
+                            </div>
+                            <div class="bg-[#111111] rounded-2xl p-5 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                                <i class="fas fa-clock text-thor-yellow text-xl mb-3 block"></i>
+                                <h4 class="font-black text-sm uppercase tracking-wide mb-2">Horário Estendido</h4>
+                                <p class="text-white/40 text-xs leading-relaxed">Aberto de segunda a segunda para se adaptar à sua rotina.</p>
+                            </div>
+                            <div class="bg-[#111111] rounded-2xl p-5 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                                <i class="fas fa-shield-alt text-thor-yellow text-xl mb-3 block"></i>
+                                <h4 class="font-black text-sm uppercase tracking-wide mb-2">Segurança e Limpeza</h4>
+                                <p class="text-white/40 text-xs leading-relaxed">Ambiente monitorado e higienizado constantemente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative rounded-3xl overflow-hidden h-[500px] estrutura-bg">
+                        <div class="absolute inset-0 bg-gradient-to-t from-thor-black/60 to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UNIDADES -->
+        <section id="unidades" class="py-24 bg-thor-gray relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.02] pointer-events-none dot-pattern"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Onde estamos</p>
+                    <h2 class="font-black text-4xl md:text-5xl uppercase tracking-tight">
+                        Nossas <span class="text-thor-yellow">Unidades</span>
+                    </h2>
+                    <p class="text-white/50 mt-4 max-w-xl mx-auto">Encontre a Thor Fitness mais próxima de você e comece sua transformação hoje mesmo.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+
+                    <!-- Unidade 1 -->
+                    <a href="https://academiathorfitness.com.br/unidades/thor-fit-balneario" class="group block bg-[#0C0C0C] rounded-3xl overflow-hidden border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300 hover:-translate-y-1">
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://academiathorfitness.com.br/Unidade-balneario/unidade3.jpeg" alt="Thor Fitness Balneário" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-thor-black/80 to-transparent"></div>
+                            <span class="absolute top-4 left-4 bg-thor-yellow text-thor-black text-xs font-black px-3 py-1 rounded-full uppercase">01</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-black text-xl mb-3 group-hover:text-thor-yellow transition-colors duration-300">Thor Fitness Balneário</h3>
+                            <p class="text-white/40 text-sm leading-relaxed mb-2">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>
+                                Av. Genésio de Lima Brito, Q. 06 - Lt. 22 - Jardim Balneario Meia Ponte · Goiânia, GO
+                            </p>
+                            <p class="text-white/30 text-xs mb-4">
+                                <i class="fas fa-clock text-thor-yellow/60 mr-2 text-xs"></i>
+                                Seg–Sex: 05h–23h · Sáb: 07h–16h · Dom: 08h–12h
+                            </p>
+                            <span class="text-thor-yellow text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Ver Unidade e Planos <i class="fas fa-arrow-right text-xs"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Unidade 2 -->
+                    <a href="https://academiathorfitness.com.br/unidades/thor-fit-garavelo" class="group block bg-[#0C0C0C] rounded-3xl overflow-hidden border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300 hover:-translate-y-1">
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://academiathorfitness.com.br/Unidade-gravelo/unidade1.jpg" alt="Thor Fitness Garavelo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-thor-black/80 to-transparent"></div>
+                            <span class="absolute top-4 left-4 bg-thor-yellow text-thor-black text-xs font-black px-3 py-1 rounded-full uppercase">02</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-black text-xl mb-3 group-hover:text-thor-yellow transition-colors duration-300">Thor Fitness Garavelo</h3>
+                            <p class="text-white/40 text-sm leading-relaxed mb-2">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>
+                                Avenida Tropical - Jardim Tropical · Aparecida de Goiânia, GO
+                            </p>
+                            <p class="text-white/30 text-xs mb-4">
+                                <i class="fas fa-clock text-thor-yellow/60 mr-2 text-xs"></i>
+                                Seg–Sex: 05h–23h · Sáb: 07h–16h · Dom: 08h–12h
+                            </p>
+                            <span class="text-thor-yellow text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Ver Unidade e Planos <i class="fas fa-arrow-right text-xs"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Unidade 3 -->
+                    <a href="https://academiathorfitness.com.br/unidades/thor-fit-guanabara" class="group block bg-[#0C0C0C] rounded-3xl overflow-hidden border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300 hover:-translate-y-1">
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://academiathorfitness.com.br/unidade2.jpeg" alt="Thor Fitness Guanabara" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-thor-black/80 to-transparent"></div>
+                            <span class="absolute top-4 left-4 bg-thor-yellow text-thor-black text-xs font-black px-3 py-1 rounded-full uppercase">03</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-black text-xl mb-3 group-hover:text-thor-yellow transition-colors duration-300">Thor Fitness Guanabara</h3>
+                            <p class="text-white/40 text-sm leading-relaxed mb-2">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>
+                                Av. Vera Cruz, Qd 34-A Lt. 9-12 N 365 Jd. Guanabara · Goiânia, GO
+                            </p>
+                            <p class="text-white/30 text-xs mb-4">
+                                <i class="fas fa-clock text-thor-yellow/60 mr-2 text-xs"></i>
+                                Seg–Sex: 05h–23h · Sáb: 07h–16h · Dom: 08h–12h
+                            </p>
+                            <span class="text-thor-yellow text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Ver Unidade e Planos <i class="fas fa-arrow-right text-xs"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- AVALIAÇÕES -->
+        <section id="avaliacoes" class="py-24 bg-thor-black relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Avaliações do Google</p>
+                    <h2 class="font-black text-4xl md:text-5xl uppercase tracking-tight">
+                        O que dizem nossos <span class="text-thor-yellow">alunos</span>
+                    </h2>
+                    <p class="text-white/50 mt-4 max-w-xl mx-auto">Histórias reais de superação e resultados alcançados na Thor Fitness.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                    <div class="review-card bg-[#111111] rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://ui-avatars.com/api/?name=Vit%C3%B3ria+Rodrigues&background=E79E14&color=000&bold=true&size=128" alt="Vitória Rodrigues" class="w-10 h-10 rounded-full">
+                            <div>
+                                <p class="font-bold text-sm">Vitória Rodrigues</p>
+                                <div class="flex text-thor-yellow text-xs gap-0.5">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/60 text-sm leading-relaxed">"Academia excelente, os melhores equipamentos e um ótimo atendimento, tive uma boa experiência 👏🏻👏🏻"</p>
+                    </div>
+
+                    <div class="review-card bg-[#111111] rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWNsK6YrI04rn1n6KSHb1lT47W0UDygGwrCl6TR1bIMRErcmTR0WQ=w80-h80-p-rp-mo-ba2-br100" alt="Thauany Silva Dias" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold text-sm">Thauany Silva Dias</p>
+                                <div class="flex text-thor-yellow text-xs gap-0.5">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/60 text-sm leading-relaxed">"Ótimo local para treinar, professores e funcionários qualificados e educados. Venha garantir um estilo de vida saudável 🫡"</p>
+                    </div>
+
+                    <div class="review-card bg-[#111111] rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUoD3xw0Z5Wqy9_0uVHqhpE36NVIkT_xrLh8yWBNFeLDuQx8c3A=w80-h80-p-rp-mo-br100" alt="Davila Neres Tormim" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold text-sm">Davila Neres Tormim</p>
+                                <div class="flex text-thor-yellow text-xs gap-0.5">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/60 text-sm leading-relaxed">"Aparelhos novos, atendimento personalizado, horários flexíveis! Melhor academia da região do Setor Garavelo! Vale a pena conhecer."</p>
+                    </div>
+
+                    <div class="review-card bg-[#111111] rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWriDNOlhfnfI7yDPIkZ1wiECGVPnoDxcCIDpwXH8ab9uoW1AEobw=w80-h80-p-rp-mo-ba4-br100" alt="Edno Donato" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold text-sm">Edno Donato</p>
+                                <div class="flex text-thor-yellow text-xs gap-0.5">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/60 text-sm leading-relaxed">"A nova unidade da Academia Thor Guanabara é muito boa. Amplo estacionamento, funcionários simpáticos, climatizada e com ótimos equipamentos."</p>
+                    </div>
+
+                    <div class="review-card bg-[#111111] rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUCpoNcmaxMG4j-Ppd6hZhC0aEibEPh1SPjf8qGxAfven0XTHmN_w=w80-h80-p-rp-mo-ba4-br100" alt="Alexandre Mazucato" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold text-sm">Alexandre Mazucato</p>
+                                <div class="flex text-thor-yellow text-xs gap-0.5">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/60 text-sm leading-relaxed">"Excelente academia, já experimentei praticamente todas aqui da região, e sem dúvida a Thor é a melhor. Atendimento de primeira, estacionamento, aparelhos novos e limpos. Nota 1000."</p>
+                    </div>
+
+                    <div class="review-card bg-[#111111] rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUdz2V2g5oZykSxU6Btn1hykcsvV6qlZ50Qp3PeibgTk-aCHAg=w80-h80-p-rp-mo-br100" alt="Nathalia Vieira Sousa" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold text-sm">Nathalia Vieira Sousa</p>
+                                <div class="flex text-thor-yellow text-xs gap-0.5">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/60 text-sm leading-relaxed">"Ambiente incrível, professores top e treinos que te desafiam a ir além! Sempre saio daqui motivada e com vontade de voltar. Recomendo para todos que querem mudar de vida! 🤍💕"</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="py-28 bg-thor-gray relative overflow-hidden">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 100%, rgba(231,158,20,0.12) 0%, transparent 70%);"></div>
+            <div class="absolute inset-0 opacity-[0.02] pointer-events-none dot-pattern"></div>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="w-20 h-20 object-contain mx-auto mb-8 opacity-60">
+                <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tighter mb-6">
+                    Comece sua<br><span class="gradient-text">transformação hoje</span>
+                </h2>
+                <p class="text-white/60 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+                    Escolha seu plano, encontre a unidade mais próxima e dê o primeiro passo rumo a uma vida mais saudável.
+                </p>
+                <a href="https://academiathorfitness.com.br/unidades" class="inline-block bg-thor-yellow text-thor-black font-black text-xl uppercase tracking-wider px-12 py-6 rounded-2xl hover:bg-yellow-400 transition-all duration-300 shadow-[0_0_50px_rgba(231,158,20,0.3)] hover:shadow-[0_0_70px_rgba(231,158,20,0.4)] hover:scale-105">
+                    Ver Todas as Unidades
+                </a>
+            </div>
+        </section>
+
+    </main>
 
     <!-- FOOTER -->
-    <footer class="py-10 bg-[#050505] border-t border-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <span class="text-xl font-black tracking-tighter text-white mb-4 md:mb-0">
-                    EDUC <span class="neon-text">LEAD</span>
-                </span>
-                <p class="text-gray-600 text-xs text-center md:text-right">
-                    Proposta exclusiva para Nova Thor Academia · Maio 2026<br>
-                    Agência de Marketing Digital especializada em negócios locais — Goiânia/GO
-                </p>
+    <footer class="py-12 bg-[#050505] border-t border-white/[0.04]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+                <div class="flex items-center gap-3">
+                    <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="Thor Fitness" class="w-10 h-10 object-contain">
+                    <span class="font-black text-xl uppercase tracking-tight">Thor <span class="text-thor-yellow">Fitness</span></span>
+                </div>
+                <div class="flex gap-5 text-2xl">
+                    <a href="https://academiathorfitness.com.br" class="text-white/30 hover:text-thor-yellow transition-colors"><i class="fas fa-globe"></i></a>
+                    <a href="#" class="text-white/30 hover:text-thor-yellow transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white/30 hover:text-thor-yellow transition-colors"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-white/[0.04] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/20 text-xs">© 2026 Thor Fitness. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-xs text-white/20">
+                    <a href="https://academiathorfitness.com.br/unidades/thor-fit-balneario" class="hover:text-thor-yellow transition-colors">Balneário</a>
+                    <a href="https://academiathorfitness.com.br/unidades/thor-fit-garavelo" class="hover:text-thor-yellow transition-colors">Garavelo</a>
+                    <a href="https://academiathorfitness.com.br/unidades/thor-fit-guanabara" class="hover:text-thor-yellow transition-colors">Guanabara</a>
+                </div>
             </div>
         </div>
     </footer>
