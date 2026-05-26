@@ -151,65 +151,232 @@
             </div>
         </section>
 
-        <!-- NÚMEROS -->
-        <section class="py-20 bg-thor-black relative overflow-hidden">
+        <!-- NPS SURVEY -->
+        <section id="pesquisa" class="py-20 bg-thor-black relative overflow-hidden">
             <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(17,17,17,0.8) 0%, #0A0A0A 70%);"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-14">
-                    <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Nossos Números</p>
-                    <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight mb-5">
-                        Por que escolher a <span class="text-thor-yellow">Thor Fitness?</span>
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+                <div class="text-center mb-12">
+                    <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Sua opinião importa</p>
+                    <h2 class="font-black text-3xl md:text-5xl uppercase tracking-tight mb-4">
+                        Como você avalia a <span class="text-thor-yellow">Thor Fitness?</span>
                     </h2>
-                    <p class="text-white/50 max-w-2xl mx-auto text-base leading-relaxed">
-                        Números que comprovam nossa dedicação em transformar vidas através do esporte e da saúde.
-                    </p>
+                    <p class="text-white/50 text-base leading-relaxed">Leva menos de 2 minutos. Sua resposta nos ajuda a melhorar cada dia mais.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Stat 1 -->
-                    <div class="stat-card bg-[#111111] rounded-2xl p-8 relative overflow-hidden group cursor-default">
-                        <div class="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-thor-yellow via-thor-yellow/60 to-transparent opacity-70 group-hover:opacity-100 transition-all duration-500"></div>
-                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute -top-4 -right-4 w-36 h-36 object-contain opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
-                        <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] border border-white/[0.07] flex items-center justify-center mb-6 ml-4 group-hover:border-thor-yellow/30 transition-all duration-400">
-                            <i class="fas fa-users text-thor-yellow text-xl"></i>
+
+                <!-- FORMULÁRIO -->
+                <div id="nps-form" class="bg-[#111111] rounded-3xl p-8 border border-white/[0.06] space-y-10">
+
+                    <!-- Q1: NPS -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-1">Em uma escala de 0 a 10, o quanto você recomendaria a Thor Fitness para um amigo ou familiar?</p>
+                        <p class="text-white/40 text-xs mb-5">0 = Jamais recomendaria · 10 = Com certeza recomendaria</p>
+                        <div class="flex flex-wrap gap-2" id="nps-buttons">
+                            <!-- gerado por JS -->
                         </div>
-                        <div class="ml-4 mb-1">
-                            <span class="font-black text-5xl md:text-6xl text-thor-yellow leading-none">+1.500</span>
-                        </div>
-                        <h3 class="ml-4 mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/90 group-hover:text-thor-yellow transition-colors duration-300">Alunos Ativos</h3>
-                        <div class="ml-4 mt-3 mb-4 h-px w-10 bg-thor-yellow/30 group-hover:w-20 transition-all duration-500"></div>
-                        <p class="ml-4 text-sm text-white/40 leading-relaxed font-medium">Fazendo parte da nossa comunidade</p>
+                        <p id="nps-label" class="text-xs mt-3 text-white/30 min-h-[1rem] transition-all"></p>
                     </div>
-                    <!-- Stat 2 -->
-                    <div class="stat-card bg-[#111111] rounded-2xl p-8 relative overflow-hidden group cursor-default">
-                        <div class="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-thor-yellow via-thor-yellow/60 to-transparent opacity-70 group-hover:opacity-100 transition-all duration-500"></div>
-                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute -top-4 -right-4 w-36 h-36 object-contain opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
-                        <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] border border-white/[0.07] flex items-center justify-center mb-6 ml-4 group-hover:border-thor-yellow/30 transition-all duration-400">
-                            <i class="fas fa-map-marker-alt text-thor-yellow text-xl"></i>
+
+                    <!-- Q2: Atributos com estrelas -->
+                    <div class="space-y-5">
+                        <p class="font-black text-base uppercase tracking-wide mb-1">Avalie cada item abaixo:</p>
+                        <p class="text-white/40 text-xs -mt-3 mb-4">1 = Péssimo · 5 = Excelente</p>
+
+                        <div class="attribute-row" data-attr="equipamentos">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-dumbbell text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Equipamentos</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="equipamentos"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
                         </div>
-                        <div class="ml-4 mb-1">
-                            <span class="font-black text-5xl md:text-6xl text-thor-yellow leading-none">3</span>
+
+                        <div class="attribute-row" data-attr="instrutores">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-user-tie text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Instrutores e Professores</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="instrutores"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
                         </div>
-                        <h3 class="ml-4 mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/90 group-hover:text-thor-yellow transition-colors duration-300">Unidades</h3>
-                        <div class="ml-4 mt-3 mb-4 h-px w-10 bg-thor-yellow/30 group-hover:w-20 transition-all duration-500"></div>
-                        <p class="ml-4 text-sm text-white/40 leading-relaxed font-medium">Em Goiás</p>
+
+                        <div class="attribute-row" data-attr="limpeza">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-broom text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Limpeza e Higiene</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="limpeza"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
+
+                        <div class="attribute-row" data-attr="atendimento">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-headset text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Atendimento na Recepção</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="atendimento"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
+
+                        <div class="attribute-row" data-attr="custo">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-tags text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Custo-benefício</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="custo"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
                     </div>
-                    <!-- Stat 3 -->
-                    <div class="stat-card bg-[#111111] rounded-2xl p-8 relative overflow-hidden group cursor-default">
-                        <div class="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-thor-yellow via-thor-yellow/60 to-transparent opacity-70 group-hover:opacity-100 transition-all duration-500"></div>
-                        <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="absolute -top-4 -right-4 w-36 h-36 object-contain opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
-                        <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] border border-white/[0.07] flex items-center justify-center mb-6 ml-4 group-hover:border-thor-yellow/30 transition-all duration-400">
-                            <img src="https://academiathorfitness.com.br/icone.png" alt="" class="w-6 h-6">
+
+                    <!-- Q3: Unidade -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-4">Qual unidade você frequenta?</p>
+                        <div class="grid sm:grid-cols-3 gap-3" id="unidade-buttons">
+                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="balneario">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Balneário
+                            </button>
+                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="garavelo">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Garavelo
+                            </button>
+                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="guanabara">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Guanabara
+                            </button>
                         </div>
-                        <div class="ml-4 mb-1">
-                            <span class="font-black text-5xl md:text-6xl text-thor-yellow leading-none">+5 anos</span>
-                        </div>
-                        <h3 class="ml-4 mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/90 group-hover:text-thor-yellow transition-colors duration-300">De Mercado</h3>
-                        <div class="ml-4 mt-3 mb-4 h-px w-10 bg-thor-yellow/30 group-hover:w-20 transition-all duration-500"></div>
-                        <p class="ml-4 text-sm text-white/40 leading-relaxed font-medium">Experiência e solidez comprovadas</p>
                     </div>
+
+                    <!-- Q4: Comentário -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-2">Deixe um comentário ou sugestão <span class="text-white/30 font-normal normal-case text-xs">(opcional)</span></p>
+                        <textarea id="comentario" rows="3" placeholder="O que podemos melhorar? O que você mais gosta?" class="w-full bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 resize-none transition-colors"></textarea>
+                    </div>
+
+                    <!-- SUBMIT -->
+                    <button type="button" onclick="submitNPS()" class="w-full bg-thor-yellow text-thor-black font-black text-base uppercase tracking-wider py-4 rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-thor-yellow/20 hover:-translate-y-0.5">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Pesquisa
+                    </button>
                 </div>
+
+                <!-- TELA DE AGRADECIMENTO (oculta) -->
+                <div id="nps-thanks" class="hidden bg-[#111111] rounded-3xl p-12 border border-thor-yellow/20 text-center">
+                    <div class="w-20 h-20 rounded-full bg-thor-yellow/10 border border-thor-yellow/30 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-check text-thor-yellow text-3xl"></i>
+                    </div>
+                    <h3 class="font-black text-3xl uppercase mb-3">Obrigado!</h3>
+                    <p class="text-white/50 text-base leading-relaxed max-w-sm mx-auto">Sua avaliação foi enviada com sucesso. Seu feedback é muito importante para a Thor Fitness!</p>
+                    <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="w-16 h-16 object-contain mx-auto mt-8 opacity-30">
+                </div>
+
             </div>
         </section>
+
+        <script>
+        // --- NPS BUTTONS ---
+        const npsLabels = {
+            0:'Definitivamente não recomendaria', 1:'Quase certeza que não recomendaria',
+            2:'Muito improvável recomendar', 3:'Improvável recomendar',
+            4:'Pouco provável recomendar', 5:'Talvez recomendaria',
+            6:'Levemente provável', 7:'Provavelmente recomendaria',
+            8:'Muito provavelmente recomendaria', 9:'Quase certeza que recomendaria',
+            10:'Com certeza recomendaria!'
+        };
+        const npsColors = {
+            0:'#ef4444',1:'#f97316',2:'#f97316',3:'#f97316',4:'#f97316',5:'#f97316',
+            6:'#eab308',7:'#E79E14',8:'#E79E14',9:'#22c55e',10:'#22c55e'
+        };
+        let selectedNPS = null;
+        const npsContainer = document.getElementById('nps-buttons');
+        for(let i = 0; i <= 10; i++){
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = i;
+            btn.dataset.val = i;
+            btn.className = 'nps-btn w-10 h-10 rounded-lg text-sm font-black border border-white/10 text-white/50 hover:border-white/30 hover:text-white transition-all duration-200';
+            btn.onclick = () => selectNPS(i, btn);
+            npsContainer.appendChild(btn);
+        }
+        function selectNPS(val, btn){
+            selectedNPS = val;
+            document.querySelectorAll('.nps-btn').forEach(b => {
+                b.style.background = '';
+                b.style.borderColor = '';
+                b.style.color = '';
+            });
+            btn.style.background = npsColors[val];
+            btn.style.borderColor = npsColors[val];
+            btn.style.color = '#0A0A0A';
+            document.getElementById('nps-label').textContent = npsLabels[val];
+            document.getElementById('nps-label').style.color = npsColors[val];
+        }
+
+        // --- STAR RATINGS ---
+        const starRatings = {};
+        document.querySelectorAll('.stars').forEach(container => {
+            const attr = container.dataset.attr;
+            starRatings[attr] = 0;
+            for(let s = 1; s <= 5; s++){
+                const star = document.createElement('button');
+                star.type = 'button';
+                star.dataset.val = s;
+                star.innerHTML = '<i class="fas fa-star text-xl"></i>';
+                star.className = 'star-btn text-white/20 hover:text-thor-yellow transition-colors duration-150';
+                star.onclick = () => selectStar(attr, s);
+                star.onmouseenter = () => highlightStars(attr, s);
+                star.onmouseleave = () => highlightStars(attr, starRatings[attr]);
+                container.appendChild(star);
+            }
+        });
+        function highlightStars(attr, val){
+            document.querySelectorAll(`.stars[data-attr="${attr}"] .star-btn`).forEach((s,i) => {
+                s.style.color = i < val ? '#E79E14' : '';
+                s.classList.toggle('text-white/20', i >= val);
+            });
+        }
+        function selectStar(attr, val){
+            starRatings[attr] = val;
+            highlightStars(attr, val);
+        }
+
+        // --- UNIDADE BUTTONS ---
+        let selectedUnidade = null;
+        document.querySelectorAll('.unidade-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('.unidade-btn').forEach(b => {
+                    b.style.borderColor = ''; b.style.color = ''; b.style.background = '';
+                });
+                btn.style.borderColor = '#E79E14';
+                btn.style.color = '#E79E14';
+                selectedUnidade = btn.dataset.val;
+            };
+        });
+
+        // --- SUBMIT ---
+        function submitNPS(){
+            const comentario = document.getElementById('comentario').value;
+            console.log('NPS:', selectedNPS, '| Unidade:', selectedUnidade, '| Attrs:', starRatings, '| Comentário:', comentario);
+            document.getElementById('nps-form').classList.add('hidden');
+            document.getElementById('nps-thanks').classList.remove('hidden');
+        }
+        </script>
 
         <!-- PLANOS -->
         <section id="planos" class="py-28 bg-thor-gray relative overflow-hidden">
