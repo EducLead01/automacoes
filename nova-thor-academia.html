@@ -256,7 +256,17 @@
                         </div>
                     </div>
 
-                    <!-- Q4: Comentário -->
+                    <!-- Q4: Identificação -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-1">Seus dados <span class="text-white/30 font-normal normal-case text-xs">(100% sigiloso)</span></p>
+                        <p class="text-white/40 text-xs mb-4">Opcional — mas nos ajuda a entrar em contato caso queira.</p>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <input id="nome" type="text" placeholder="Seu nome" class="bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 transition-colors w-full">
+                            <input id="whatsapp" type="tel" placeholder="WhatsApp (DDD + número)" class="bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 transition-colors w-full">
+                        </div>
+                    </div>
+
+                    <!-- Q5: Comentário -->
                     <div>
                         <p class="font-black text-base uppercase tracking-wide mb-2">Deixe um comentário ou sugestão <span class="text-white/30 font-normal normal-case text-xs">(100% sigiloso)</span></p>
                         <textarea id="comentario" rows="3" placeholder="O que podemos melhorar? O que você mais gosta?" class="w-full bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 resize-none transition-colors"></textarea>
@@ -364,7 +374,9 @@
         // --- SUBMIT ---
         function submitNPS(){
             const comentario = document.getElementById('comentario').value;
-            console.log('NPS:', selectedNPS, '| Unidade:', selectedUnidade, '| Attrs:', starRatings, '| Comentário:', comentario);
+            const nome = document.getElementById('nome').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            console.log('NPS:', selectedNPS, '| Unidade:', selectedUnidade, '| Attrs:', starRatings, '| Comentário:', comentario, '| Nome:', nome, '| WhatsApp:', whatsapp);
             document.getElementById('nps-form').classList.add('hidden');
             document.getElementById('nps-thanks').classList.remove('hidden');
         }
