@@ -106,9 +106,9 @@
                     <a href="#unidades" class="nav-link">Unidades</a>
                     <a href="#avaliacoes" class="nav-link">Avaliações</a>
                 </nav>
-                <a href="#planos" class="hidden md:block bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-yellow-400 transition-all duration-300">
-                    Matricule-se
-                </a>
+                <button onclick="toggleWaPopup()" class="hidden md:block bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-yellow-400 transition-all duration-300">
+                    Falar no Atendimento
+                </button>
                 <button class="md:hidden text-white absolute right-0" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
@@ -119,7 +119,7 @@
             <a href="#estrutura" class="block nav-link py-2 text-sm font-semibold text-center">Estrutura</a>
             <a href="#unidades" class="block nav-link py-2 text-sm font-semibold text-center">Unidades</a>
             <a href="#avaliacoes" class="block nav-link py-2 text-sm font-semibold text-center">Avaliações</a>
-            <a href="#planos" class="block bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg text-center mt-2">Matricule-se</a>
+            <button onclick="toggleWaPopup(); document.getElementById('mobile-menu').classList.add('hidden')" class="block w-full bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg text-center mt-2">Falar no Atendimento</button>
         </div>
     </header>
 
