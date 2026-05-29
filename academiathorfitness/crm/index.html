@@ -77,6 +77,11 @@
             transition: color 0.2s;
         }
         .nav-link:hover { color: #E79E14; }
+        @keyframes alert-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+            50%       { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+        }
+        .alert-pulse { animation: alert-pulse 1.4s ease-in-out infinite; }
         @keyframes clock-minute {
             from { transform: rotate(0deg); }
             to   { transform: rotate(360deg); }
@@ -307,11 +312,11 @@
                             <p class="text-white/40 text-xs leading-relaxed">Cole o padrão: <span class="text-thor-yellow font-mono">Nome - Data - Origem</span></p>
                         </div>
                     </div>
-                    <div class="flex gap-3 items-start bg-[#111] rounded-2xl p-5 border border-white/[0.06]">
-                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center font-black text-xs text-white/40 mt-0.5" style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1);">2</div>
+                    <div class="alert-pulse flex gap-3 items-start rounded-2xl p-5" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.35);">
+                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center font-black text-xs text-white mt-0.5" style="background:rgba(239,68,68,0.8);">2</div>
                         <div>
-                            <p class="font-bold text-sm text-white mb-1">Segundo nome</p>
-                            <p class="text-white/40 text-xs leading-relaxed">Deixe em branco</p>
+                            <p class="font-bold text-sm text-red-400 mb-1">Segundo nome</p>
+                            <p class="text-red-400/70 text-xs leading-relaxed">⚠️ Deixe em branco</p>
                         </div>
                     </div>
                     <div class="flex gap-3 items-start bg-[#111] rounded-2xl p-5 border border-white/[0.06]">
