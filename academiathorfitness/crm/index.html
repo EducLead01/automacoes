@@ -1,0 +1,801 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thor Fitness | Pesquisa de Satisfação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'thor-black': '#0A0A0A',
+                        'thor-gray':  '#111111',
+                        'thor-yellow': '#E79E14',
+                        'thor-white': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        display: ['Inter', 'sans-serif'],
+                        sans:    ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; }
+        ::selection { background: #E79E14; color: #0A0A0A; }
+        body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #fff; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #E79E14; border-radius: 10px; }
+
+        .hero-bg {
+            background-image: url('https://academiathorfitness.com.br/unidade2.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .estrutura-bg {
+            background-image: url('https://academiathorfitness.com.br/estrutura.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #E79E14, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .dot-pattern {
+            background-image: radial-gradient(circle, #E79E14 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .plan-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .plan-card:hover {
+            border-color: rgba(231,158,20,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(231,158,20,0.1);
+        }
+        .plan-featured {
+            border: 2px solid #E79E14;
+            box-shadow: 0 0 40px rgba(231,158,20,0.15);
+        }
+        .stat-card {
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .stat-card:hover { border-color: rgba(231,158,20,0.3); }
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: #E79E14; }
+        @keyframes clock-minute {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        @keyframes clock-hour {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        .clock-minute-hand { animation: clock-minute 3s linear infinite; transform-origin: 12px 12px; }
+        .clock-hour-hand   { animation: clock-hour 36s linear infinite; transform-origin: 12px 12px; }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        .thor-marquee-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: marquee 40s linear infinite;
+        }
+        .thor-marquee-track:hover { animation-play-state: paused; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-thor-black text-thor-white">
+
+    <!-- NAV -->
+    <header class="fixed top-0 w-full z-50" style="background: rgba(10,10,10,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center md:justify-between h-20 relative">
+                <a href="#" class="flex items-center gap-3">
+                    <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="Thor Fitness" class="w-10 h-10 object-contain">
+                    <span class="font-black text-xl uppercase tracking-tight">Thor <span class="text-thor-yellow">Fitness</span></span>
+                </a>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                    <a href="#pesquisa" class="nav-link">Pesquisa de Satisfação</a>
+                    <a href="#estrutura" class="nav-link">Estrutura</a>
+                    <a href="#unidades" class="nav-link">Unidades</a>
+                    <a href="#avaliacoes" class="nav-link">Avaliações</a>
+                </nav>
+                <button onclick="toggleWaPopup()" class="hidden md:block bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-yellow-400 transition-all duration-300">
+                    Falar no Atendimento
+                </button>
+                <button class="md:hidden text-white absolute right-0" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-[#0A0A0A] px-4 pb-4 pt-2 space-y-1">
+            <a href="#pesquisa" class="block nav-link py-2 text-sm font-semibold text-center">Pesquisa de Satisfação</a>
+            <a href="#estrutura" class="block nav-link py-2 text-sm font-semibold text-center">Estrutura</a>
+            <a href="#unidades" class="block nav-link py-2 text-sm font-semibold text-center">Unidades</a>
+            <a href="#avaliacoes" class="block nav-link py-2 text-sm font-semibold text-center">Avaliações</a>
+            <button onclick="toggleWaPopup(); document.getElementById('mobile-menu').classList.add('hidden')" class="block w-full bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg text-center mt-2">Falar no Atendimento</button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- HERO -->
+        <section class="flex items-center justify-center pt-36 pb-8 bg-thor-black">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+                <h1 class="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase">
+                    Pesquisa de<br>
+                    <span class="gradient-text">Satisfação</span><br>
+                    Thor Fitness
+                </h1>
+            </div>
+        </section>
+
+        <!-- NPS SURVEY -->
+        <section id="pesquisa" class="py-20 bg-thor-black relative overflow-hidden">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(17,17,17,0.8) 0%, #0A0A0A 70%);"></div>
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+                <div class="text-center mb-12">
+                    <p class="text-white/50 text-xl font-medium flex items-center justify-center gap-3">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 opacity-60">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                            <line class="clock-minute-hand" x1="12" y1="12" x2="12" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <line class="clock-hour-hand" x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Leva menos de 1 minuto.
+                    </p>
+                </div>
+
+                <!-- FORMULÁRIO -->
+                <div id="nps-form" class="bg-[#111111] rounded-3xl p-8 border border-white/[0.06] space-y-10">
+
+                    <!-- Q1: NPS -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-1">Em uma escala de 0 a 10, o quanto você recomendaria a Thor Fitness para um amigo ou familiar?</p>
+                        <p class="text-white/40 text-xs mb-5">0 = Jamais recomendaria · 10 = Com certeza recomendaria</p>
+                        <div class="flex flex-wrap gap-2" id="nps-buttons">
+                            <!-- gerado por JS -->
+                        </div>
+                        <p id="nps-label" class="text-xs mt-3 text-white/30 min-h-[1rem] transition-all"></p>
+                    </div>
+
+                    <!-- Q2: Atributos com estrelas -->
+                    <div class="space-y-5">
+                        <p class="font-black text-base uppercase tracking-wide mb-1">Avalie cada item abaixo:</p>
+                        <p class="text-white/40 text-xs -mt-3 mb-4">1 = Péssimo · 5 = Excelente</p>
+
+                        <div class="attribute-row" data-attr="equipamentos">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-dumbbell text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Equipamentos</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="equipamentos"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
+
+                        <div class="attribute-row" data-attr="instrutores">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-user-tie text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Instrutores e Professores</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="instrutores"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
+
+                        <div class="attribute-row" data-attr="limpeza">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-broom text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Limpeza e Higiene</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="limpeza"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
+
+                        <div class="attribute-row" data-attr="atendimento">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-headset text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Atendimento na Recepção</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="atendimento"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
+
+                        <div class="attribute-row" data-attr="custo">
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
+                                        <i class="fas fa-tags text-thor-yellow text-sm"></i>
+                                    </div>
+                                    <span class="font-semibold text-sm text-white/80">Custo-benefício</span>
+                                </div>
+                                <div class="flex gap-2 stars" data-attr="custo"></div>
+                            </div>
+                            <div class="mt-2 h-px bg-white/[0.04]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Q3: Unidade -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-4">Qual unidade você frequenta?</p>
+                        <div class="grid sm:grid-cols-3 gap-3" id="unidade-buttons">
+                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="balneario">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Balneário
+                            </button>
+                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="garavelo">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Garavelo
+                            </button>
+                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="guanabara">
+                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Guanabara
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Q4: Identificação -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-1">Seus dados <span class="text-white/30 font-normal normal-case text-xs">(100% sigiloso)</span></p>
+                        <p class="text-white/40 text-xs mb-4">Obrigatório — necessário para identificação da sua resposta.</p>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <input id="nome" type="text" placeholder="Seu nome" class="bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 transition-colors w-full">
+                            <input id="whatsapp" type="tel" placeholder="WhatsApp (DDD + número)" class="bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 transition-colors w-full">
+                        </div>
+                    </div>
+
+                    <!-- Q5: Comentário -->
+                    <div>
+                        <p class="font-black text-base uppercase tracking-wide mb-2">Deixe um comentário ou sugestão em nossa ouvidoria <span class="text-white/30 font-normal normal-case text-xs">(100% sigiloso)</span></p>
+                        <textarea id="comentario" rows="3" placeholder="O que podemos melhorar? O que você mais gosta?" class="w-full bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 resize-none transition-colors"></textarea>
+                    </div>
+
+                    <!-- SUBMIT -->
+                    <button type="button" onclick="submitNPS()" class="w-full bg-thor-yellow text-thor-black font-black text-base uppercase tracking-wider py-4 rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-thor-yellow/20 hover:-translate-y-0.5">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Pesquisa
+                    </button>
+                </div>
+
+                <!-- TELA DE AGRADECIMENTO (oculta) -->
+                <div id="nps-thanks" class="hidden bg-[#111111] rounded-3xl p-12 border border-thor-yellow/20 text-center">
+                    <div class="w-20 h-20 rounded-full bg-thor-yellow/10 border border-thor-yellow/30 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-check text-thor-yellow text-3xl"></i>
+                    </div>
+                    <h3 class="font-black text-3xl uppercase mb-3">Obrigado!</h3>
+                    <p class="text-white/50 text-base leading-relaxed max-w-sm mx-auto">Sua avaliação foi enviada com sucesso. Seu feedback é muito importante para a Thor Fitness!</p>
+                    <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="w-16 h-16 object-contain mx-auto mt-8 opacity-30">
+                </div>
+
+            </div>
+        </section>
+
+        <script>
+        // --- NPS BUTTONS ---
+        const npsLabels = {
+            0:'Definitivamente não recomendaria', 1:'Quase certeza que não recomendaria',
+            2:'Muito improvável recomendar', 3:'Improvável recomendar',
+            4:'Pouco provável recomendar', 5:'Talvez recomendaria',
+            6:'Levemente provável', 7:'Provavelmente recomendaria',
+            8:'Muito provavelmente recomendaria', 9:'Quase certeza que recomendaria',
+            10:'Com certeza recomendaria!'
+        };
+        const npsColors = {
+            0:'#ef4444',1:'#f97316',2:'#f97316',3:'#f97316',4:'#f97316',5:'#f97316',
+            6:'#eab308',7:'#E79E14',8:'#E79E14',9:'#22c55e',10:'#22c55e'
+        };
+        let selectedNPS = null;
+        const npsContainer = document.getElementById('nps-buttons');
+        for(let i = 0; i <= 10; i++){
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = i;
+            btn.dataset.val = i;
+            btn.className = 'nps-btn w-10 h-10 rounded-lg text-sm font-black border border-white/10 text-white/50 hover:border-white/30 hover:text-white transition-all duration-200';
+            btn.onclick = () => selectNPS(i, btn);
+            npsContainer.appendChild(btn);
+        }
+        function selectNPS(val, btn){
+            selectedNPS = val;
+            document.querySelectorAll('.nps-btn').forEach(b => {
+                b.style.background = '';
+                b.style.borderColor = '';
+                b.style.color = '';
+            });
+            btn.style.background = npsColors[val];
+            btn.style.borderColor = npsColors[val];
+            btn.style.color = '#0A0A0A';
+            document.getElementById('nps-label').textContent = npsLabels[val];
+            document.getElementById('nps-label').style.color = npsColors[val];
+        }
+
+        // --- STAR RATINGS ---
+        const starRatings = {};
+        document.querySelectorAll('.stars').forEach(container => {
+            const attr = container.dataset.attr;
+            starRatings[attr] = 0;
+            for(let s = 1; s <= 5; s++){
+                const star = document.createElement('button');
+                star.type = 'button';
+                star.dataset.val = s;
+                star.innerHTML = '<i class="fas fa-star text-xl"></i>';
+                star.className = 'star-btn text-white/20 hover:text-thor-yellow transition-colors duration-150';
+                star.onclick = () => selectStar(attr, s);
+                star.onmouseenter = () => highlightStars(attr, s);
+                star.onmouseleave = () => highlightStars(attr, starRatings[attr]);
+                container.appendChild(star);
+            }
+        });
+        function highlightStars(attr, val){
+            document.querySelectorAll(`.stars[data-attr="${attr}"] .star-btn`).forEach((s,i) => {
+                s.style.color = i < val ? '#E79E14' : '';
+                s.classList.toggle('text-white/20', i >= val);
+            });
+        }
+        function selectStar(attr, val){
+            starRatings[attr] = val;
+            highlightStars(attr, val);
+        }
+
+        // --- UNIDADE BUTTONS ---
+        let selectedUnidade = null;
+        document.querySelectorAll('.unidade-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('.unidade-btn').forEach(b => {
+                    b.style.borderColor = ''; b.style.color = ''; b.style.background = '';
+                });
+                btn.style.borderColor = '#E79E14';
+                btn.style.color = '#E79E14';
+                selectedUnidade = btn.dataset.val;
+            };
+        });
+
+        // --- SUBMIT ---
+        function submitNPS(){
+            const comentario = document.getElementById('comentario').value;
+            const nome = document.getElementById('nome').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            console.log('NPS:', selectedNPS, '| Unidade:', selectedUnidade, '| Attrs:', starRatings, '| Comentário:', comentario, '| Nome:', nome, '| WhatsApp:', whatsapp);
+            document.getElementById('nps-form').classList.add('hidden');
+            document.getElementById('nps-thanks').classList.remove('hidden');
+        }
+        </script>
+
+
+        <!-- AVALIAÇÕES -->
+        <section id="avaliacoes" class="py-24 bg-thor-black relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+                <div class="text-center">
+                    <p class="text-thor-yellow text-sm font-bold uppercase tracking-[0.3em] mb-4">Avaliações do Google</p>
+                    <h2 class="font-black text-4xl md:text-5xl uppercase tracking-tight">
+                        O que dizem nossos <span class="text-thor-yellow">alunos</span>
+                    </h2>
+                    <!-- Google Badge -->
+                    <div class="inline-flex items-center gap-3 mt-6 px-5 py-3 rounded-full" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        <span class="text-white/80 text-sm font-semibold">4,9</span>
+                        <div class="flex text-[#FBBC05] text-xs gap-0.5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-white/40 text-xs">no Google</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marquee container with fade edges -->
+            <div class="overflow-hidden" style="mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);">
+                <div class="thor-marquee-track">
+
+                    <!-- === CARD 1 === -->
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://ui-avatars.com/api/?name=Vit%C3%B3ria+Rodrigues&background=E79E14&color=000&bold=true&size=128" alt="Vitória Rodrigues" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Vitória Rodrigues</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Academia excelente, os melhores equipamentos e um ótimo atendimento, tive uma boa experiência 👏🏻👏🏻"</p>
+                    </div>
+
+                    <!-- === CARD 2 === -->
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWNsK6YrI04rn1n6KSHb1lT47W0UDygGwrCl6TR1bIMRErcmTR0WQ=w80-h80-p-rp-mo-ba2-br100" alt="Thauany Silva Dias" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Thauany Silva Dias</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Ótimo local para treinar, professores e funcionários qualificados e educados. Venha garantir um estilo de vida saudável 🫡"</p>
+                    </div>
+
+                    <!-- === CARD 3 === -->
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUoD3xw0Z5Wqy9_0uVHqhpE36NVIkT_xrLh8yWBNFeLDuQx8c3A=w80-h80-p-rp-mo-br100" alt="Davila Neres Tormim" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Davila Neres Tormim</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Aparelhos novos, atendimento personalizado, horários flexíveis! Melhor academia da região do Setor Garavelo! Vale a pena conhecer."</p>
+                    </div>
+
+                    <!-- === CARD 4 === -->
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWriDNOlhfnfI7yDPIkZ1wiECGVPnoDxcCIDpwXH8ab9uoW1AEobw=w80-h80-p-rp-mo-ba4-br100" alt="Edno Donato" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Edno Donato</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"A nova unidade da Academia Thor Guanabara é muito boa. Amplo estacionamento, funcionários simpáticos, climatizada e com ótimos equipamentos."</p>
+                    </div>
+
+                    <!-- === CARD 5 === -->
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUCpoNcmaxMG4j-Ppd6hZhC0aEibEPh1SPjf8qGxAfven0XTHmN_w=w80-h80-p-rp-mo-ba4-br100" alt="Alexandre Mazucato" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Alexandre Mazucato</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Excelente academia, já experimentei praticamente todas aqui da região, e sem dúvida a Thor é a melhor. Atendimento de primeira, estacionamento, aparelhos novos e limpos. Nota 1000."</p>
+                    </div>
+
+                    <!-- === CARD 6 === -->
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUdz2V2g5oZykSxU6Btn1hykcsvV6qlZ50Qp3PeibgTk-aCHAg=w80-h80-p-rp-mo-br100" alt="Nathalia Vieira Sousa" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Nathalia Vieira Sousa</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Ambiente incrível, professores top e treinos que te desafiam a ir além! Sempre saio daqui motivada e com vontade de voltar. Recomendo para todos que querem mudar de vida! 🤍💕"</p>
+                    </div>
+
+                    <!-- === CARD 7 === -->
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjW4QqFI4PKxJwT-HlsNLFUbl7SIRUonEp7bBgbN84NP6ibG0u011g=w80-h80-p-rp-mo-br100" alt="Samuel Silva V." class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Samuel Silva V.</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Thor Fitness é top demais! Equipamentos de qualidade, professores atenciosos e ambiente motivador. Melhor investimento que fiz para minha saúde!"</p>
+                    </div>
+
+                    <!-- === DUPLICATE SET for seamless loop === -->
+
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://ui-avatars.com/api/?name=Vit%C3%B3ria+Rodrigues&background=E79E14&color=000&bold=true&size=128" alt="Vitória Rodrigues" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Vitória Rodrigues</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Academia excelente, os melhores equipamentos e um ótimo atendimento, tive uma boa experiência 👏🏻👏🏻"</p>
+                    </div>
+
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWNsK6YrI04rn1n6KSHb1lT47W0UDygGwrCl6TR1bIMRErcmTR0WQ=w80-h80-p-rp-mo-ba2-br100" alt="Thauany Silva Dias" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Thauany Silva Dias</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Ótimo local para treinar, professores e funcionários qualificados e educados. Venha garantir um estilo de vida saudável 🫡"</p>
+                    </div>
+
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUoD3xw0Z5Wqy9_0uVHqhpE36NVIkT_xrLh8yWBNFeLDuQx8c3A=w80-h80-p-rp-mo-br100" alt="Davila Neres Tormim" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Davila Neres Tormim</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Aparelhos novos, atendimento personalizado, horários flexíveis! Melhor academia da região do Setor Garavelo! Vale a pena conhecer."</p>
+                    </div>
+
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWriDNOlhfnfI7yDPIkZ1wiECGVPnoDxcCIDpwXH8ab9uoW1AEobw=w80-h80-p-rp-mo-ba4-br100" alt="Edno Donato" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Edno Donato</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"A nova unidade da Academia Thor Guanabara é muito boa. Amplo estacionamento, funcionários simpáticos, climatizada e com ótimos equipamentos."</p>
+                    </div>
+
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUCpoNcmaxMG4j-Ppd6hZhC0aEibEPh1SPjf8qGxAfven0XTHmN_w=w80-h80-p-rp-mo-ba4-br100" alt="Alexandre Mazucato" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Alexandre Mazucato</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Excelente academia, já experimentei praticamente todas aqui da região, e sem dúvida a Thor é a melhor. Atendimento de primeira, estacionamento, aparelhos novos e limpos. Nota 1000."</p>
+                    </div>
+
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUdz2V2g5oZykSxU6Btn1hykcsvV6qlZ50Qp3PeibgTk-aCHAg=w80-h80-p-rp-mo-br100" alt="Nathalia Vieira Sousa" class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Nathalia Vieira Sousa</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Ambiente incrível, professores top e treinos que te desafiam a ir além! Sempre saio daqui motivada e com vontade de voltar. Recomendo para todos que querem mudar de vida! 🤍💕"</p>
+                    </div>
+
+                    <div class="relative flex-shrink-0 rounded-2xl p-7 flex flex-col gap-5" style="width:420px; min-height:290px; background:linear-gradient(145deg,#161616 0%,#0f0f0f 100%); border:1px solid rgba(231,158,20,0.18); box-shadow:0 0 50px rgba(231,158,20,0.07),0 20px 50px rgba(0,0,0,0.5);">
+                        <span class="absolute top-4 right-7 font-black text-9xl leading-none select-none pointer-events-none" style="color:rgba(231,158,20,0.07)">"</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjW4QqFI4PKxJwT-HlsNLFUbl7SIRUonEp7bBgbN84NP6ibG0u011g=w80-h80-p-rp-mo-br100" alt="Samuel Silva V." class="w-16 h-16 rounded-full object-cover flex-shrink-0" style="border:2px solid rgba(231,158,20,0.7); box-shadow:0 0 20px rgba(231,158,20,0.3);">
+                            <div>
+                                <p class="font-bold text-white">Samuel Silva V.</p>
+                                <div class="flex text-[#FBBC05] text-sm gap-0.5 mt-1">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                    <span class="text-white/40 text-xs">Avaliação Google</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed relative z-10">"Thor Fitness é top demais! Equipamentos de qualidade, professores atenciosos e ambiente motivador. Melhor investimento que fiz para minha saúde!"</p>
+                    </div>
+
+                </div><!-- end marquee track -->
+            </div><!-- end overflow-hidden -->
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-12 bg-[#050505] border-t border-white/[0.04]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="Thor Fitness" class="w-10 h-10 object-contain">
+                <span class="font-black text-xl uppercase tracking-tight">Thor <span class="text-thor-yellow">Fitness</span></span>
+            </div>
+            <div class="border-t border-white/[0.04] pt-6 w-full">
+                <p class="text-white/20 text-xs text-center">© 2026 Thor Fitness. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON + POPUP -->
+    <div id="wa-popup-overlay" onclick="closeWaPopup()" class="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm hidden"></div>
+
+    <div id="wa-popup" class="fixed bottom-24 right-5 z-[100] w-80 rounded-2xl overflow-hidden shadow-2xl hidden" style="box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+        <!-- Header verde -->
+        <div class="flex items-center justify-between px-5 py-4" style="background:#25D366;">
+            <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 fill-white flex-shrink-0">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+                <span class="font-black text-white text-base">Atendimento Thor</span>
+            </div>
+            <button onclick="closeWaPopup()" class="text-white/80 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <!-- Subtitle -->
+        <div class="px-5 py-3 text-xs text-white/50 font-semibold uppercase tracking-wider" style="background:#1a1a1a; border-bottom:1px solid rgba(255,255,255,0.07);">
+            Escolha a unidade que deseja falar:
+        </div>
+        <!-- Units -->
+        <div style="background:#111111;">
+            <a href="https://wa.me/556292649108?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20a%20Thor%20Fitness%20Balneário!" target="_blank" rel="noopener noreferrer"
+               class="flex items-center justify-between px-5 py-4 border-b hover:bg-white/[0.04] transition-colors" style="border-color:rgba(255,255,255,0.07);">
+                <div>
+                    <p class="font-bold text-white text-sm">Unidade Balneário</p>
+                    <p class="text-white/35 text-[10px] uppercase tracking-widest mt-0.5">Clique para iniciar o chat</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 flex-shrink-0" style="fill:#25D366;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+            </a>
+            <a href="https://wa.me/556292246784?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20a%20Thor%20Fitness%20Garavelo!" target="_blank" rel="noopener noreferrer"
+               class="flex items-center justify-between px-5 py-4 border-b hover:bg-white/[0.04] transition-colors" style="border-color:rgba(255,255,255,0.07);">
+                <div>
+                    <p class="font-bold text-white text-sm">Unidade Garavelo</p>
+                    <p class="text-white/35 text-[10px] uppercase tracking-widest mt-0.5">Clique para iniciar o chat</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 flex-shrink-0" style="fill:#25D366;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+            </a>
+            <a href="https://wa.me/556298867996?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20a%20Thor%20Fitness%20Guanabara!" target="_blank" rel="noopener noreferrer"
+               class="flex items-center justify-between px-5 py-4 hover:bg-white/[0.04] transition-colors">
+                <div>
+                    <p class="font-bold text-white text-sm">Unidade Guanabara</p>
+                    <p class="text-white/35 text-[10px] uppercase tracking-widest mt-0.5">Clique para iniciar o chat</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 flex-shrink-0" style="fill:#25D366;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <button id="wa-float-btn" onclick="toggleWaPopup()"
+        class="fixed bottom-5 right-5 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110 active:scale-95"
+        style="background:#25D366; box-shadow:0 4px 20px rgba(37,211,102,0.5);">
+        <svg id="wa-icon-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 fill-white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        <svg id="wa-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+    </button>
+
+    <script>
+        function toggleWaPopup() {
+            var popup = document.getElementById('wa-popup');
+            var overlay = document.getElementById('wa-popup-overlay');
+            var iconOpen = document.getElementById('wa-icon-open');
+            var iconClose = document.getElementById('wa-icon-close');
+            var isOpen = !popup.classList.contains('hidden');
+            if (isOpen) {
+                popup.classList.add('hidden');
+                overlay.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            } else {
+                popup.classList.remove('hidden');
+                overlay.classList.remove('hidden');
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+            }
+        }
+        function closeWaPopup() {
+            document.getElementById('wa-popup').classList.add('hidden');
+            document.getElementById('wa-popup-overlay').classList.add('hidden');
+            document.getElementById('wa-icon-open').classList.remove('hidden');
+            document.getElementById('wa-icon-close').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>
