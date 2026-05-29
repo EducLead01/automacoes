@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thor Fitness | Pesquisa de Satisfação</title>
+    <title>Thor Fitness | Playbook do Vendedor CRM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -111,9 +111,9 @@
                     <span class="font-black text-xl uppercase tracking-tight">Thor <span class="text-thor-yellow">Fitness</span></span>
                 </a>
                 <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
-                    <a href="#pesquisa" class="nav-link">Pesquisa de Satisfação</a>
-                    <a href="#estrutura" class="nav-link">Estrutura</a>
-                    <a href="#unidades" class="nav-link">Unidades</a>
+                    <a href="#contatos" class="nav-link">Contatos</a>
+                    <a href="#kanban" class="nav-link">Kanban</a>
+                    <a href="#inbox" class="nav-link">Inbox</a>
                     <a href="#avaliacoes" class="nav-link">Avaliações</a>
                 </nav>
                 <button onclick="toggleWaPopup()" class="hidden md:block bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-yellow-400 transition-all duration-300">
@@ -125,9 +125,9 @@
             </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-[#0A0A0A] px-4 pb-4 pt-2 space-y-1">
-            <a href="#pesquisa" class="block nav-link py-2 text-sm font-semibold text-center">Pesquisa de Satisfação</a>
-            <a href="#estrutura" class="block nav-link py-2 text-sm font-semibold text-center">Estrutura</a>
-            <a href="#unidades" class="block nav-link py-2 text-sm font-semibold text-center">Unidades</a>
+            <a href="#contatos" class="block nav-link py-2 text-sm font-semibold text-center">Contatos</a>
+            <a href="#kanban" class="block nav-link py-2 text-sm font-semibold text-center">Kanban</a>
+            <a href="#inbox" class="block nav-link py-2 text-sm font-semibold text-center">Inbox</a>
             <a href="#avaliacoes" class="block nav-link py-2 text-sm font-semibold text-center">Avaliações</a>
             <button onclick="toggleWaPopup(); document.getElementById('mobile-menu').classList.add('hidden')" class="block w-full bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg text-center mt-2">Falar no Atendimento</button>
         </div>
@@ -135,260 +135,66 @@
 
     <main class="flex-grow">
 
+
         <!-- HERO -->
-        <section class="flex items-center justify-center pt-36 pb-8 bg-thor-black">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
-                <h1 class="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase">
-                    Pesquisa de<br>
-                    <span class="gradient-text">Satisfação</span><br>
+        <section class="flex items-center justify-center pt-36 pb-10 bg-thor-black">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+                <p class="text-thor-yellow text-xs font-black uppercase tracking-[0.35em] mb-5">BotConversa CRM</p>
+                <h1 class="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase mb-6">
+                    Playbook do<br>
+                    <span class="gradient-text">Vendedor</span><br>
                     Thor Fitness
                 </h1>
+                <p class="text-white/50 text-lg md:text-xl font-light max-w-2xl mx-auto">
+                    Você tem acesso a <strong class="text-white font-bold">3 ferramentas</strong> no sistema. Entenda o que fazer em cada uma.
+                </p>
             </div>
         </section>
 
-        <!-- NPS SURVEY -->
-        <section id="pesquisa" class="py-20 bg-thor-black relative overflow-hidden">
-            <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(17,17,17,0.8) 0%, #0A0A0A 70%);"></div>
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- CRM MENUS -->
+        <section class="py-20 bg-thor-black">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <div class="text-center mb-12">
-                    <p class="text-white/50 text-xl font-medium flex items-center justify-center gap-3">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 opacity-60">
-                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-                            <circle cx="12" cy="12" r="1" fill="currentColor"/>
-                            <line class="clock-minute-hand" x1="12" y1="12" x2="12" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <line class="clock-hour-hand" x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Leva menos de 1 minuto.
-                    </p>
+                    <!-- Contatos -->
+                    <div id="contatos" class="group bg-[#111111] rounded-3xl p-8 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(231,158,20,0.1); border:1px solid rgba(231,158,20,0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-thor-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 0 0-4-4h-1M9 20H4v-2a4 4 0 0 1 4-4h1m4-4a4 4 0 1 0-8 0 4 4 0 0 0 8 0zm6 0a3 3 0 1 0-6 0 3 3 0 0 0 6 0z"/>
+                            </svg>
+                        </div>
+                        <div class="w-8 h-[2px] bg-thor-yellow/40 mb-5 group-hover:w-14 transition-all duration-500"></div>
+                        <h2 class="font-black text-2xl uppercase tracking-tight mb-3">Contatos</h2>
+                        <p class="text-white/50 text-sm leading-relaxed">Aqui ficam todos os leads e clientes cadastrados. Visualize o histórico de conversas, adicione tags, anotações e crie novos contatos manualmente.</p>
+                    </div>
+
+                    <!-- Kanban -->
+                    <div id="kanban" class="group bg-[#111111] rounded-3xl p-8 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(231,158,20,0.1); border:1px solid rgba(231,158,20,0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-thor-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m0 10a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 7a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m0 10V7m0 10a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2"/>
+                            </svg>
+                        </div>
+                        <div class="w-8 h-[2px] bg-thor-yellow/40 mb-5 group-hover:w-14 transition-all duration-500"></div>
+                        <h2 class="font-black text-2xl uppercase tracking-tight mb-3">Kanban</h2>
+                        <p class="text-white/50 text-sm leading-relaxed">O quadro de pipeline de vendas. Mova os cards entre as colunas conforme o avanço de cada negociação — de novo lead até matrícula fechada.</p>
+                    </div>
+
+                    <!-- Inbox -->
+                    <div id="inbox" class="group bg-[#111111] rounded-3xl p-8 border border-white/[0.06] hover:border-thor-yellow/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(231,158,20,0.1); border:1px solid rgba(231,158,20,0.2);">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-thor-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 16V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3l3 3 3-3h3a2 2 0 0 0 2-2z"/>
+                            </svg>
+                        </div>
+                        <div class="w-8 h-[2px] bg-thor-yellow/40 mb-5 group-hover:w-14 transition-all duration-500"></div>
+                        <h2 class="font-black text-2xl uppercase tracking-tight mb-3">Inbox</h2>
+                        <p class="text-white/50 text-sm leading-relaxed">Todas as conversas ativas chegam aqui. Responda mensagens, envie áudios e gerencie os atendimentos em andamento sem sair do sistema.</p>
+                    </div>
+
                 </div>
-
-                <!-- FORMULÁRIO -->
-                <div id="nps-form" class="bg-[#111111] rounded-3xl p-8 border border-white/[0.06] space-y-10">
-
-                    <!-- Q1: NPS -->
-                    <div>
-                        <p class="font-black text-base uppercase tracking-wide mb-1">Em uma escala de 0 a 10, o quanto você recomendaria a Thor Fitness para um amigo ou familiar?</p>
-                        <p class="text-white/40 text-xs mb-5">0 = Jamais recomendaria · 10 = Com certeza recomendaria</p>
-                        <div class="flex flex-wrap gap-2" id="nps-buttons">
-                            <!-- gerado por JS -->
-                        </div>
-                        <p id="nps-label" class="text-xs mt-3 text-white/30 min-h-[1rem] transition-all"></p>
-                    </div>
-
-                    <!-- Q2: Atributos com estrelas -->
-                    <div class="space-y-5">
-                        <p class="font-black text-base uppercase tracking-wide mb-1">Avalie cada item abaixo:</p>
-                        <p class="text-white/40 text-xs -mt-3 mb-4">1 = Péssimo · 5 = Excelente</p>
-
-                        <div class="attribute-row" data-attr="equipamentos">
-                            <div class="flex items-center justify-between flex-wrap gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
-                                        <i class="fas fa-dumbbell text-thor-yellow text-sm"></i>
-                                    </div>
-                                    <span class="font-semibold text-sm text-white/80">Equipamentos</span>
-                                </div>
-                                <div class="flex gap-2 stars" data-attr="equipamentos"></div>
-                            </div>
-                            <div class="mt-2 h-px bg-white/[0.04]"></div>
-                        </div>
-
-                        <div class="attribute-row" data-attr="instrutores">
-                            <div class="flex items-center justify-between flex-wrap gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
-                                        <i class="fas fa-user-tie text-thor-yellow text-sm"></i>
-                                    </div>
-                                    <span class="font-semibold text-sm text-white/80">Instrutores e Professores</span>
-                                </div>
-                                <div class="flex gap-2 stars" data-attr="instrutores"></div>
-                            </div>
-                            <div class="mt-2 h-px bg-white/[0.04]"></div>
-                        </div>
-
-                        <div class="attribute-row" data-attr="limpeza">
-                            <div class="flex items-center justify-between flex-wrap gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
-                                        <i class="fas fa-broom text-thor-yellow text-sm"></i>
-                                    </div>
-                                    <span class="font-semibold text-sm text-white/80">Limpeza e Higiene</span>
-                                </div>
-                                <div class="flex gap-2 stars" data-attr="limpeza"></div>
-                            </div>
-                            <div class="mt-2 h-px bg-white/[0.04]"></div>
-                        </div>
-
-                        <div class="attribute-row" data-attr="atendimento">
-                            <div class="flex items-center justify-between flex-wrap gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
-                                        <i class="fas fa-headset text-thor-yellow text-sm"></i>
-                                    </div>
-                                    <span class="font-semibold text-sm text-white/80">Atendimento na Recepção</span>
-                                </div>
-                                <div class="flex gap-2 stars" data-attr="atendimento"></div>
-                            </div>
-                            <div class="mt-2 h-px bg-white/[0.04]"></div>
-                        </div>
-
-                        <div class="attribute-row" data-attr="custo">
-                            <div class="flex items-center justify-between flex-wrap gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
-                                        <i class="fas fa-tags text-thor-yellow text-sm"></i>
-                                    </div>
-                                    <span class="font-semibold text-sm text-white/80">Custo-benefício</span>
-                                </div>
-                                <div class="flex gap-2 stars" data-attr="custo"></div>
-                            </div>
-                            <div class="mt-2 h-px bg-white/[0.04]"></div>
-                        </div>
-                    </div>
-
-                    <!-- Q3: Unidade -->
-                    <div>
-                        <p class="font-black text-base uppercase tracking-wide mb-4">Qual unidade você frequenta?</p>
-                        <div class="grid sm:grid-cols-3 gap-3" id="unidade-buttons">
-                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="balneario">
-                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Balneário
-                            </button>
-                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="garavelo">
-                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Garavelo
-                            </button>
-                            <button type="button" class="unidade-btn py-3 px-4 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:border-thor-yellow/50 hover:text-white transition-all" data-val="guanabara">
-                                <i class="fas fa-map-marker-alt text-thor-yellow mr-2 text-xs"></i>Guanabara
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Q4: Identificação -->
-                    <div>
-                        <p class="font-black text-base uppercase tracking-wide mb-1">Seus dados <span class="text-white/30 font-normal normal-case text-xs">(100% sigiloso)</span></p>
-                        <p class="text-white/40 text-xs mb-4">Obrigatório — necessário para identificação da sua resposta.</p>
-                        <div class="grid sm:grid-cols-2 gap-3">
-                            <input id="nome" type="text" placeholder="Seu nome" class="bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 transition-colors w-full">
-                            <input id="whatsapp" type="tel" placeholder="WhatsApp (DDD + número)" class="bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 transition-colors w-full">
-                        </div>
-                    </div>
-
-                    <!-- Q5: Comentário -->
-                    <div>
-                        <p class="font-black text-base uppercase tracking-wide mb-2">Deixe um comentário ou sugestão em nossa ouvidoria <span class="text-white/30 font-normal normal-case text-xs">(100% sigiloso)</span></p>
-                        <textarea id="comentario" rows="3" placeholder="O que podemos melhorar? O que você mais gosta?" class="w-full bg-[#0C0C0C] border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-thor-yellow/50 resize-none transition-colors"></textarea>
-                    </div>
-
-                    <!-- SUBMIT -->
-                    <button type="button" onclick="submitNPS()" class="w-full bg-thor-yellow text-thor-black font-black text-base uppercase tracking-wider py-4 rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-lg hover:shadow-thor-yellow/20 hover:-translate-y-0.5">
-                        <i class="fas fa-paper-plane mr-2"></i> Enviar Pesquisa
-                    </button>
-                </div>
-
-                <!-- TELA DE AGRADECIMENTO (oculta) -->
-                <div id="nps-thanks" class="hidden bg-[#111111] rounded-3xl p-12 border border-thor-yellow/20 text-center">
-                    <div class="w-20 h-20 rounded-full bg-thor-yellow/10 border border-thor-yellow/30 flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-check text-thor-yellow text-3xl"></i>
-                    </div>
-                    <h3 class="font-black text-3xl uppercase mb-3">Obrigado!</h3>
-                    <p class="text-white/50 text-base leading-relaxed max-w-sm mx-auto">Sua avaliação foi enviada com sucesso. Seu feedback é muito importante para a Thor Fitness!</p>
-                    <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="" class="w-16 h-16 object-contain mx-auto mt-8 opacity-30">
-                </div>
-
             </div>
         </section>
-
-        <script>
-        // --- NPS BUTTONS ---
-        const npsLabels = {
-            0:'Definitivamente não recomendaria', 1:'Quase certeza que não recomendaria',
-            2:'Muito improvável recomendar', 3:'Improvável recomendar',
-            4:'Pouco provável recomendar', 5:'Talvez recomendaria',
-            6:'Levemente provável', 7:'Provavelmente recomendaria',
-            8:'Muito provavelmente recomendaria', 9:'Quase certeza que recomendaria',
-            10:'Com certeza recomendaria!'
-        };
-        const npsColors = {
-            0:'#ef4444',1:'#f97316',2:'#f97316',3:'#f97316',4:'#f97316',5:'#f97316',
-            6:'#eab308',7:'#E79E14',8:'#E79E14',9:'#22c55e',10:'#22c55e'
-        };
-        let selectedNPS = null;
-        const npsContainer = document.getElementById('nps-buttons');
-        for(let i = 0; i <= 10; i++){
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.textContent = i;
-            btn.dataset.val = i;
-            btn.className = 'nps-btn w-10 h-10 rounded-lg text-sm font-black border border-white/10 text-white/50 hover:border-white/30 hover:text-white transition-all duration-200';
-            btn.onclick = () => selectNPS(i, btn);
-            npsContainer.appendChild(btn);
-        }
-        function selectNPS(val, btn){
-            selectedNPS = val;
-            document.querySelectorAll('.nps-btn').forEach(b => {
-                b.style.background = '';
-                b.style.borderColor = '';
-                b.style.color = '';
-            });
-            btn.style.background = npsColors[val];
-            btn.style.borderColor = npsColors[val];
-            btn.style.color = '#0A0A0A';
-            document.getElementById('nps-label').textContent = npsLabels[val];
-            document.getElementById('nps-label').style.color = npsColors[val];
-        }
-
-        // --- STAR RATINGS ---
-        const starRatings = {};
-        document.querySelectorAll('.stars').forEach(container => {
-            const attr = container.dataset.attr;
-            starRatings[attr] = 0;
-            for(let s = 1; s <= 5; s++){
-                const star = document.createElement('button');
-                star.type = 'button';
-                star.dataset.val = s;
-                star.innerHTML = '<i class="fas fa-star text-xl"></i>';
-                star.className = 'star-btn text-white/20 hover:text-thor-yellow transition-colors duration-150';
-                star.onclick = () => selectStar(attr, s);
-                star.onmouseenter = () => highlightStars(attr, s);
-                star.onmouseleave = () => highlightStars(attr, starRatings[attr]);
-                container.appendChild(star);
-            }
-        });
-        function highlightStars(attr, val){
-            document.querySelectorAll(`.stars[data-attr="${attr}"] .star-btn`).forEach((s,i) => {
-                s.style.color = i < val ? '#E79E14' : '';
-                s.classList.toggle('text-white/20', i >= val);
-            });
-        }
-        function selectStar(attr, val){
-            starRatings[attr] = val;
-            highlightStars(attr, val);
-        }
-
-        // --- UNIDADE BUTTONS ---
-        let selectedUnidade = null;
-        document.querySelectorAll('.unidade-btn').forEach(btn => {
-            btn.onclick = () => {
-                document.querySelectorAll('.unidade-btn').forEach(b => {
-                    b.style.borderColor = ''; b.style.color = ''; b.style.background = '';
-                });
-                btn.style.borderColor = '#E79E14';
-                btn.style.color = '#E79E14';
-                selectedUnidade = btn.dataset.val;
-            };
-        });
-
-        // --- SUBMIT ---
-        function submitNPS(){
-            const comentario = document.getElementById('comentario').value;
-            const nome = document.getElementById('nome').value;
-            const whatsapp = document.getElementById('whatsapp').value;
-            console.log('NPS:', selectedNPS, '| Unidade:', selectedUnidade, '| Attrs:', starRatings, '| Comentário:', comentario, '| Nome:', nome, '| WhatsApp:', whatsapp);
-            document.getElementById('nps-form').classList.add('hidden');
-            document.getElementById('nps-thanks').classList.remove('hidden');
-        }
-        </script>
-
 
         <!-- AVALIAÇÕES -->
         <section id="avaliacoes" class="py-24 bg-thor-black relative overflow-hidden">
