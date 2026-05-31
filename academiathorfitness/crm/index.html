@@ -981,6 +981,121 @@
             </div>
         </section>
 
+    <!-- QUIZ DE ACEITE -->
+    <section id="quiz-aceite" class="py-20 bg-[#0D0D0D]">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <p class="text-thor-yellow text-xs font-black uppercase tracking-[0.35em] mb-3">Confirmação de Leitura</p>
+                <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
+                    Você leu o <span class="gradient-text">Playbook?</span>
+                </h2>
+                <p class="text-white/40 mt-3 text-sm">Responda as perguntas abaixo e confirme que está pronto para começar.</p>
+            </div>
+
+            <form id="quiz-form" action="https://formspree.io/f/SEUID" method="POST" class="space-y-8">
+
+                <!-- Q1 -->
+                <div class="bg-[#111111] rounded-2xl p-6 border border-white/[0.06]">
+                    <p class="font-bold text-sm text-white mb-4">1. Qual é o padrão correto para salvar um contato no CRM?</p>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q1" value="a" required class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Nome, Telefone, Origem</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q1" value="b" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Data - Origem - Nome</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q1" value="c" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Nome - Data - Origem</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q1" value="d" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Origem - Nome - Data</span></label>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="bg-[#111111] rounded-2xl p-6 border border-white/[0.06]">
+                    <p class="font-bold text-sm text-white mb-4">2. Ao receber um lead no Inbox, qual é a primeira ação do vendedor?</p>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q2" value="a" required class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Fechar o chat imediatamente</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q2" value="b" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Mover para o Kanban sem atender</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q2" value="c" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Atribuir a conversa ao vendedor responsável</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q2" value="d" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Criar um novo contato sem responder</span></label>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="bg-[#111111] rounded-2xl p-6 border border-white/[0.06]">
+                    <p class="font-bold text-sm text-white mb-4">3. O que a etiqueta <span class="text-thor-yellow font-mono">Suplementos_Nao_Alunos</span> representa?</p>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q3" value="a" required class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Alunos que compraram suplementos e cancelaram</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q3" value="b" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Clientes de balcão ou pessoas que não são alunos da Thor</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q3" value="c" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Leads que nunca compraram suplementos</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q3" value="d" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Vendas canceladas no mês</span></label>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="bg-[#111111] rounded-2xl p-6 border border-white/[0.06]">
+                    <p class="font-bold text-sm text-white mb-4">4. O que você deve fazer se precisar trocar um lead de funil no Kanban?</p>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q4" value="a" required class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Mover diretamente entre os funis pelo painel</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q4" value="b" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Deletar o contato e criar um novo</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q4" value="c" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Arquivar o cartão ou pedir ao Sales Ops para mover</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q4" value="d" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">Fechar o chat e aguardar o Sales Ops agir</span></label>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="bg-[#111111] rounded-2xl p-6 border border-white/[0.06]">
+                    <p class="font-bold text-sm text-white mb-4">5. O que indica a "Temperatura do Card" no BotConversa?</p>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q5" value="a" required class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">O horário de atendimento do consultor</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q5" value="b" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">O valor do plano do aluno</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q5" value="c" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">O nível de engajamento do lead com base nas atividades do responsável</span></label>
+                        <label class="flex items-center gap-3 cursor-pointer group"><input type="radio" name="q5" value="d" class="accent-[#E79E14]"><span class="text-white/60 text-sm group-hover:text-white transition-colors">A quantidade de mensagens enviadas no dia</span></label>
+                    </div>
+                </div>
+
+                <!-- Nome e Email -->
+                <div class="bg-[#111111] rounded-2xl p-6 border border-white/[0.06] space-y-4">
+                    <p class="font-bold text-sm text-white">Seus dados</p>
+                    <input type="text" name="nome" placeholder="Seu nome completo" required class="w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-thor-yellow transition-colors" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+                    <input type="email" name="email" placeholder="Seu e-mail" required class="w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-thor-yellow transition-colors" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+                    <input type="hidden" name="documento" value="Playbook do Matriculador — Thor Fitness">
+                </div>
+
+                <!-- Checkbox aceite -->
+                <label class="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" name="aceite" required class="mt-1 accent-[#E79E14] flex-shrink-0">
+                    <span class="text-white/50 text-sm leading-relaxed">Confirmo que li e compreendi o Playbook do Matriculador e me comprometo a seguir os processos descritos.</span>
+                </label>
+
+                <!-- Botão -->
+                <button type="submit" class="w-full bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider py-4 rounded-xl hover:bg-yellow-400 transition-all duration-300">
+                    Confirmar Leitura e Enviar
+                </button>
+
+            </form>
+
+            <!-- Mensagem de sucesso (oculta) -->
+            <div id="quiz-sucesso" class="hidden text-center py-12">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style="background:rgba(22,163,74,0.15); border:2px solid #16a34a;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h3 class="font-black text-2xl uppercase text-white mb-2">Aceite Confirmado!</h3>
+                <p class="text-white/40 text-sm">Suas respostas foram enviadas. Boas vendas!</p>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('quiz-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const form = e.target;
+                const data = new FormData(form);
+                try {
+                    const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+                    if (res.ok) {
+                        form.classList.add('hidden');
+                        document.getElementById('quiz-sucesso').classList.remove('hidden');
+                    }
+                } catch(err) {}
+            });
+        </script>
+    </section>
+
     <!-- EM BREVE -->
     <div class="py-10 bg-thor-black text-center">
         <p class="text-white/25 text-sm font-medium tracking-widest uppercase">Em breve novas atualizações de funis e etapas</p>
