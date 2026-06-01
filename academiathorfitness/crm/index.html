@@ -1245,9 +1245,9 @@
                 <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style="background:rgba(239,68,68,0.1); border:2px solid #dc2626;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
                 </div>
-                <h3 class="font-black text-xl uppercase text-white mb-3">Você ainda não está apto a operar o CRM</h3>
-                <p class="text-white/50 text-sm leading-relaxed mb-6">Releia a documentação e refaça sua avaliação.</p>
-                <button onclick="document.getElementById('quiz-erro-overlay').classList.add('hidden')" class="w-full py-3 rounded-xl font-black text-sm uppercase tracking-wider text-thor-black transition-all hover:bg-yellow-400" style="background:#E79E14;">
+                <h3 id="erro-titulo" class="font-black text-xl uppercase text-white mb-3">Você ainda não está apto a operar o CRM</h3>
+                <p id="erro-descricao" class="text-white/50 text-sm leading-relaxed mb-6">Releia a documentação e refaça sua avaliação.</p>
+                <button id="erro-btn" class="w-full py-3 rounded-xl font-black text-sm uppercase tracking-wider text-thor-black transition-all hover:bg-yellow-400" style="background:#E79E14;">
                     Voltar e Reler
                 </button>
             </div>
@@ -1255,16 +1255,62 @@
 
         <script>
             const gabarito = { q1: 'c', q2: 'c', q3: 'b', q4: 'c', q5: 'c' };
+            const MAX_TENTATIVAS = 2;
+
+            function getTentativas(email) {
+                try {
+                    return JSON.parse(localStorage.getItem('quiz_attempts') || '{}')[email] || 0;
+                } catch(e) { return 0; }
+            }
+
+            function salvarTentativa(email) {
+                try {
+                    const data = JSON.parse(localStorage.getItem('quiz_attempts') || '{}');
+                    data[email] = (data[email] || 0) + 1;
+                    localStorage.setItem('quiz_attempts', JSON.stringify(data));
+                    return data[email];
+                } catch(e) { return 1; }
+            }
+
+            function showErro(tipo) {
+                const msgs = {
+                    primeira: {
+                        titulo: 'Resposta Incorreta',
+                        descricao: 'Releia a documentação. Você ainda tem 1 tentativa restante.',
+                        btn: 'Voltar e Reler',
+                        acao: () => document.getElementById('quiz-erro-overlay').classList.add('hidden')
+                    },
+                    bloqueado: {
+                        titulo: 'Tentativas Esgotadas',
+                        descricao: 'Você atingiu o limite de tentativas. Entre em contato com o suporte da Educ Lead.',
+                        btn: 'Falar com Suporte',
+                        acao: () => window.open('https://wa.me/55629942630696?text=Ol%C3%A1!%20Errei%20o%20quiz%20do%20Playbook%20e%20preciso%20de%20suporte.', '_blank')
+                    }
+                };
+                const m = msgs[tipo] || msgs.bloqueado;
+                document.getElementById('erro-titulo').textContent = m.titulo;
+                document.getElementById('erro-descricao').textContent = m.descricao;
+                const btn = document.getElementById('erro-btn');
+                btn.textContent = m.btn;
+                btn.onclick = m.acao;
+                document.getElementById('quiz-erro-overlay').classList.remove('hidden');
+            }
 
             document.getElementById('quiz-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const form = e.target;
                 const data = new FormData(form);
+                const email = (data.get('email') || '').toLowerCase().trim();
 
-                // Valida respostas
+                if (getTentativas(email) >= MAX_TENTATIVAS) {
+                    showErro('bloqueado');
+                    return;
+                }
+
                 const errou = Object.keys(gabarito).some(q => data.get(q) !== gabarito[q]);
                 if (errou) {
-                    document.getElementById('quiz-erro-overlay').classList.remove('hidden');
+                    const total = salvarTentativa(email);
+                    showErro(total >= MAX_TENTATIVAS ? 'bloqueado' : 'primeira');
                     return;
                 }
 
