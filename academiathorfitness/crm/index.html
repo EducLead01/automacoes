@@ -1239,11 +1239,35 @@
             </div>
         </div>
 
+        <!-- Popup de erro -->
+        <div id="quiz-erro-overlay" class="fixed inset-0 z-[200] flex items-center justify-center hidden" style="background:rgba(0,0,0,0.7); backdrop-filter:blur(4px);">
+            <div class="max-w-sm w-full mx-4 rounded-3xl p-8 text-center" style="background:#111111; border:1px solid rgba(239,68,68,0.3);">
+                <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5" style="background:rgba(239,68,68,0.1); border:2px solid #dc2626;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                </div>
+                <h3 class="font-black text-xl uppercase text-white mb-3">Você ainda não está apto a operar o CRM</h3>
+                <p class="text-white/50 text-sm leading-relaxed mb-6">Releia a documentação e refaça sua avaliação.</p>
+                <button onclick="document.getElementById('quiz-erro-overlay').classList.add('hidden')" class="w-full py-3 rounded-xl font-black text-sm uppercase tracking-wider text-thor-black transition-all hover:bg-yellow-400" style="background:#E79E14;">
+                    Voltar e Reler
+                </button>
+            </div>
+        </div>
+
         <script>
+            const gabarito = { q1: 'c', q2: 'c', q3: 'b', q4: 'c', q5: 'c' };
+
             document.getElementById('quiz-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const form = e.target;
                 const data = new FormData(form);
+
+                // Valida respostas
+                const errou = Object.keys(gabarito).some(q => data.get(q) !== gabarito[q]);
+                if (errou) {
+                    document.getElementById('quiz-erro-overlay').classList.remove('hidden');
+                    return;
+                }
+
                 try {
                     const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
                     if (res.ok) {
