@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thor Fitness | Inteligência Comercial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'thor-black':  '#0A0A0A',
+                        'thor-gray':   '#111111',
+                        'thor-yellow': '#E79E14',
+                        'thor-white':  '#FFFFFF',
+                    },
+                    fontFamily: {
+                        display: ['Inter', 'sans-serif'],
+                        sans:    ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; }
+        ::selection { background: #E79E14; color: #0A0A0A; }
+        body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #fff; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #E79E14; border-radius: 10px; }
+
+        .gradient-text {
+            background: linear-gradient(to right, #E79E14, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: #E79E14; }
+
+        .kpi-card {
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s ease;
+        }
+        .kpi-card:hover {
+            border-color: rgba(231,158,20,0.3);
+            transform: translateY(-3px);
+        }
+
+        .rank-row {
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.25s ease;
+        }
+        .rank-row:hover { border-color: rgba(231,158,20,0.25); background: rgba(255,255,255,0.02); }
+
+        .rank-1 { border-color: rgba(255,215,0,0.35) !important; background: rgba(255,215,0,0.04); }
+        .rank-2 { border-color: rgba(192,192,192,0.3) !important; background: rgba(192,192,192,0.03); }
+        .rank-3 { border-color: rgba(205,127,50,0.3) !important; background: rgba(205,127,50,0.03); }
+
+        .bar-fill {
+            height: 6px;
+            border-radius: 999px;
+            background: linear-gradient(to right, #E79E14, #fbbf24);
+            transition: width 1s ease;
+        }
+        .bar-bg {
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.07);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.4; }
+        }
+        .live-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-thor-black text-thor-white">
+
+    <!-- NAV -->
+    <header class="fixed top-0 w-full z-50" style="background: rgba(10,10,10,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center md:justify-between h-20 relative">
+                <a href="../" class="flex items-center gap-3">
+                    <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="Thor Fitness" class="w-10 h-10 object-contain">
+                    <span class="font-black text-xl uppercase tracking-tight">Thor <span class="text-thor-yellow">Fitness</span></span>
+                </a>
+                <nav class="hidden md:flex items-center gap-6 text-xs font-semibold whitespace-nowrap">
+                    <a href="#indicadores" class="nav-link">Indicadores</a>
+                    <a href="#conversao-funil" class="nav-link">Conversão por Funil</a>
+                    <a href="#redflags" class="nav-link" style="color:#f87171;">Red Flags</a>
+                    <a href="#ranking" class="nav-link">Ranking</a>
+                </nav>
+                <button onclick="toggleWaPopup()" class="hidden md:block bg-thor-yellow text-thor-black font-black text-xs uppercase tracking-wide px-4 py-2.5 rounded-lg hover:bg-yellow-400 transition-all duration-300 whitespace-nowrap flex-shrink-0">
+                    Suporte ao Vendedor
+                </button>
+                <button class="md:hidden text-white absolute right-0" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-[#0A0A0A] px-4 pb-4 pt-2 space-y-1">
+            <a href="#indicadores" class="block nav-link py-2 text-sm font-semibold text-center">Indicadores</a>
+            <a href="#conversao-funil" class="block nav-link py-2 text-sm font-semibold text-center">Conversão por Funil</a>
+            <a href="#redflags" class="block py-2 text-sm font-semibold text-center" style="color:#f87171;">Red Flags</a>
+            <a href="#ranking" class="block nav-link py-2 text-sm font-semibold text-center">Ranking</a>
+            <button onclick="toggleWaPopup(); document.getElementById('mobile-menu').classList.add('hidden')" class="block w-full bg-thor-yellow text-thor-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg text-center mt-2">Suporte ao Vendedor</button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- HERO -->
+        <section class="flex items-center justify-center pt-36 pb-12 bg-thor-black">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+                <div class="flex items-center justify-center gap-2 mb-5">
+                    <span class="live-dot w-2 h-2 rounded-full bg-green-400 inline-block"></span>
+                    <p class="text-thor-yellow text-xs font-black uppercase tracking-[0.35em]">Inteligência Comercial</p>
+                </div>
+                <h1 class="font-black text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter uppercase mb-6">
+                    Painel de<br>
+                    <span class="gradient-text">Performance</span><br>
+                    Thor Fitness
+                </h1>
+                <p class="text-white/50 text-lg font-light max-w-xl mx-auto">
+                    Indicadores e ranking da equipe comercial.
+                </p>
+                <p id="periodo-label" class="text-white/25 text-xs mt-3 uppercase tracking-widest font-semibold"></p>
+            </div>
+        </section>
+
+        <!-- INDICADORES -->
+        <section id="indicadores" class="py-16 bg-[#0D0D0D]">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-10">
+                    <p class="text-thor-yellow text-xs font-black uppercase tracking-[0.35em] mb-2">Visão Geral</p>
+                    <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">Indicadores <span class="gradient-text">do Mês</span></h2>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Leads Recebidos</p>
+                        <p class="font-black text-4xl text-white" data-kpi="leads_recebidos">—</p>
+                        <p class="text-white/30 text-xs mt-2" data-kpi-sub="leads_recebidos">no mês</p>
+                    </div>
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Matrículas</p>
+                        <p class="font-black text-4xl text-thor-yellow" data-kpi="matriculas">—</p>
+                        <p class="text-white/30 text-xs mt-2" data-kpi-sub="matriculas">no mês</p>
+                    </div>
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Taxa de Conversão</p>
+                        <p class="font-black text-4xl text-white" data-kpi="taxa_conversao">—</p>
+                        <p class="text-white/30 text-xs mt-2">leads → matrícula</p>
+                    </div>
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Aulas Experimentais</p>
+                        <p class="font-black text-4xl text-white" data-kpi="aulas_exp">—</p>
+                        <p class="text-white/30 text-xs mt-2" data-kpi-sub="aulas_exp">agendadas</p>
+                    </div>
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Ticket Médio</p>
+                        <p class="font-black text-4xl text-white" data-kpi="ticket_medio">—</p>
+                        <p class="text-white/30 text-xs mt-2">por matrícula</p>
+                    </div>
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Negócios Parados</p>
+                        <p class="font-black text-4xl text-red-400" data-kpi="negocios_parados">—</p>
+                        <p class="text-white/30 text-xs mt-2">requer atenção</p>
+                    </div>
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Suplementos Vendidos</p>
+                        <p class="font-black text-4xl text-white" data-kpi="suplementos">—</p>
+                        <p class="text-white/30 text-xs mt-2">no mês</p>
+                    </div>
+
+                    <div class="kpi-card bg-[#111111] rounded-2xl p-6">
+                        <p class="text-white/40 text-xs font-semibold uppercase tracking-widest mb-3">Conversão Exp → Mat.</p>
+                        <p class="font-black text-4xl text-green-400" data-kpi="conv_exp_mat">—</p>
+                        <p class="text-white/30 text-xs mt-2">experimental → matrícula</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONVERSÃO POR FUNIL -->
+        <section id="conversao-funil" class="py-16 bg-[#0D0D0D]">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-10">
+                    <p class="text-thor-yellow text-xs font-black uppercase tracking-[0.35em] mb-2">Equipe Comercial</p>
+                    <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">Conversão por <span class="gradient-text">Funil</span></h2>
+                </div>
+
+                <div id="funis-lista" class="space-y-3"></div>
+
+                <p class="text-white/20 text-xs text-center mt-8 uppercase tracking-widest">Atualizado manualmente · <span id="ultima-atualizacao">—</span></p>
+            </div>
+        </section>
+
+        <!-- REDFLAGS -->
+        <section id="redflags" class="py-16 bg-thor-black">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0" style="box-shadow:0 0 8px rgba(239,68,68,0.7);"></span>
+                        <p class="text-red-400 text-xs font-black uppercase tracking-[0.35em]">Atenção Necessária</p>
+                    </div>
+                    <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">Red <span style="background:linear-gradient(to right,#ef4444,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Flags</span></h2>
+                    <p class="text-white/35 text-sm mt-2">Vendedores com indicadores em alerta no período.</p>
+                </div>
+
+                <div id="redflags-lista" class="space-y-3"></div>
+
+            </div>
+        </section>
+
+        <!-- RANKING GERAL -->
+        <section id="ranking" class="py-16 bg-[#0D0D0D]">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-10">
+                    <p class="text-thor-yellow text-xs font-black uppercase tracking-[0.35em] mb-2">Equipe Comercial</p>
+                    <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">Ranking de <span class="gradient-text">Vendedores</span></h2>
+                </div>
+
+                <div id="ranking-geral-lista" class="space-y-3"></div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-12 bg-[#050505] border-t border-white/[0.04]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://academiathorfitness.com.br/logofavicon2.png" alt="Thor Fitness" class="w-10 h-10 object-contain">
+                <span class="font-black text-xl uppercase tracking-tight">Thor <span class="text-thor-yellow">Fitness</span></span>
+            </div>
+            <div class="border-t border-white/[0.04] pt-6 w-full">
+                <p class="text-white/20 text-xs text-center">© 2026 Thor Fitness. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON + POPUP -->
+    <div id="wa-popup-overlay" onclick="closeWaPopup()" class="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm hidden"></div>
+
+    <div id="wa-popup" class="fixed bottom-24 right-5 z-[100] w-80 rounded-2xl overflow-hidden shadow-2xl hidden" style="box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+        <div class="flex items-center justify-between px-5 py-4" style="background:#25D366;">
+            <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 fill-white flex-shrink-0">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+                <span class="font-black text-white text-base">Atendimento Educ Lead</span>
+            </div>
+            <button onclick="closeWaPopup()" class="text-white/80 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="px-5 py-3 text-xs text-white/50 font-semibold uppercase tracking-wider" style="background:#1a1a1a; border-bottom:1px solid rgba(255,255,255,0.07);">
+            Fale com o suporte:
+        </div>
+        <div style="background:#111111;">
+            <a href="https://wa.me/55629942630696?text=Olá!%20Gostaria%20de%20suporte%20da%20Educ%20Lead!" target="_blank" rel="noopener noreferrer"
+               class="flex items-center justify-between px-5 py-4 hover:bg-white/[0.04] transition-colors">
+                <div>
+                    <p class="font-bold text-white text-sm">Suporte ao cliente</p>
+                    <p class="text-white/35 text-[10px] uppercase tracking-widest mt-0.5">Clique para iniciar o chat</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 flex-shrink-0" style="fill:#25D366;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <button id="wa-float-btn" onclick="toggleWaPopup()"
+        class="fixed bottom-5 right-5 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110 active:scale-95"
+        style="background:#25D366; box-shadow:0 4px 20px rgba(37,211,102,0.5);">
+        <svg id="wa-icon-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 fill-white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        <svg id="wa-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+    </button>
+
+    <script>
+        // ─── DADOS ───────────────────────────────────────────────────────────────
+
+        const PERIODO           = 'Junho 2026';
+        const ULTIMA_ATUALIZACAO = '01/06/2026';
+
+        const KPIs = {
+            leads_recebidos:  { valor: '—',    sub: 'no mês'    },
+            matriculas:       { valor: '—',    sub: 'no mês'    },
+            taxa_conversao:   { valor: '—%'                     },
+            aulas_exp:        { valor: '—',    sub: 'agendadas' },
+            ticket_medio:     { valor: 'R$ —'                   },
+            negocios_parados: { valor: '—'                      },
+            suplementos:      { valor: '—'                      },
+            conv_exp_mat:     { valor: '—%'                     },
+        };
+
+        // Alertas de vendedores — aparece na seção RedFlags
+        // motivos possíveis: 'Negócios parados', 'Baixa conversão', 'Sem contatos novos', etc.
+        const REDFLAGS = [
+            // { nome: 'Carlos Lima', motivos: ['Negócios parados', 'Sem contatos novos'], funil: 'Captação Orgânica' },
+        ];
+
+        // Cada funil tem: nome, cor de destaque, leads, e lista de vendedores
+        // vendedores: [ { nome: 'Ana Silva', matriculas: 10 } ]
+        const FUNIS = [
+            {
+                id: 'organico',
+                nome: 'Captação Orgânica',
+                cor: '#E79E14',
+                leads: 0,
+                matriculas: 0,
+                aberto: true,
+                vendedores: [],
+            },
+            {
+                id: 'pago',
+                nome: 'Captação Paga',
+                cor: '#3b82f6',
+                leads: 0,
+                matriculas: 0,
+                aberto: false,
+                vendedores: [],
+            },
+            {
+                id: 'sucesso',
+                nome: 'Sucesso do Cliente',
+                cor: '#22c55e',
+                leads: 0,
+                matriculas: 0,
+                aberto: false,
+                vendedores: [],
+            },
+            {
+                id: 'suplementos',
+                nome: 'Suplementos',
+                cor: '#a855f7',
+                leads: 0,
+                matriculas: 0,
+                aberto: false,
+                vendedores: [],
+            },
+        ];
+
+        // ─────────────────────────────────────────────────────────────────────────
+
+        const MEDALHAS = ['🥇', '🥈', '🥉'];
+
+        function conv(leads, matriculas) {
+            if (!leads) return '—';
+            return Math.round((matriculas / leads) * 100) + '%';
+        }
+
+        function renderPeriodo() {
+            document.getElementById('periodo-label').textContent = 'Período: ' + PERIODO;
+            document.getElementById('ultima-atualizacao').textContent = ULTIMA_ATUALIZACAO;
+        }
+
+        function renderKPIs() {
+            Object.entries(KPIs).forEach(([key, data]) => {
+                const el = document.querySelector('[data-kpi="' + key + '"]');
+                if (el) el.textContent = data.valor;
+                if (data.sub) {
+                    const subEl = document.querySelector('[data-kpi-sub="' + key + '"]');
+                    if (subEl) subEl.textContent = data.sub;
+                }
+            });
+        }
+
+        function rankingHTML(vendedores) {
+            if (!vendedores.length) {
+                return '<p class="text-white/25 text-xs text-center py-6 uppercase tracking-widest">Nenhum dado ainda</p>';
+            }
+            const sorted = [...vendedores].sort((a, b) => b.matriculas - a.matriculas);
+            const max = sorted[0].matriculas || 1;
+            return sorted.map((v, i) => {
+                const pos = i + 1;
+                const pct = Math.round((v.matriculas / max) * 100);
+                const posLabel = pos <= 3
+                    ? '<span class="text-lg leading-none">' + MEDALHAS[i] + '</span>'
+                    : '<span class="font-black text-white/30 text-base w-6 text-center">' + pos + '</span>';
+                const rowClass = pos <= 3 ? 'rank-' + pos : '';
+                return '<div class="rank-row ' + rowClass + ' rounded-xl px-5 py-4 flex items-center gap-4">' +
+                    '<div class="flex-shrink-0 w-6 flex justify-center">' + posLabel + '</div>' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<p class="font-black text-white text-sm leading-tight">' + v.nome + '</p>' +
+                        '<div class="bar-bg mt-2"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
+                    '</div>' +
+                    '<div class="flex-shrink-0 text-right">' +
+                        '<p class="font-black text-thor-yellow text-xl leading-none">' + v.matriculas + '</p>' +
+                        '<p class="text-white/30 text-[10px] uppercase tracking-widest mt-0.5">matrículas</p>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function renderRankingGeral() {
+            const lista = document.getElementById('ranking-geral-lista');
+            const mapa = {};
+            FUNIS.forEach(f => {
+                f.vendedores.forEach(v => {
+                    if (!mapa[v.nome]) mapa[v.nome] = 0;
+                    mapa[v.nome] += v.matriculas;
+                });
+            });
+            const sorted = Object.entries(mapa).sort((a, b) => b[1] - a[1]);
+            if (!sorted.length) {
+                lista.innerHTML = '<p class="text-white/25 text-sm text-center py-10 uppercase tracking-widest">Nenhum dado disponível ainda</p>';
+                return;
+            }
+            const max = sorted[0][1] || 1;
+            lista.innerHTML = sorted.map(([nome, mat], i) => {
+                const pos = i + 1;
+                const pct = Math.round((mat / max) * 100);
+                const posLabel = pos <= 3
+                    ? '<span class="text-xl leading-none">' + MEDALHAS[i] + '</span>'
+                    : '<span class="font-black text-white/30 text-lg w-7 text-center">' + pos + '</span>';
+                const rowClass = pos <= 3 ? 'rank-' + pos : '';
+                return '<div class="rank-row ' + rowClass + ' rounded-2xl px-6 py-5 flex items-center gap-5">' +
+                    '<div class="flex-shrink-0 w-7 flex justify-center">' + posLabel + '</div>' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<p class="font-black text-white text-base leading-tight">' + nome + '</p>' +
+                        '<div class="bar-bg mt-3"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
+                    '</div>' +
+                    '<div class="flex-shrink-0 text-right">' +
+                        '<p class="font-black text-thor-yellow text-2xl leading-none">' + mat + '</p>' +
+                        '<p class="text-white/30 text-[10px] uppercase tracking-widest mt-1">matrículas</p>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function renderRedFlags() {
+            const lista = document.getElementById('redflags-lista');
+            if (!REDFLAGS.length) {
+                lista.innerHTML = '<div class="rounded-2xl px-6 py-8 text-center" style="border:1px solid rgba(255,255,255,0.06);background:#111111;">' +
+                    '<p class="text-white/25 text-sm uppercase tracking-widest">Nenhuma redflag no momento</p>' +
+                '</div>';
+                return;
+            }
+            lista.innerHTML = REDFLAGS.map(r => {
+                const tags = r.motivos.map(m =>
+                    '<span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(239,68,68,0.12);color:#f87171;border:1px solid rgba(239,68,68,0.25);">' + m + '</span>'
+                ).join('');
+                return '<div class="rounded-2xl px-6 py-5 flex items-start gap-5" style="background:#111111;border:1px solid rgba(239,68,68,0.2);">' +
+                    '<div class="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0 mt-1.5" style="box-shadow:0 0 8px rgba(239,68,68,0.6);"></div>' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<p class="font-black text-white text-base leading-tight">' + r.nome + '</p>' +
+                        '<p class="text-white/30 text-xs mt-0.5 uppercase tracking-widest">' + (r.funil || '') + '</p>' +
+                        '<div class="flex flex-wrap gap-2 mt-3">' + tags + '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function toggleFunil(id) {
+            const body  = document.getElementById('funil-body-' + id);
+            const arrow = document.getElementById('funil-arrow-' + id);
+            const hidden = body.classList.contains('hidden');
+            body.classList.toggle('hidden', !hidden);
+            arrow.style.transform = hidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function renderFunis() {
+            const lista = document.getElementById('funis-lista');
+            lista.innerHTML = FUNIS.map(f => {
+                const taxaConv = conv(f.leads, f.matriculas);
+                const bodyClass = f.aberto ? '' : 'hidden';
+                const arrowRot  = f.aberto ? 'rotate(180deg)' : 'rotate(0deg)';
+                return '<div class="rounded-2xl overflow-hidden" style="border:1px solid rgba(255,255,255,0.07);">' +
+                    '<button onclick="toggleFunil(\'' + f.id + '\')" class="w-full flex items-center justify-between px-6 py-5 hover:bg-white/[0.02] transition-colors" style="background:#111111;">' +
+                        '<div class="flex items-center gap-4">' +
+                            '<div class="w-3 h-3 rounded-full flex-shrink-0" style="background:' + f.cor + ';box-shadow:0 0 8px ' + f.cor + '66;"></div>' +
+                            '<span class="font-black text-white text-base uppercase tracking-tight">' + f.nome + '</span>' +
+                        '</div>' +
+                        '<div class="flex items-center gap-4">' +
+                            '<div class="flex items-center gap-3 text-right">' +
+                                '<div>' +
+                                    '<p class="font-black text-white text-lg leading-none">' + (f.matriculas || '—') + '</p>' +
+                                    '<p class="text-white/30 text-[10px] uppercase tracking-widest mt-0.5">matrículas</p>' +
+                                '</div>' +
+                                '<div class="w-px h-8 bg-white/10"></div>' +
+                                '<div>' +
+                                    '<p class="font-black text-sm leading-none" style="color:' + f.cor + '">' + taxaConv + '</p>' +
+                                    '<p class="text-white/30 text-[10px] uppercase tracking-widest mt-0.5">conversão</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<svg id="funil-arrow-' + f.id + '" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white/30 flex-shrink-0 transition-transform duration-300" style="transform:' + arrowRot + '" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">' +
+                                '<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>' +
+                            '</svg>' +
+                        '</div>' +
+                    '</button>' +
+                    '<div id="funil-body-' + f.id + '" class="' + bodyClass + ' px-4 pb-4 pt-2 space-y-2" style="background:#0D0D0D;">' +
+                        rankingHTML(f.vendedores) +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function toggleWaPopup() {
+            var popup   = document.getElementById('wa-popup');
+            var overlay = document.getElementById('wa-popup-overlay');
+            var iconOpen  = document.getElementById('wa-icon-open');
+            var iconClose = document.getElementById('wa-icon-close');
+            var isOpen  = !popup.classList.contains('hidden');
+            if (isOpen) {
+                popup.classList.add('hidden');
+                overlay.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            } else {
+                popup.classList.remove('hidden');
+                overlay.classList.remove('hidden');
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+            }
+        }
+        function closeWaPopup() {
+            document.getElementById('wa-popup').classList.add('hidden');
+            document.getElementById('wa-popup-overlay').classList.add('hidden');
+            document.getElementById('wa-icon-open').classList.remove('hidden');
+            document.getElementById('wa-icon-close').classList.add('hidden');
+        }
+
+        renderPeriodo();
+        renderKPIs();
+        renderRankingGeral();
+        renderFunis();
+        renderRedFlags();
+    </script>
+
+</body>
+</html>
