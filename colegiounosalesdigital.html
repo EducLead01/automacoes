@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Portal Digital | Colégio Uno Sales Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .rounded-hero-video {
+            border-bottom-left-radius: 80px;
+        }
+
+        @media (min-width: 1024px) {
+            .rounded-hero-video {
+                border-bottom-left-radius: 120px;
+            }
+        }
+
+        .badge-pulse {
+            animation: badgePulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .text-primary { color: #d97706; }
+
+        .btn-primary {
+            background-color: #d97706;
+            color: #fff;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #b45309;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            border: 2px solid #d97706;
+            color: #d97706;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            background-color: #d97706;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="bg-white antialiased">
+
+    <!-- HEADER -->
+    <header class="w-full px-6 lg:px-16 py-5 flex items-center justify-between border-b border-gray-100">
+
+        <div class="flex items-center">
+            <img src="./logo_02.PNG" alt="Colégio Uno Sales Digital" class="h-12 object-contain">
+        </div>
+
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500 badge-pulse inline-block"></span>
+            <span class="text-xs font-semibold uppercase tracking-widest text-gray-400">Apresentação Exclusiva</span>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="w-full px-6 lg:px-16 pt-16 pb-0 lg:pt-20">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- BADGE -->
+            <div class="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 badge-pulse inline-block"></span>
+                Proposta exclusiva · Colégio Uno Sales Digital
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+                <!-- TEXTO -->
+                <div class="flex flex-col gap-7">
+                    <h1 class="text-4xl lg:text-5xl xl:text-6xl font-black leading-tight text-gray-900">
+                        Seu novo portal digital.<br>
+                        <span class="text-primary italic">Moderno, completo</span><br>
+                        e pensado para crescer.
+                    </h1>
+
+                    <p class="text-gray-500 text-lg leading-relaxed max-w-lg">
+                        Preparamos esta apresentação para levar o Colégio Uno Sales Digital a um novo nível de presença online — captando mais alunos e entregando uma experiência à altura da sua instituição.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#proposta" class="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-xl font-bold text-sm">
+                            Ver a proposta
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Vi%20a%20proposta%20do%20Col%C3%A9gio%20Uno%20Sales%20Digital%20e%20quero%20saber%20mais!"
+                           target="_blank"
+                           class="btn-outline inline-flex items-center gap-2 px-7 py-4 rounded-xl font-bold text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.555 4.122 1.527 5.853L.057 23.1a.75.75 0 00.916.916l5.247-1.47A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.97-1.364l-.356-.213-3.688 1.032 1.032-3.688-.213-.356A9.75 9.75 0 1112 21.75z"/>
+                            </svg>
+                            Falar pelo WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VÍDEO -->
+                <div class="relative w-full aspect-video lg:aspect-auto lg:h-[520px] rounded-hero-video overflow-hidden bg-gray-100">
+                    <video
+                        class="w-full h-full object-cover hidden md:block"
+                        autoplay loop muted playsinline>
+                        <source src="https://www.escolamobile.com.br/wp-content/uploads/2024/05/240208_011_valores_v04_SITE.mp4" type="video/mp4">
+                    </video>
+                    <video
+                        class="w-full h-full object-cover md:hidden"
+                        autoplay loop muted playsinline>
+                        <source src="https://www.escolamobile.com.br/wp-content/uploads/2024/05/240208_011_valores_v04_SITE_SQUARE.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
