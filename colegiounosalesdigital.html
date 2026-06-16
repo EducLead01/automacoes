@@ -564,8 +564,6 @@ const PRES = [
 let presIdx = 0;
 
 function presRender() {
-    document.getElementById('pres-label').textContent   = PRES[presIdx].label;
-    document.getElementById('pres-counter').textContent = (presIdx + 1) + '/' + PRES.length;
     document.querySelectorAll('.pres-dot').forEach((d, i) => {
         d.style.background = i === presIdx ? 'white' : 'rgba(255,255,255,.25)';
         d.style.transform  = i === presIdx ? 'scale(1.6)' : 'scale(1)';
