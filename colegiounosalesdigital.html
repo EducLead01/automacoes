@@ -117,64 +117,95 @@
     </section>
 
 
-    <!-- SEÇÃO — CLONE "EDUCAR PARA A VIDA" (Maristas) com foco em conversão -->
-    <section id="detalhes" class="w-full px-6 lg:px-20 py-28 bg-white">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <!-- SEÇÃO — CLONE EXATO "EDUCAR PARA A VIDA" (Maristas) -->
+    <section id="detalhes" class="w-full py-20 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-0 items-center">
 
             <!-- TEXTO ESQUERDA -->
-            <div>
-                <h2 class="text-4xl lg:text-5xl font-black leading-tight mb-6" style="color: #1a1a2e; font-size: 38px; font-weight: 800;">
-                    Educar para a vida, em todas as dimensões — e na palma da mão das famílias.
+            <div class="px-6 lg:px-20 py-10">
+                <h2 class="font-black leading-tight mb-6 text-gray-900" style="font-size: 37px; font-weight: 800;">
+                    Um portal digital que conecta sua escola às famílias — e transforma interesse em matrícula.
                 </h2>
                 <p class="text-gray-600 text-lg leading-relaxed mb-10">
-                    O novo portal digital do Colégio Uno Sales conecta alunos, pais e professores em um único ambiente moderno. Comunicados em tempo real, matrícula online, agenda integrada e área do aluno — tudo pensado para aumentar matrículas e fidelizar as famílias que já confiam na sua instituição.
+                    O novo portal do Colégio Uno Sales digitaliza a jornada completa das famílias — da primeira visita à rematrícula. Com comunicados em tempo real, agenda online, área do aluno e matrícula digital, sua escola conquista mais alunos e fideliza os que já tem.
                 </p>
-                <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Vi%20a%20proposta%20do%20portal%20do%20Col%C3%A9gio%20Uno%20Sales%20e%20quero%20saber%20mais!"
+                <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20portal%20do%20Col%C3%A9gio%20Uno%20Sales!"
                    target="_blank"
-                   class="btn-primary inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-base">
+                   style="background-color: #d97706; color: #fff; border-radius: 9999px; padding: 14px 28px; font-weight: 700; display: inline-block; transition: background 0.2s;">
                     Quero este portal
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                    </svg>
                 </a>
             </div>
 
-            <!-- CARDS EMPILHADOS DIREITA (clone exato Maristas) -->
-            <div class="relative w-full" style="height: 520px;">
+            <!-- CAROUSEL PEEK DIREITA -->
+            <div class="relative overflow-hidden" style="height: 480px;">
 
-                <!-- Card de trás — menor, rotacionado, atrás -->
-                <div class="absolute rounded-2xl overflow-hidden shadow-lg"
-                     style="width: 35%; left: 57%; top: 6%; z-index: 1; height: 90%; opacity: 0.85; transform: rotate(5deg); transition: transform 0.4s ease;">
-                    <img src="https://www.unosales.com.br/adm/uploads/image/ensino-medio/ensino-medio.png"
-                         alt="Ensino Médio Uno Sales"
-                         class="w-full h-full object-cover">
-                </div>
+                <!-- track -->
+                <div id="edu-track" class="flex gap-4 h-full transition-transform duration-500 ease-in-out" style="padding-right: 80px;">
 
-                <!-- Card da frente — maior, sem rotação, na frente -->
-                <div class="absolute rounded-2xl overflow-hidden shadow-2xl"
-                     style="width: 70%; left: 0%; top: 0%; z-index: 10; height: 100%; transition: transform 0.4s ease;">
-                    <img src="https://www.unosales.com.br/adm/uploads/image/fund-2/fundamental-2.png"
-                         alt="Fundamental II Uno Sales"
-                         class="w-full h-full object-cover">
-                    <!-- tag de conversão sobre a imagem -->
-                    <div class="absolute bottom-5 left-5 right-5">
-                        <div class="bg-white/95 backdrop-blur-sm rounded-xl px-5 py-4 flex items-center gap-4 shadow-lg">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #fef3c7;">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="font-black text-gray-900 text-sm">+47% de matrículas online</p>
-                                <p class="text-gray-400 text-xs">média dos portais que desenvolvemos</p>
-                            </div>
-                        </div>
+                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
+                        <img src="https://www.unosales.com.br/adm/uploads/image/fund-2/fundamental-2.png"
+                             class="w-full h-full object-cover" alt="Fundamental II">
                     </div>
+
+                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
+                        <img src="https://www.unosales.com.br/adm/uploads/image/fund-1/ensino-fundamental-1.png"
+                             class="w-full h-full object-cover" alt="Fundamental I">
+                    </div>
+
+                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
+                        <img src="https://www.unosales.com.br/adm/uploads/image/ensino-medio/ensino-medio.png"
+                             class="w-full h-full object-cover" alt="Ensino Médio">
+                    </div>
+
+                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
+                        <img src="https://www.unosales.com.br/adm/uploads/image/caipiras-day/caipiras-day.png"
+                             class="w-full h-full object-cover" alt="Eventos">
+                    </div>
+
+                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
+                        <img src="https://www.unosales.com.br/adm/uploads/image/fotos-entrada-2023/frente-colegio-1.png"
+                             class="w-full h-full object-cover" alt="O Colégio">
+                    </div>
+
                 </div>
+
+                <!-- Seta direita -->
+                <button onclick="eduNext()"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors duration-200 text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+
+                <!-- Seta esquerda -->
+                <button onclick="eduPrev()"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors duration-200 text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
 
             </div>
         </div>
     </section>
+
+    <script>
+        let eduIndex = 0;
+        function eduCardW() {
+            const track = document.getElementById('edu-track');
+            return track.children[0].offsetWidth + 16;
+        }
+        function eduNext() {
+            const track = document.getElementById('edu-track');
+            const max = track.children.length - 1;
+            eduIndex = Math.min(eduIndex + 1, max);
+            track.style.transform = `translateX(-${eduIndex * eduCardW()}px)`;
+        }
+        function eduPrev() {
+            eduIndex = Math.max(eduIndex - 1, 0);
+            document.getElementById('edu-track').style.transform = `translateX(-${eduIndex * eduCardW()}px)`;
+        }
+    </script>
 
 </body>
 </html>
