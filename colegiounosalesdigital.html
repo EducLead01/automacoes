@@ -57,52 +57,47 @@
 <body class="bg-white antialiased">
 
     <!-- HEADER -->
-    <header class="w-full px-6 lg:px-16 py-5 flex items-center justify-between bg-white border-b border-gray-100">
-
-        <div class="flex items-center">
-            <img src="./logo_02.PNG" alt="Colégio Uno Sales Digital" class="h-12 object-contain">
-        </div>
-
-        <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-amber-500 badge-pulse inline-block"></span>
-            <span class="text-xs font-semibold uppercase tracking-widest text-gray-400">Apresentação Exclusiva</span>
-        </div>
+    <header class="w-full px-6 py-5 flex items-center justify-center bg-white border-b border-gray-100">
+        <img src="./logo_02.PNG" alt="Colégio Uno Sales Digital" class="h-20 object-contain">
     </header>
 
-    <!-- HERO — VSL fullscreen -->
-    <section class="relative w-full overflow-hidden bg-black" style="height: calc(100vh - 82px);">
-
-        <!-- VÍDEO DE FUNDO -->
+    <!-- HERO — vídeo limpo fullscreen -->
+    <section class="relative w-full overflow-hidden bg-black" style="height: calc(100vh - 110px);">
         <video
             class="absolute inset-0 w-full h-full object-cover"
             autoplay loop muted playsinline>
             <source src="https://www.escolamobile.com.br/wp-content/uploads/2024/05/240208_011_valores_v04_SITE.mp4" type="video/mp4">
         </video>
 
-        <!-- OVERLAY GRADIENTE -->
-        <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.05) 100%);"></div>
+        <!-- seta de scroll -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
 
-        <!-- CONTEÚDO SOBRE O VÍDEO -->
-        <div class="relative z-10 h-full flex flex-col justify-center px-12 lg:px-24 max-w-3xl">
+    <!-- SEÇÃO DE TEXTO -->
+    <section id="proposta" class="w-full px-10 lg:px-24 py-24 bg-white">
+        <div class="max-w-3xl mx-auto text-center">
 
-            <div class="inline-flex items-center gap-2 border border-white/20 bg-white/10 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-8 self-start backdrop-blur-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 badge-pulse inline-block"></span>
+            <div class="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-10">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 badge-pulse inline-block"></span>
                 Proposta exclusiva · Colégio Uno Sales Digital
             </div>
 
-            <h1 class="text-5xl xl:text-6xl 2xl:text-7xl font-black leading-tight text-white mb-6">
-                Seu novo portal<br>
-                digital.<br>
-                <span style="color: #fbbf24;" class="italic">Moderno, completo</span><br>
+            <h1 class="text-5xl xl:text-6xl font-black leading-tight text-gray-900 mb-8">
+                Seu novo portal digital.<br>
+                <span class="text-primary italic">Moderno, completo</span><br>
                 e pensado para crescer.
             </h1>
 
-            <p class="text-white/70 text-lg leading-relaxed max-w-lg mb-10">
+            <p class="text-gray-500 text-xl leading-relaxed mb-12">
                 Preparamos esta apresentação para levar o Colégio Uno Sales Digital a um novo nível de presença online — captando mais alunos e entregando uma experiência à altura da sua instituição.
             </p>
 
-            <div class="flex flex-wrap gap-4">
-                <a href="#proposta" class="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-xl font-bold text-sm">
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#detalhes" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold">
                     Ver a proposta
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
@@ -110,7 +105,7 @@
                 </a>
                 <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Vi%20a%20proposta%20do%20Col%C3%A9gio%20Uno%20Sales%20Digital%20e%20quero%20saber%20mais!"
                    target="_blank"
-                   class="inline-flex items-center gap-2 px-7 py-4 rounded-xl font-bold text-sm border-2 border-white/40 text-white hover:bg-white hover:text-gray-900 transition-all duration-200">
+                   class="btn-outline inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                         <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.555 4.122 1.527 5.853L.057 23.1a.75.75 0 00.916.916l5.247-1.47A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.97-1.364l-.356-.213-3.688 1.032 1.032-3.688-.213-.356A9.75 9.75 0 1112 21.75z"/>
@@ -119,15 +114,6 @@
                 </a>
             </div>
         </div>
-
-        <!-- SETA SCROLL -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/40">
-            <span class="text-xs uppercase tracking-widest font-semibold">Rolar</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-            </svg>
-        </div>
-
     </section>
 
 </body>
