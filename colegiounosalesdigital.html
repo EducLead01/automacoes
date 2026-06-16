@@ -3,346 +3,535 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Portal Digital | Colégio Uno Sales Digital</title>
+    <title>Novo Portal Digital | Colégio Uno Sales</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+        *, ::before, ::after { box-sizing: border-box; }
+        body { margin: 0; font-family: "Source Sans 3", sans-serif; background: #fff; color: rgb(0,58,96); }
 
-        .rounded-hero-video {
-            border-bottom-left-radius: 80px;
+        /* Primary CTA button */
+        .btn-padrao-1 {
+            background-color: rgb(11,174,248);
+            color: white;
+            border-radius: 100px;
+            padding: 10px 28px;
+            font-weight: 700;
+            font-size: 15px;
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color .2s, transform .15s;
         }
+        .btn-padrao-1:hover { background-color: rgb(0,150,214); transform: translateY(-1px); }
 
-        @media (min-width: 1024px) {
-            .rounded-hero-video {
-                border-bottom-left-radius: 120px;
-            }
-        }
+        /* Floating dots */
+        @keyframes liquido-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+        .liquido-float { animation: liquido-float ease-in-out infinite; }
 
-        .badge-pulse {
-            animation: badgePulse 2.5s ease-in-out infinite;
-        }
+        /* Mouse scroll indicator */
+        @keyframes scrollDot { 0%,100%{transform:translateY(0);opacity:1} 50%{transform:translateY(9px);opacity:.4} }
+        .mouse-dot { animation: scrollDot 1.5s ease-in-out infinite; transform-origin: center; }
 
-        @keyframes badgePulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
+        /* Scrolling image columns (estamos presentes) */
+        @keyframes trackUp { from{transform:translateY(0)} to{transform:translateY(-50%)} }
+        @keyframes trackDown { from{transform:translateY(-50%)} to{transform:translateY(0)} }
+        .track-up   { animation: trackUp   22s linear infinite; }
+        .track-down { animation: trackDown 22s linear infinite; }
 
-        .text-primary { color: #d97706; }
+        /* Níveis hover */
+        .nivel-card .nivel-img { transition: transform .5s ease; }
+        .nivel-card:hover .nivel-img { transform: scale(1.05); }
+        .nivel-desc, .nivel-btn { opacity: 0; transition: opacity .2s; }
+        .nivel-card:hover .nivel-desc,
+        .nivel-card:hover .nivel-btn  { opacity: 1; }
 
-        .btn-primary {
-            background-color: #d97706;
-            color: #fff;
-            transition: background-color 0.2s, transform 0.2s;
-        }
-        .btn-primary:hover {
-            background-color: #b45309;
-            transform: translateY(-1px);
-        }
-
-        .btn-outline {
-            border: 2px solid #d97706;
-            color: #d97706;
-            transition: all 0.2s;
-        }
-        .btn-outline:hover {
-            background-color: #d97706;
-            color: #fff;
-            transform: translateY(-1px);
-        }
+        /* badge pulse */
+        @keyframes badgePulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+        .badge-pulse { animation: badgePulse 2.5s ease-in-out infinite; }
     </style>
 </head>
-<body class="bg-white antialiased">
+<body>
 
-    <!-- HEADER -->
-    <header style="background-color: #002d5a;" class="w-full sticky top-0 z-50">
-        <div class="flex items-center justify-center" style="height: 72px;">
-            <a href="#">
-                <img src="./logo_01.PNG" alt="Colégio Uno Sales" class="h-12 object-contain">
-            </a>
-        </div>
-    </header>
+<!-- ── HEADER ─────────────────────────────────── -->
+<header style="background-color:#002d5a;" class="w-full sticky top-0 z-50">
+    <div class="flex items-center justify-center" style="height:72px;">
+        <a href="#"><img src="./logo_01.PNG" alt="Colégio Uno Sales" class="h-12 object-contain"></a>
+    </div>
+</header>
 
-    <!-- HERO — vídeo limpo fullscreen -->
-    <section class="relative w-full overflow-hidden bg-black" style="height: calc(100vh - 72px);">
-        <video
-            class="absolute inset-0 w-full h-full object-cover"
-            autoplay loop muted playsinline>
-            <source src="https://www.escolamobile.com.br/wp-content/uploads/2024/05/240208_011_valores_v04_SITE.mp4" type="video/mp4">
-        </video>
+<!-- ── HERO ──────────────────────────────────── -->
+<section id="hero-section" class="relative overflow-hidden flex items-center"
+         style="min-height:60vh; background:linear-gradient(135deg,#001e36 0%,#003a60 60%,#004f80 100%);">
 
-        <!-- seta de scroll -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/50">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-            </svg>
-        </div>
-    </section>
+    <!-- floating dots -->
+    <div aria-hidden="true" class="absolute inset-0 pointer-events-none" style="z-index:1;">
+        <div class="liquido-float" style="position:absolute;left:2%;bottom:45%;width:10px;height:10px;border-radius:50%;background:rgb(11,174,248);opacity:.22;animation-duration:5s;"></div>
+        <div class="liquido-float" style="position:absolute;left:18%;bottom:58%;width:10px;height:10px;border-radius:50%;background:rgb(11,174,248);opacity:.3;animation-duration:5.4s;animation-delay:.15s;"></div>
+        <div class="liquido-float" style="position:absolute;left:35%;bottom:72%;width:10px;height:10px;border-radius:50%;background:rgb(11,174,248);opacity:.2;animation-duration:5.8s;animation-delay:.3s;"></div>
+        <div class="liquido-float" style="position:absolute;left:52%;bottom:55%;width:10px;height:10px;border-radius:50%;background:rgb(11,174,248);opacity:.35;animation-duration:6.2s;animation-delay:.45s;"></div>
+        <div class="liquido-float" style="position:absolute;left:70%;bottom:68%;width:10px;height:10px;border-radius:50%;background:rgb(11,174,248);opacity:.25;animation-duration:6.6s;animation-delay:.6s;"></div>
+        <div class="liquido-float" style="position:absolute;left:86%;bottom:40%;width:10px;height:10px;border-radius:50%;background:rgb(11,174,248);opacity:.2;animation-duration:5.2s;animation-delay:.75s;"></div>
+    </div>
 
-    <!-- SEÇÃO DE TEXTO -->
-    <section id="proposta" class="w-full px-10 lg:px-24 py-24 bg-white">
-        <div class="max-w-3xl mx-auto text-center">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full relative" style="z-index:2;">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-            <div class="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-10">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 badge-pulse inline-block"></span>
-                Proposta exclusiva · Colégio Uno Sales Digital
+            <!-- text left -->
+            <div>
+                <h1 class="text-white mb-6"
+                    style="font-weight:800;font-size:60px;line-height:107%;letter-spacing:0%;">
+                    Somos Uno Sales
+                </h1>
+                <p class="text-white mb-8"
+                   style="font-weight:400;font-size:16px;line-height:143%;opacity:.8;">
+                    Formamos pessoas íntegras, criativas e comprometidas com o futuro. Com uma proposta pedagógica inovadora, o Colégio Uno Sales prepara alunos da Educação Infantil ao Ensino Médio para os desafios do século XXI.
+                </p>
+                <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20agendar%20uma%20visita%20ao%20Col%C3%A9gio%20Uno%20Sales!"
+                   target="_blank" class="btn-padrao-1">
+                    Agende sua visita
+                </a>
+
+                <!-- stats -->
+                <div class="mt-12 grid gap-6"
+                     style="max-width:580px;grid-template-columns:1fr 1fr 1fr auto;">
+                    <div>
+                        <div class="text-white" style="font-weight:800;font-size:53px;line-height:100%;">30</div>
+                        <div class="text-white" style="font-size:16px;line-height:143%;margin-bottom:10px;">anos de história</div>
+                    </div>
+                    <div>
+                        <div class="text-white" style="font-weight:800;font-size:53px;line-height:100%;">+1k</div>
+                        <div class="text-white" style="font-size:16px;line-height:143%;margin-bottom:10px;">famílias atendidas</div>
+                    </div>
+                    <div>
+                        <div class="text-white" style="font-weight:800;font-size:53px;line-height:100%;">5</div>
+                        <div class="text-white" style="font-size:16px;line-height:143%;margin-bottom:10px;">níveis de ensino</div>
+                    </div>
+                    <!-- scroll mouse -->
+                    <div style="display:flex;align-items:flex-end;justify-content:center;gap:10px;">
+                        <svg width="22" height="37" viewBox="0 0 22 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x=".5" y=".5" width="21" height="36" rx="10.5" stroke="white"/>
+                            <circle cx="11" cy="10" r="3" fill="white" class="mouse-dot"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
 
-            <h1 class="text-5xl xl:text-6xl font-black leading-tight text-gray-900 mb-8">
-                Seu novo portal digital.<br>
-                <span class="text-primary italic">Moderno, completo</span><br>
-                e pensado para crescer.
-            </h1>
+            <!-- image right -->
+            <div class="relative hidden lg:block">
+                <img src="https://colegiosmaristas.com.br/assets/home/hero-desktop.webp"
+                     alt="Estudantes do Colégio Uno Sales"
+                     class="w-full h-auto"
+                     style="max-height:540px;object-fit:cover;border-radius:16px;"
+                     fetchpriority="high">
+            </div>
 
-            <p class="text-gray-500 text-xl leading-relaxed mb-12">
-                Preparamos esta apresentação para levar o Colégio Uno Sales Digital a um novo nível de presença online — captando mais alunos e entregando uma experiência à altura da sua instituição.
+        </div>
+    </div>
+</section>
+
+<!-- ── EDUCAR PARA A VIDA ─────────────────────── -->
+<section id="detalhes" class="w-full py-20 bg-white overflow-hidden">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0 items-center px-4 sm:px-6">
+
+        <div class="py-10 lg:pr-16">
+            <h2 style="font-weight:800;font-size:37px;line-height:1.2;color:#003a60;" class="mb-5">
+                Educar para a vida, em todas as dimensões
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                Formação integral e humana que contempla a Educação Infantil até o Ensino Médio, com projetos conectados ao autoconhecimento, à investigação, ao empreendedorismo e às finanças. Além disso, são oferecidas diversas atividades extracurriculares ligadas às artes, cultura e esportes.
             </p>
+            <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20Col%C3%A9gio%20Uno%20Sales!"
+               target="_blank" class="btn-padrao-1" style="margin-top:32px;display:inline-block;">
+                Conheça nossos diferenciais
+            </a>
+        </div>
 
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#detalhes" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold">
-                    Ver a proposta
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
+        <!-- peek carousel -->
+        <div class="relative overflow-hidden" style="height:480px;">
+            <div id="edu-track" class="flex gap-4 h-full transition-transform duration-500 ease-in-out" style="padding-right:80px;">
+                <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width:78%;">
+                    <img src="https://colegiosmaristas.com.br/assets/home/unidades/01.png" class="w-full h-full object-cover" alt="">
+                </div>
+                <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width:78%;">
+                    <img src="https://colegiosmaristas.com.br/assets/home/unidades/03.png" class="w-full h-full object-cover" alt="">
+                </div>
+                <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width:78%;">
+                    <img src="https://colegiosmaristas.com.br/assets/home/unidades/05.png" class="w-full h-full object-cover" alt="">
+                </div>
+                <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width:78%;">
+                    <img src="https://colegiosmaristas.com.br/assets/home/unidades/07.png" class="w-full h-full object-cover" alt="">
+                </div>
+                <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width:78%;">
+                    <img src="https://colegiosmaristas.com.br/assets/home/unidades/09.png" class="w-full h-full object-cover" alt="">
+                </div>
+            </div>
+            <button onclick="eduNext()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:bg-[#0BAEF8] hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+            <button onclick="eduPrev()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:bg-[#0BAEF8] hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ── ESTAMOS PRESENTES ──────────────────────── -->
+<section class="relative overflow-hidden" style="background-color:#003a60;padding:80px 0;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 gap-12 items-center">
+
+            <!-- scrolling image columns -->
+            <div class="flex gap-4 overflow-hidden" style="height:420px;" aria-hidden="true">
+                <div class="flex-1 overflow-hidden" style="height:420px;">
+                    <div class="track-up flex flex-col gap-3">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/01.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/03.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/05.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/07.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/09.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/01.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/03.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/05.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/07.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/09.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                    </div>
+                </div>
+                <div class="flex-1 overflow-hidden" style="height:420px;">
+                    <div class="track-down flex flex-col gap-3">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/02.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/04.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/06.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/08.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/10.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/02.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/04.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/06.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/08.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                        <img src="https://colegiosmaristas.com.br/assets/home/unidades/10.png" class="w-full rounded-xl object-cover" style="height:180px;" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- text right -->
+            <div>
+                <h2 class="text-white mb-0" style="font-size:42px;font-weight:400;">Uma escola com</h2>
+                <div class="flex items-baseline gap-3 mb-0">
+                    <span class="font-bold text-white" style="font-size:145px;line-height:1;">30</span>
+                    <p class="text-white" style="font-size:33px;max-width:160px;line-height:1.2;margin-left:12px;">anos de história</p>
+                </div>
+                <p class="text-white" style="font-size:22px;font-weight:300;max-width:350px;opacity:.8;margin-top:4px;">
+                    Formando protagonistas comprometidos com um futuro mais solidário.
+                </p>
+                <a href="https://wa.me/5562982587808?text=Quero%20visitar%20o%20Col%C3%A9gio%20Uno%20Sales!"
+                   target="_blank" class="btn-padrao-1" style="margin-top:28px;display:inline-block;">
+                    Agendar visita
                 </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── EDUCAÇÃO QUE TRANSFORMA (form) ────────── -->
+<section style="background:linear-gradient(rgba(0,150,214,.7) 0%,rgba(255,255,255,.7) 50%,rgba(0,150,214,.7) 100%) center/cover no-repeat;height:500px;overflow:hidden;position:relative;">
+
+    <!-- floating card centered -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background-color:#003a60;border-radius:20px;padding:48px 60px;max-width:960px;width:88%;z-index:10;">
+        <div style="display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap;">
+            <div style="flex:1;min-width:260px;">
+                <p class="text-white mb-0" style="font-size:20px;line-height:143%;">
+                    <strong>Educação que transforma</strong> crianças curiosas e criativas em jovens autônomos, éticos e comprometidos com um <strong>futuro mais solidário.</strong>
+                </p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;min-width:260px;">
+                <input type="text" placeholder="Nome completo"
+                       style="border-radius:8px;padding:10px 16px;border:1px solid #e5e7eb;font-size:16px;width:100%;color:#003a60;">
+                <input type="text" placeholder="Nome do responsável"
+                       style="border-radius:8px;padding:10px 16px;border:1px solid #e5e7eb;font-size:16px;width:100%;color:#003a60;">
+                <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Tenho%20interesse%20em%20matricular%20no%20Col%C3%A9gio%20Uno%20Sales."
+                   target="_blank" class="btn-padrao-1"
+                   style="margin-top:8px;text-align:center;width:100%;display:block;">
+                    Agende sua visita
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- decorative person image -->
+    <img src="https://colegiosmaristas.com.br/assets/home/camisa.png"
+         alt="" loading="lazy" aria-hidden="true"
+         style="position:absolute;right:4%;bottom:0;z-index:5;height:420px;width:auto;pointer-events:none;">
+</section>
+
+<!-- ── NÍVEIS DE ENSINO ───────────────────────── -->
+<section id="niveis" class="w-full bg-white py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="mb-12">
+            <h2 style="font-weight:800;font-size:35px;line-height:143%;color:#003a60;">Níveis de Ensino</h2>
+            <p style="font-size:18px;line-height:143%;color:#003a60;max-width:1000px;margin-top:8px;">
+                Formação integral e humana que contempla a Educação Infantil até o Ensino Médio, com projetos conectados ao autoconhecimento, à investigação, ao empreendedorismo e às finanças. Além disso, são oferecidas diversas atividades extracurriculares ligadas às artes, cultura e esportes.
+            </p>
+            <a href="https://wa.me/5562982587808?text=Quero%20saber%20mais%20sobre%20os%20n%C3%ADveis%20de%20ensino!"
+               target="_blank" class="btn-padrao-1" style="margin-top:32px;display:inline-block;">
+                Conheça nossos diferenciais
+            </a>
+        </div>
+
+        <!-- desktop 5-column grid -->
+        <div class="hidden md:grid md:grid-cols-5 gap-6">
+
+            <div class="nivel-card flex flex-col items-start cursor-pointer">
+                <div class="w-full overflow-hidden rounded-2xl">
+                    <img src="https://colegiosmaristas.com.br/assets/home/coluna-infantil.png"
+                         class="nivel-img w-full" style="aspect-ratio:3/4;object-fit:cover;" alt="" loading="lazy">
+                </div>
+                <h3 class="mt-4" style="font-weight:800;font-size:15px;line-height:143%;color:#003a60;width:147px;">Educação Infantil</h3>
+                <p class="nivel-desc mt-2" style="font-size:14px;max-width:177px;color:#6b7280;">Onde tudo começa com amor e significado.</p>
+                <a href="https://wa.me/5562982587808" target="_blank" class="nivel-btn btn-padrao-1 mt-4" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+            </div>
+
+            <div class="nivel-card flex flex-col items-start cursor-pointer">
+                <div class="w-full overflow-hidden rounded-2xl">
+                    <img src="https://colegiosmaristas.com.br/assets/home/coluna-iniciais.png"
+                         class="nivel-img w-full" style="aspect-ratio:3/4;object-fit:cover;" alt="" loading="lazy">
+                </div>
+                <h3 class="mt-4" style="font-weight:800;font-size:15.66px;line-height:143%;color:#003a60;width:147px;">Ensino Fundamental Anos Iniciais</h3>
+                <p class="nivel-desc mt-2" style="font-size:14px;max-width:177px;color:#6b7280;">Aprendizagem com alegria, crescimento com valores.</p>
+                <a href="https://wa.me/5562982587808" target="_blank" class="nivel-btn btn-padrao-1 mt-4" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+            </div>
+
+            <div class="nivel-card flex flex-col items-start cursor-pointer">
+                <div class="w-full overflow-hidden rounded-2xl">
+                    <img src="https://colegiosmaristas.com.br/assets/home/coluna-finais.png"
+                         class="nivel-img w-full" style="aspect-ratio:3/4;object-fit:cover;" alt="" loading="lazy">
+                </div>
+                <h3 class="mt-4" style="font-weight:800;font-size:15.66px;line-height:143%;color:#003a60;width:147px;">Ensino Fundamental Anos Finais</h3>
+                <p class="nivel-desc mt-2" style="font-size:14px;max-width:177px;color:#6b7280;">Conhecimento, identidade e protagonismo.</p>
+                <a href="https://wa.me/5562982587808" target="_blank" class="nivel-btn btn-padrao-1 mt-4" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+            </div>
+
+            <div class="nivel-card flex flex-col items-start cursor-pointer">
+                <div class="w-full overflow-hidden rounded-2xl">
+                    <img src="https://colegiosmaristas.com.br/assets/home/coluna-medio.png"
+                         class="nivel-img w-full" style="aspect-ratio:3/4;object-fit:cover;" alt="" loading="lazy">
+                </div>
+                <h3 class="mt-4" style="font-weight:800;font-size:15px;line-height:143%;color:#003a60;width:147px;">Ensino Médio</h3>
+                <p class="nivel-desc mt-2" style="font-size:14px;max-width:177px;color:#6b7280;">Preparação para o futuro.</p>
+                <a href="https://wa.me/5562982587808" target="_blank" class="nivel-btn btn-padrao-1 mt-4" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+            </div>
+
+            <div class="nivel-card flex flex-col items-start cursor-pointer">
+                <div class="w-full overflow-hidden rounded-2xl">
+                    <img src="https://colegiosmaristas.com.br/assets/home/coluna-integral.png"
+                         class="nivel-img w-full" style="aspect-ratio:3/4;object-fit:cover;" alt="" loading="lazy">
+                </div>
+                <h3 class="mt-4" style="font-weight:800;font-size:15px;line-height:143%;color:#003a60;width:147px;">Período Integral</h3>
+                <p class="nivel-desc mt-2" style="font-size:14px;max-width:177px;color:#6b7280;">Viver, explorar e aprender.</p>
+                <a href="https://wa.me/5562982587808" target="_blank" class="nivel-btn btn-padrao-1 mt-4" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+            </div>
+
+        </div>
+
+        <!-- mobile carousel -->
+        <div class="md:hidden relative overflow-hidden">
+            <div id="niveis-track" class="flex gap-4 transition-transform duration-500">
+                <div class="flex-shrink-0 w-[280px] flex flex-col items-start">
+                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio:3/4;">
+                        <img src="https://colegiosmaristas.com.br/assets/home/edu-infantil.png" class="w-full h-full object-cover" alt="">
+                    </div>
+                    <h3 class="mt-4 font-black text-sm" style="color:#003a60;">Educação Infantil</h3>
+                    <p class="text-sm text-gray-500 mt-1">Onde tudo começa com amor e significado.</p>
+                    <a href="https://wa.me/5562982587808" target="_blank" class="btn-padrao-1 mt-3" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+                </div>
+                <div class="flex-shrink-0 w-[280px] flex flex-col items-start">
+                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio:3/4;">
+                        <img src="https://colegiosmaristas.com.br/assets/home/ensino-fundamental-iniciais.png" class="w-full h-full object-cover" alt="">
+                    </div>
+                    <h3 class="mt-4 font-black text-sm" style="color:#003a60;">Ensino Fundamental</h3>
+                    <p class="text-sm text-gray-500 mt-1">Aprendizagem com alegria.</p>
+                    <a href="https://wa.me/5562982587808" target="_blank" class="btn-padrao-1 mt-3" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+                </div>
+                <div class="flex-shrink-0 w-[280px] flex flex-col items-start">
+                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio:3/4;">
+                        <img src="https://colegiosmaristas.com.br/assets/home/ensino-medio.png" class="w-full h-full object-cover" alt="">
+                    </div>
+                    <h3 class="mt-4 font-black text-sm" style="color:#003a60;">Ensino Médio</h3>
+                    <p class="text-sm text-gray-500 mt-1">Preparação para o futuro.</p>
+                    <a href="https://wa.me/5562982587808" target="_blank" class="btn-padrao-1 mt-3" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+                </div>
+                <div class="flex-shrink-0 w-[280px] flex flex-col items-start">
+                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio:3/4;">
+                        <img src="https://colegiosmaristas.com.br/assets/home/periodo-integral.png" class="w-full h-full object-cover" alt="">
+                    </div>
+                    <h3 class="mt-4 font-black text-sm" style="color:#003a60;">Período Integral</h3>
+                    <p class="text-sm text-gray-500 mt-1">Viver, explorar e aprender.</p>
+                    <a href="https://wa.me/5562982587808" target="_blank" class="btn-padrao-1 mt-3" style="padding:8px 20px;font-size:13px;">Saiba Mais</a>
+                </div>
+            </div>
+            <div class="flex items-center justify-center gap-4 mt-6">
+                <button onclick="niveisNav(-1)"
+                        style="width:40px;height:40px;border-radius:50%;background:rgb(11,174,248);border:none;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m19 12H5M12 5l-7 7 7 7"/></svg>
+                </button>
+                <div id="niveis-dots" class="flex gap-2">
+                    <button onclick="niveisGo(0)" class="niveis-dot" style="width:20px;height:8px;border-radius:100px;background:rgb(11,174,248);border:none;padding:0;cursor:pointer;transition:.3s;"></button>
+                    <button onclick="niveisGo(1)" class="niveis-dot" style="width:8px;height:8px;border-radius:100px;background:rgba(0,58,96,.3);border:none;padding:0;cursor:pointer;transition:.3s;"></button>
+                    <button onclick="niveisGo(2)" class="niveis-dot" style="width:8px;height:8px;border-radius:100px;background:rgba(0,58,96,.3);border:none;padding:0;cursor:pointer;transition:.3s;"></button>
+                    <button onclick="niveisGo(3)" class="niveis-dot" style="width:8px;height:8px;border-radius:100px;background:rgba(0,58,96,.3);border:none;padding:0;cursor:pointer;transition:.3s;"></button>
+                </div>
+                <button onclick="niveisNav(1)"
+                        style="width:40px;height:40px;border-radius:50%;background:rgb(11,174,248);border:none;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── ATIVIDADES COMPLEMENTARES ─────────────── -->
+<section id="atividades" class="bg-white" style="padding-bottom:calc(30px + 2rem);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="mb-12 text-center">
+            <h2 class="font-bold text-[#003a60]" style="font-size:36px;margin-bottom:16px;">
+                Atividades<br class="md:hidden"> complementares
+            </h2>
+            <p style="font-size:26.4px;color:#003a60;">Esporte, arte e cultura na formação de protagonistas.</p>
+        </div>
+
+        <!-- centered peek carousel -->
+        <div class="relative" style="overflow:visible;padding:32px 0;">
+            <div id="atv-track" class="relative flex items-center justify-center" style="height:452px;">
+                <div id="atv-0" style="position:absolute;border-radius:8px;overflow:hidden;width:40%;height:452px;z-index:10;transform:translateX(0) scale(1);opacity:1;transition:all .4s ease;">
+                    <img class="w-full h-full object-cover" style="border-radius:8px;" alt="Atividade">
+                </div>
+                <div id="atv-1" style="position:absolute;border-radius:8px;overflow:hidden;width:32%;height:361.6px;z-index:5;transform:translateX(calc(55% + 60px)) scale(0.92);opacity:.8;transition:all .4s ease;">
+                    <img class="w-full h-full object-cover" style="border-radius:8px;" alt="Atividade">
+                </div>
+                <div id="atv-2" style="position:absolute;border-radius:8px;overflow:hidden;width:32%;height:361.6px;z-index:5;transform:translateX(calc(-55% - 60px)) scale(0.92);opacity:.8;transition:all .4s ease;">
+                    <img class="w-full h-full object-cover" style="border-radius:8px;" alt="Atividade">
+                </div>
+            </div>
+
+            <button onclick="atvPrev()"
+                    style="position:absolute;top:50%;left:calc(30% - 24px);transform:translate(-50%,-50%);background:#002036;border:1px solid white;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;z-index:100;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            </button>
+            <button onclick="atvNext()"
+                    style="position:absolute;top:50%;right:calc(30% - 24px);transform:translate(50%,-50%);background:#002036;border:1px solid white;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;z-index:100;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+
+            <p class="text-center py-10">
+                <a href="https://wa.me/5562982587808?text=Quero%20saber%20mais%20sobre%20as%20atividades%20do%20Col%C3%A9gio%20Uno%20Sales!"
+                   target="_blank" class="btn-padrao-1">Saiba mais</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ── VALORES / CTA FINAL ───────────────────── -->
+<section style="background-color:#003a60;border-top:10px solid rgb(11,174,248);padding:80px 0;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <div>
+                <h2 style="font-weight:400;font-size:24px;color:white;margin-bottom:32px;">
+                    Educação pautada por <strong>valores e princípios</strong>:
+                </h2>
+                <div class="grid grid-cols-2 gap-8 mb-10">
+                    <div>
+                        <div style="font-size:38px;margin-bottom:8px;">🎯</div>
+                        <p style="font-size:13px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;">Foco no Aluno</p>
+                    </div>
+                    <div>
+                        <div style="font-size:38px;margin-bottom:8px;">🤝</div>
+                        <p style="font-size:13px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;">Parceria com a Família</p>
+                    </div>
+                    <div>
+                        <div style="font-size:38px;margin-bottom:8px;">💡</div>
+                        <p style="font-size:13px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;">Inovação</p>
+                    </div>
+                    <div>
+                        <div style="font-size:38px;margin-bottom:8px;">🌱</div>
+                        <p style="font-size:13px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;">Formação Integral</p>
+                    </div>
+                </div>
+                <a href="https://wa.me/5562982587808?text=Quero%20conhecer%20o%20Col%C3%A9gio%20Uno%20Sales!"
+                   target="_blank" class="btn-padrao-1">Conheça</a>
+            </div>
+
+            <div>
+                <div class="flex items-center gap-2 mb-5">
+                    <span class="w-2 h-2 rounded-full badge-pulse" style="background:rgb(11,174,248);display:inline-block;"></span>
+                    <span style="font-size:12px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;">Proposta exclusiva</span>
+                </div>
+                <h2 class="text-white" style="font-size:48px;font-weight:800;line-height:1.1;margin-bottom:28px;">
+                    Seu novo portal.<br>
+                    <span style="color:rgb(11,174,248);">Moderno, completo</span><br>
+                    e pensado para crescer.
+                </h2>
                 <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Vi%20a%20proposta%20do%20Col%C3%A9gio%20Uno%20Sales%20Digital%20e%20quero%20saber%20mais!"
-                   target="_blank"
-                   class="btn-outline inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.555 4.122 1.527 5.853L.057 23.1a.75.75 0 00.916.916l5.247-1.47A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.97-1.364l-.356-.213-3.688 1.032 1.032-3.688-.213-.356A9.75 9.75 0 1112 21.75z"/>
-                    </svg>
+                   target="_blank" class="btn-padrao-1" style="font-size:17px;padding:14px 36px;">
                     Falar pelo WhatsApp
                 </a>
             </div>
-        </div>
-    </section>
-
-
-    <!-- SEÇÃO — CLONE EXATO "EDUCAR PARA A VIDA" (Maristas) -->
-    <section id="detalhes" class="w-full py-20 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-0 items-center">
-
-            <!-- TEXTO ESQUERDA -->
-            <div class="px-6 lg:px-20 py-10">
-                <h2 class="font-black leading-tight mb-6 text-gray-900" style="font-size: 37px; font-weight: 800;">
-                    Um portal digital que conecta sua escola às famílias — e transforma interesse em matrícula.
-                </h2>
-                <p class="text-gray-600 text-lg leading-relaxed mb-10">
-                    O novo portal do Colégio Uno Sales digitaliza a jornada completa das famílias — da primeira visita à rematrícula. Com comunicados em tempo real, agenda online, área do aluno e matrícula digital, sua escola conquista mais alunos e fideliza os que já tem.
-                </p>
-                <a href="https://wa.me/5562982587808?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20portal%20do%20Col%C3%A9gio%20Uno%20Sales!"
-                   target="_blank"
-                   style="background-color: #d97706; color: #fff; border-radius: 9999px; padding: 14px 28px; font-weight: 700; display: inline-block; transition: background 0.2s;">
-                    Quero este portal
-                </a>
-            </div>
-
-            <!-- CAROUSEL PEEK DIREITA -->
-            <div class="relative overflow-hidden" style="height: 480px;">
-
-                <!-- track -->
-                <div id="edu-track" class="flex gap-4 h-full transition-transform duration-500 ease-in-out" style="padding-right: 80px;">
-
-                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
-                        <img src="https://www.unosales.com.br/adm/uploads/image/fund-2/fundamental-2.png"
-                             class="w-full h-full object-cover" alt="Fundamental II">
-                    </div>
-
-                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
-                        <img src="https://www.unosales.com.br/adm/uploads/image/fund-1/ensino-fundamental-1.png"
-                             class="w-full h-full object-cover" alt="Fundamental I">
-                    </div>
-
-                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
-                        <img src="https://www.unosales.com.br/adm/uploads/image/ensino-medio/ensino-medio.png"
-                             class="w-full h-full object-cover" alt="Ensino Médio">
-                    </div>
-
-                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
-                        <img src="https://www.unosales.com.br/adm/uploads/image/caipiras-day/caipiras-day.png"
-                             class="w-full h-full object-cover" alt="Eventos">
-                    </div>
-
-                    <div class="flex-shrink-0 rounded-2xl overflow-hidden h-full" style="width: 78%;">
-                        <img src="https://www.unosales.com.br/adm/uploads/image/fotos-entrada-2023/frente-colegio-1.png"
-                             class="w-full h-full object-cover" alt="O Colégio">
-                    </div>
-
-                </div>
-
-                <!-- Seta direita -->
-                <button onclick="eduNext()"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors duration-200 text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </button>
-
-                <!-- Seta esquerda -->
-                <button onclick="eduPrev()"
-                    class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors duration-200 text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO — CLONE EXATO "NÍVEIS DE ENSINO" (Maristas) -->
-    <section id="niveis" class="w-full bg-white py-20">
-        <div class="max-w-7xl mx-auto px-6 lg:px-20">
-
-            <!-- CABEÇALHO -->
-            <div class="mb-12">
-                <h2 style="font-weight: 800; font-size: 37px; line-height: 1.15; color: #003a60;">Níveis de Ensino</h2>
-                <p class="text-gray-600 text-base leading-relaxed mt-4 max-w-3xl">
-                    Formação integral e humana, que contempla a Educação Infantil até o Ensino Médio, com projetos conectados ao autoconhecimento, à investigação, ao empreendedorismo e às finanças. Além disso, são oferecidas diversas atividades extracurriculares ligadas às artes, cultura e esportes.
-                </p>
-                <a href="https://wa.me/5562982587808?text=Quero%20saber%20mais%20sobre%20o%20portal%20do%20Col%C3%A9gio%20Uno%20Sales!"
-                   target="_blank"
-                   style="margin-top: 32px; display: inline-block; background-color: #d97706; color: #fff; padding: 12px 28px; border-radius: 9999px; font-weight: 700; font-size: 14px; transition: background 0.2s;">
-                    Conheça nossos diferenciais
-                </a>
-            </div>
-
-            <!-- CARDS DESKTOP -->
-            <div class="hidden md:flex gap-5 items-start">
-
-                <!-- Card 1 -->
-                <div class="flex flex-col items-start group flex-1 cursor-pointer">
-                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                        <img src="https://images.pexels.com/photos/8617830/pexels-photo-8617830.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop"
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Educação Infantil">
-                    </div>
-                    <h3 class="mt-4" style="font-weight: 800; font-size: 15.66px; line-height: 143%; color: #003a60; width: 147px;">Educação Infantil</h3>
-                    <p class="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-500" style="font-size: 14px; max-width: 177px;">Onde tudo começa com amor e significado.</p>
-                    <a href="#" class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                       style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block;">Saiba Mais</a>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="flex flex-col items-start group flex-1 cursor-pointer">
-                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                        <img src="https://images.pexels.com/photos/20333032/pexels-photo-20333032.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop"
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Fundamental Anos Iniciais">
-                    </div>
-                    <h3 class="mt-4" style="font-weight: 800; font-size: 15.66px; line-height: 143%; color: #003a60; width: 147px;">Ensino Fundamental Anos Iniciais</h3>
-                    <p class="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-500" style="font-size: 14px; max-width: 177px;">Aprendizagem com alegria, crescimento com valores.</p>
-                    <a href="#" class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                       style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block;">Saiba Mais</a>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="flex flex-col items-start group flex-1 cursor-pointer">
-                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                        <img src="https://images.pexels.com/photos/15065521/pexels-photo-15065521.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop"
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Fundamental Anos Finais">
-                    </div>
-                    <h3 class="mt-4" style="font-weight: 800; font-size: 15.66px; line-height: 143%; color: #003a60; width: 147px;">Ensino Fundamental Anos Finais</h3>
-                    <p class="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-500" style="font-size: 14px; max-width: 177px;">Conhecimento, identidade e protagonismo.</p>
-                    <a href="#" class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                       style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block;">Saiba Mais</a>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="flex flex-col items-start group flex-1 cursor-pointer">
-                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                        <img src="https://images.pexels.com/photos/33755559/pexels-photo-33755559.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop"
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Ensino Médio">
-                    </div>
-                    <h3 class="mt-4" style="font-weight: 800; font-size: 15px; line-height: 143%; color: #003a60; width: 147px;">Ensino Médio</h3>
-                    <p class="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-500" style="font-size: 14px; max-width: 177px;">Preparação para o futuro.</p>
-                    <a href="#" class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                       style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block;">Saiba Mais</a>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="flex flex-col items-start group flex-1 cursor-pointer">
-                    <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                        <img src="https://images.pexels.com/photos/36538876/pexels-photo-36538876.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop"
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Período Integral">
-                    </div>
-                    <h3 class="mt-4" style="font-weight: 800; font-size: 15px; line-height: 143%; color: #003a60; width: 147px;">Período Integral</h3>
-                    <p class="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-500" style="font-size: 14px; max-width: 177px;">Viver, explorar e aprender.</p>
-                    <a href="#" class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                       style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block;">Saiba Mais</a>
-                </div>
-
-            </div>
-
-            <!-- CAROUSEL MOBILE -->
-            <div class="md:hidden relative overflow-hidden">
-                <div id="niveis-track" class="flex gap-4 transition-transform duration-500">
-                    <div class="flex-shrink-0 w-72 flex flex-col items-start">
-                        <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                            <img src="https://images.pexels.com/photos/8617830/pexels-photo-8617830.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop" class="w-full h-full object-cover" alt="">
-                        </div>
-                        <h3 class="mt-4 font-black text-sm" style="color: #003a60;">Educação Infantil</h3>
-                        <p class="text-sm text-gray-500 mt-1">Onde tudo começa com amor e significado.</p>
-                        <a href="#" style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block; margin-top: 12px;">Saiba Mais</a>
-                    </div>
-                    <div class="flex-shrink-0 w-72 flex flex-col items-start">
-                        <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                            <img src="https://images.pexels.com/photos/20333032/pexels-photo-20333032.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop" class="w-full h-full object-cover" alt="">
-                        </div>
-                        <h3 class="mt-4 font-black text-sm" style="color: #003a60;">Ensino Fundamental</h3>
-                        <p class="text-sm text-gray-500 mt-1">Aprendizagem com alegria.</p>
-                        <a href="#" style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block; margin-top: 12px;">Saiba Mais</a>
-                    </div>
-                    <div class="flex-shrink-0 w-72 flex flex-col items-start">
-                        <div class="w-full overflow-hidden rounded-2xl" style="aspect-ratio: 3/4;">
-                            <img src="https://images.pexels.com/photos/33755559/pexels-photo-33755559.jpeg?auto=compress&cs=tinysrgb&w=400&h=533&fit=crop" class="w-full h-full object-cover" alt="">
-                        </div>
-                        <h3 class="mt-4 font-black text-sm" style="color: #003a60;">Ensino Médio</h3>
-                        <p class="text-sm text-gray-500 mt-1">Preparação para o futuro.</p>
-                        <a href="#" style="background-color: #d97706; color: #fff; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 13px; display: inline-block; margin-top: 12px;">Saiba Mais</a>
-                    </div>
-                </div>
-                <div class="flex justify-end gap-3 mt-6">
-                    <button onclick="niveisNav(-1)" class="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-500">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                    </button>
-                    <button onclick="niveisNav(1)" class="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-500">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                    </button>
-                </div>
-            </div>
 
         </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        let niveisIdx = 0;
-        function niveisNav(dir) {
-            const track = document.getElementById('niveis-track');
-            const max = track.children.length - 1;
-            niveisIdx = Math.max(0, Math.min(niveisIdx + dir, max));
-            track.style.transform = `translateX(-${niveisIdx * (288 + 16)}px)`;
-        }
-    </script>
+<!-- ── SCRIPTS ────────────────────────────────── -->
+<script>
+// Educar para a vida — peek carousel
+let eduIndex = 0;
+function eduNext() {
+    const t = document.getElementById('edu-track');
+    eduIndex = Math.min(eduIndex + 1, t.children.length - 1);
+    t.style.transform = `translateX(-${eduIndex * (t.children[0].offsetWidth + 16)}px)`;
+}
+function eduPrev() {
+    const t = document.getElementById('edu-track');
+    eduIndex = Math.max(eduIndex - 1, 0);
+    t.style.transform = `translateX(-${eduIndex * (t.children[0].offsetWidth + 16)}px)`;
+}
 
-    <script>
-        let eduIndex = 0;
-        function eduCardW() {
-            const track = document.getElementById('edu-track');
-            return track.children[0].offsetWidth + 16;
-        }
-        function eduNext() {
-            const track = document.getElementById('edu-track');
-            const max = track.children.length - 1;
-            eduIndex = Math.min(eduIndex + 1, max);
-            track.style.transform = `translateX(-${eduIndex * eduCardW()}px)`;
-        }
-        function eduPrev() {
-            eduIndex = Math.max(eduIndex - 1, 0);
-            document.getElementById('edu-track').style.transform = `translateX(-${eduIndex * eduCardW()}px)`;
-        }
-    </script>
+// Níveis mobile carousel
+let niveisIdx = 0;
+function niveisNav(dir) { niveisGo(Math.max(0, Math.min(niveisIdx + dir, 3))); }
+function niveisGo(i) {
+    niveisIdx = i;
+    document.getElementById('niveis-track').style.transform = `translateX(-${i * (280 + 16)}px)`;
+    document.querySelectorAll('.niveis-dot').forEach((d, idx) => {
+        d.style.width  = idx === i ? '20px' : '8px';
+        d.style.background = idx === i ? 'rgb(11,174,248)' : 'rgba(0,58,96,.3)';
+    });
+}
+
+// Atividades complementares — centered carousel
+const ATV = [
+    'https://colegiosmaristas.com.br/assets/home/atividades-complementares-card-1.png',
+    'https://colegiosmaristas.com.br/assets/home/atividades-complementares-card-2.png',
+    'https://colegiosmaristas.com.br/assets/home/atividades-complementares-card-3.png',
+];
+let atvIdx = 0;
+
+function atvRender() {
+    const n = ATV.length;
+    const prev = (atvIdx - 1 + n) % n;
+    const next = (atvIdx + 1) % n;
+    document.querySelector('#atv-0 img').src = ATV[atvIdx];
+    document.querySelector('#atv-1 img').src = ATV[next];
+    document.querySelector('#atv-2 img').src = ATV[prev];
+}
+function atvNext() { atvIdx = (atvIdx + 1) % ATV.length; atvRender(); }
+function atvPrev() { atvIdx = (atvIdx - 1 + ATV.length) % ATV.length; atvRender(); }
+atvRender();
+</script>
 
 </body>
 </html>
