@@ -607,38 +607,31 @@ const SEMANA = {
     falas: [
         {
             dia: 'Segunda',
-            stories: 7,
-            fala: 'De uniforme, olha pra câmera e abre com: "Hoje é segunda-feira no Colégio Uno Sales e..."',
+            fala: 'De uniforme, abre a câmera e convida pra semana: "Segunda-feira! A semana começa aqui no Uno Sales..."',
         },
         {
             dia: 'Terça',
-            stories: 7,
-            fala: 'Mostra um espaço da escola, chama o dia e conecta com algo que aconteceu: "Terça-feira e a semana já tá..."',
+            fala: 'Aproveita o clima do café junino ainda fresco: "Ontem foi incrível — o Uno Sales celebrou com..."',
         },
         {
             dia: 'Quarta',
-            stories: 7,
-            fala: 'Quarta é dia de virada — cria um gancho de metade da semana: "Já é quarta e a gente ainda..."',
+            fala: 'Gancho de meio de semana com energia positiva: "Quarta-feira! Metade da semana e a escola ainda..."',
         },
         {
             dia: 'Quinta',
-            stories: 7,
-            fala: 'Antecipa o fim de semana com leveza: "Quinta-feira! Falta pouco pra sexta e aqui no Uno..."',
+            fala: 'Antecipa o fim de semana sem perder o foco: "Quinta! Falta pouco pra sexta e aqui no Uno a gente..."',
         },
         {
             dia: 'Sexta',
-            stories: 7,
-            fala: 'Encerra a semana com energia: "Hoje é sexta no Colégio Uno Sales — semana reta e..."',
+            fala: 'Celebra a semana e lança o CTA: "Sexta-feira! Semana reta — garante a vaga do seu filho..."',
         },
         {
             dia: 'Sábado',
-            stories: 3,
-            fala: 'Tom mais leve, fora da escola: "Sábado é dia de descanso, mas a gente lembra que..."',
+            fala: 'Tom leve de descanso com lembrete de matrícula: "Sábado é descanso, mas as vagas não esperam..."',
         },
         {
             dia: 'Domingo',
-            stories: 3,
-            fala: 'Convite para a semana que vem: "Domingo é dia de planejar — que tal conhecer o Uno Sales?"',
+            fala: 'Convite direto para visita na semana que começa: "Domingo de planejar — que tal conhecer o Uno Sales amanhã?"',
         },
     ],
 };
@@ -689,11 +682,8 @@ document.addEventListener('DOMContentLoaded', function () {
     SEMANA.falas.forEach(function (d) {
         const isFds = fimSemana.includes(d.dia);
         falasEl.innerHTML += '<div class="dia-card' + (isFds ? ' fim-semana' : '') + '">'
-            + '<div class="flex items-center justify-between mb-4">'
+            + '<div class="flex items-center mb-4">'
                 + '<p class="dia-label font-black text-sm uppercase tracking-widest" style="color:' + (isFds ? 'rgba(255,255,255,0.25)' : '#E79E14') + ';">' + d.dia + '</p>'
-                + '<span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.3);">'
-                    + d.stories + ' stories'
-                + '</span>'
             + '</div>'
             + '<p class="text-white/60 text-sm leading-relaxed italic">"' + d.fala + '"</p>'
             + '</div>';
