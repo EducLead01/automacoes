@@ -269,10 +269,10 @@
             </div>
         </div>
 
-        <!-- Orientações da visita -->
+        <!-- Categorias de produção -->
         <div class="mb-10">
-            <p class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-4">O que produzir na visita</p>
-            <div id="orientacoes-lista" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+            <p class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-6">O que produzir na visita</p>
+            <div id="categorias-lista" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
         </div>
 
         <!-- Falas por dia -->
@@ -571,14 +571,37 @@ const SEMANA = {
         descricao: '',
     },
 
-    orientacoes: [
-        'Gravar de uniforme da escola durante toda a visita',
-        'Registrar o café da manhã junino com fotos e vídeos (banco de imagens)',
-        'Filmar chamadas gravadas para cada um dos 7 dias da semana (usar as falas abaixo)',
-        'Sempre tirar fotos e banco de vídeos gerais da escola e dos alunos',
-        'Após gravar, mover cada material para a pasta do dia correspondente no Drive',
-        'Pastas de stories: Segunda, Terça, Quarta, Quinta, Sexta, Sábado, Domingo',
-        'Demais materiais (feed, reels): usar as pastas específicas do Drive',
+    categorias: [
+        {
+            icone: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#E79E14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
+            titulo: 'Hooks e CTA',
+            label: 'Conteúdo atemporal',
+            descricao: 'Essa semana: gravar hooks de chamada de dias — segunda à domingo. Use as falas da seção abaixo como roteiro.',
+            itens: [],
+        },
+        {
+            icone: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#E79E14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+            titulo: 'Registro da Visita',
+            label: 'Captação de imagens',
+            descricao: '',
+            itens: [
+                'Gravar de uniforme da escola durante toda a visita',
+                'Registrar o café da manhã junino com fotos e vídeos',
+                'Filmar chamadas para os 7 dias da semana (usar as falas abaixo)',
+                'Tirar fotos e banco de vídeos gerais da escola e dos alunos',
+            ],
+        },
+        {
+            icone: '<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#E79E14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+            titulo: 'Organização no Drive',
+            label: 'Após a visita · até 48h',
+            descricao: '',
+            itens: [
+                'Mover cada material para a pasta do dia correspondente',
+                'Stories → pastas: Segunda, Terça, Quarta, Quinta, Sexta, Sábado, Domingo',
+                'Feed e Reels → pastas específicas do Drive',
+            ],
+        },
     ],
 
     falas: [
@@ -638,12 +661,25 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('visita-descricao-wrap').classList.remove('hidden');
     }
 
-    // Orientações
-    const oriEl = document.getElementById('orientacoes-lista');
-    SEMANA.orientacoes.forEach(function (txt, i) {
-        oriEl.innerHTML += '<div class="flex gap-3 items-start bg-[#111111] rounded-2xl p-4" style="border:1px solid rgba(255,255,255,0.06);">'
-            + '<span class="step-num flex-shrink-0 mt-0.5">' + (i + 1) + '</span>'
-            + '<p class="text-white/70 text-sm leading-relaxed">' + txt + '</p>'
+    // Categorias
+    const catEl = document.getElementById('categorias-lista');
+    SEMANA.categorias.forEach(function (c) {
+        var itensHtml = c.itens.length
+            ? '<ul class="space-y-2 mt-5">' + c.itens.map(function (it) {
+                return '<li class="flex items-start gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0 mt-1.5"></span>' + it + '</li>';
+              }).join('') + '</ul>'
+            : '';
+        var descHtml = c.descricao
+            ? '<p class="text-white/50 text-sm leading-relaxed mt-2">' + c.descricao + '</p>'
+            : '';
+        catEl.innerHTML +=
+            '<div class="group bg-[#111111] rounded-3xl p-8 border border-white/[0.06] hover:border-el-yellow/30 transition-all duration-300">'
+            + '<div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(231,158,20,0.1);border:1px solid rgba(231,158,20,0.2);">' + c.icone + '</div>'
+            + '<div class="w-8 h-0.5 mb-5 transition-all duration-500 group-hover:w-14" style="background:rgba(231,158,20,0.4);"></div>'
+            + '<h3 class="font-black text-2xl uppercase tracking-tight mb-1">' + c.titulo + '</h3>'
+            + '<p class="text-xs font-bold uppercase tracking-widest mb-0" style="color:rgba(231,158,20,0.7);">' + c.label + '</p>'
+            + descHtml
+            + itensHtml
             + '</div>';
     });
 
