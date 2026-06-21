@@ -190,7 +190,7 @@
                     <p class="text-white/30 text-xs uppercase tracking-widest mb-1">Horário</p>
                     <p id="visita-horario" class="font-black text-el-yellow text-3xl"></p>
                 </div>
-                <div class="text-center md:text-right">
+                <div id="visita-descricao-wrap" class="text-center md:text-right hidden">
                     <p class="text-white/30 text-xs uppercase tracking-widest mb-2">Objetivo</p>
                     <p id="visita-descricao" class="text-white font-semibold text-sm leading-relaxed"></p>
                 </div>
@@ -507,13 +507,13 @@
      ═══════════════════════════════════════════════════ -->
 <script>
 const SEMANA = {
-    periodo: '23 – 29 jun 2026',
+    periodo: 'Semana 26',
     drive: 'https://drive.google.com/drive/folders/1q4dVCWOGzdR0ex9hFmU2BeFb3nJyNpIH?usp=drive_link',
 
     visita: {
-        data:      '24/06/2026 · Terça-feira',
+        data:      '24/06/2026 · Quarta-feira',
         horario:   '08h00',
-        descricao: 'Cobertura do café da manhã típico junino dos alunos',
+        descricao: '',
     },
 
     orientacoes: [
@@ -573,12 +573,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('rodape-drive-link').href = SEMANA.drive;
 
     // Período
-    document.getElementById('label-periodo').textContent = 'Semana ' + SEMANA.periodo;
+    document.getElementById('label-periodo').textContent = SEMANA.periodo;
 
     // Visita
-    document.getElementById('visita-data').textContent      = SEMANA.visita.data;
-    document.getElementById('visita-horario').textContent   = SEMANA.visita.horario;
-    document.getElementById('visita-descricao').textContent = SEMANA.visita.descricao;
+    document.getElementById('visita-data').textContent    = SEMANA.visita.data;
+    document.getElementById('visita-horario').textContent = SEMANA.visita.horario;
+    if (SEMANA.visita.descricao) {
+        document.getElementById('visita-descricao').textContent = SEMANA.visita.descricao;
+        document.getElementById('visita-descricao-wrap').classList.remove('hidden');
+    }
 
     // Orientações
     const oriEl = document.getElementById('orientacoes-lista');
