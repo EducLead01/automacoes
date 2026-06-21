@@ -251,18 +251,20 @@
                 </svg>
                 <p class="font-black text-el-yellow text-xs uppercase tracking-[0.3em]">Visita da Semana</p>
             </div>
-            <div class="px-8 py-7 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="text-center md:text-left">
+            <div class="px-8 py-7 flex flex-wrap items-center gap-8">
+                <div>
                     <p class="text-white/30 text-xs uppercase tracking-widest mb-1">Data</p>
-                    <p id="visita-data" class="font-black text-white text-2xl"></p>
+                    <p id="visita-data" class="font-black text-white text-2xl whitespace-nowrap"></p>
                 </div>
-                <div class="text-center">
+                <div class="w-px self-stretch" style="background:rgba(255,255,255,0.06);"></div>
+                <div>
                     <p class="text-white/30 text-xs uppercase tracking-widest mb-1">Horário</p>
                     <p id="visita-horario" class="font-black text-el-yellow text-3xl"></p>
                 </div>
-                <div id="visita-descricao-wrap" class="text-center md:text-right hidden">
+                <div id="visita-descricao-wrap" class="hidden">
+                    <div class="w-px self-stretch mr-8" style="background:rgba(255,255,255,0.06);"></div>
                     <p class="text-white/30 text-xs uppercase tracking-widest mb-2">Objetivo</p>
-                    <p id="visita-descricao" class="text-white font-semibold text-sm leading-relaxed"></p>
+                    <p id="visita-descricao" class="text-white font-semibold text-sm leading-relaxed max-w-xs"></p>
                 </div>
             </div>
         </div>
