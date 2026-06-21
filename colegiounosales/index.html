@@ -96,6 +96,7 @@
             </a>
 
             <nav class="hidden md:flex items-center gap-5 text-xs font-semibold">
+                <a href="#regras"      class="nav-link">Regras</a>
                 <a href="#semana"      class="nav-link">Semana Atual</a>
                 <a href="#plataformas" class="nav-link">Plataformas</a>
                 <a href="#pilares"     class="nav-link">Pilares</a>
@@ -153,6 +154,72 @@
     </div>
 </section>
 
+<!-- ─── REGRAS DO TIME ────────────────────────────────── -->
+<section id="regras" class="py-20 bg-[#0D0D0D]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-12">
+            <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em] mb-3">Conduta</p>
+            <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
+                Regras do <span class="gradient-text">Time</span>
+            </h2>
+        </div>
+
+        <!-- Sempre -->
+        <p class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-5">✓ &nbsp;Sempre</p>
+        <div class="relative space-y-5 mb-10">
+            <div class="absolute left-5 top-10 bottom-10 w-px" style="background:rgba(231,158,20,0.2);"></div>
+
+            <div class="flex gap-6 items-start group">
+                <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm z-10" style="background:#E79E14;color:#0A0A0A;">01</div>
+                <div class="flex-1 bg-[#111111] rounded-2xl p-6 border border-white/[0.06] group-hover:border-el-yellow/25 transition-all duration-300">
+                    <h3 class="font-black text-base uppercase tracking-tight mb-2">Tirar fotos</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Tirar fotos em todas as visitas — banco de imagens da escola.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-6 items-start group">
+                <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm z-10" style="background:#E79E14;color:#0A0A0A;">02</div>
+                <div class="flex-1 bg-[#111111] rounded-2xl p-6 border border-white/[0.06] group-hover:border-el-yellow/25 transition-all duration-300">
+                    <h3 class="font-black text-base uppercase tracking-tight mb-2">Depoimento em fala</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Tentar captar um depoimento em fala de algum colaborador durante a visita.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-6 items-start group">
+                <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm z-10" style="background:#E79E14;color:#0A0A0A;">03</div>
+                <div class="flex-1 bg-[#111111] rounded-2xl p-6 border border-white/[0.06] group-hover:border-el-yellow/25 transition-all duration-300">
+                    <h3 class="font-black text-base uppercase tracking-tight mb-2">Arquivo original no Drive</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Subir o arquivo original — sem legenda embutida no vídeo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nunca -->
+        <p class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-5">✕ &nbsp;Nunca</p>
+        <div class="relative space-y-5">
+            <div class="absolute left-5 top-10 bottom-10 w-px" style="background:rgba(239,68,68,0.2);"></div>
+
+            <div class="flex gap-6 items-start group">
+                <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm z-10" style="background:rgba(239,68,68,0.8);color:white;">01</div>
+                <div class="flex-1 bg-[#111111] rounded-2xl p-6 border border-white/[0.06] group-hover:border-red-500/25 transition-all duration-300">
+                    <h3 class="font-black text-base uppercase tracking-tight mb-2 text-red-400">Material no celular</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Deixar material no celular — tudo vai para o Drive em até 48h.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-6 items-start group">
+                <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm z-10" style="background:rgba(239,68,68,0.8);color:white;">02</div>
+                <div class="flex-1 bg-[#111111] rounded-2xl p-6 border border-white/[0.06] group-hover:border-red-500/25 transition-all duration-300">
+                    <h3 class="font-black text-base uppercase tracking-tight mb-2 text-red-400">Conteúdo impróprio</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Postar conteúdo impróprio que induza interpretações diferentes.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 <!-- ─── SEMANA ATUAL ──────────────────────────────────── -->
 <section id="semana" class="py-20 bg-[#0D0D0D]">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -196,43 +263,6 @@
         <div class="mb-10">
             <p class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-4">O que produzir na visita</p>
             <div id="orientacoes-lista" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
-        </div>
-
-        <!-- Regras fixas da visita -->
-        <div class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-5">
-
-            <div class="bg-[#111111] rounded-2xl p-6" style="border:1px solid rgba(255,255,255,0.06);">
-                <p class="text-green-400 text-xs font-black uppercase tracking-[0.25em] mb-5">✓ &nbsp;Sempre</p>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Tirar fotos em todas as visitas — banco de imagens da escola
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Tentar captar um depoimento em fala de algum colaborador durante a visita
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Subir o arquivo original no Drive — sem legenda embutida no vídeo
-                    </li>
-                </ul>
-            </div>
-
-            <div class="bg-[#111111] rounded-2xl p-6" style="border:1px solid rgba(239,68,68,0.2);">
-                <p class="text-red-400 text-xs font-black uppercase tracking-[0.25em] mb-5">✕ &nbsp;Nunca</p>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>
-                        Deixar material no celular — tudo vai para o Drive em até 48h
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>
-                        Postar conteúdo impróprio que induza interpretações diferentes
-                    </li>
-                </ul>
-            </div>
-
         </div>
 
         <!-- Falas por dia -->
