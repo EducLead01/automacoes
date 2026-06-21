@@ -12,7 +12,7 @@
                     colors: {
                         'el-black':  '#0A0A0A',
                         'el-gray':   '#111111',
-                        'el-blue':   '#E79E14',
+                        'el-yellow': '#E79E14',
                         'el-white':  '#FFFFFF',
                     },
                     fontFamily: {
@@ -40,10 +40,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .nav-link {
-            color: rgba(255,255,255,0.7);
-            transition: color 0.2s;
-        }
+        .nav-link { color: rgba(255,255,255,0.7); transition: color 0.2s; }
         .nav-link:hover { color: #E79E14; }
 
         .card {
@@ -53,48 +50,43 @@
             border: 1px solid rgba(255,255,255,0.06);
             transition: all 0.3s ease;
         }
-        .card:hover {
-            border-color: rgba(11,174,248,0.3);
-            transform: translateY(-3px);
-        }
-        .card .bar {
-            width: 32px; height: 2px;
-            background: rgba(11,174,248,0.4);
-            transition: width 0.5s;
-        }
-        .card:hover .bar { width: 56px; }
+        .card:hover { border-color: rgba(231,158,20,0.3); transform: translateY(-3px); }
+        .card .bar { width:32px; height:2px; background:rgba(231,158,20,0.4); transition:width .5s; }
+        .card:hover .bar { width:56px; }
 
         .step-num {
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            background: #E79E14;
-            color: #0A0A0A;
-            font-weight: 900;
-            font-size: 12px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
+            width:28px; height:28px; border-radius:50%;
+            background:#E79E14; color:#0A0A0A;
+            font-weight:900; font-size:12px;
+            display:flex; align-items:center; justify-content:center; flex-shrink:0;
         }
 
         .tag {
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-            background: rgba(11,174,248,0.08);
-            border: 1px solid rgba(11,174,248,0.2);
-            color: #E79E14;
+            padding:5px 12px; border-radius:999px; font-size:12px; font-weight:700;
+            background:rgba(231,158,20,0.08); border:1px solid rgba(231,158,20,0.2); color:#E79E14;
         }
 
+        .dia-card {
+            background:#111111; border-radius:20px; padding:24px;
+            border:1px solid rgba(255,255,255,0.06); transition:all .3s;
+        }
+        .dia-card:hover { border-color:rgba(231,158,20,0.25); }
+        .dia-card.fim-semana { border-color:rgba(255,255,255,0.04); }
+        .dia-card.fim-semana .dia-label { color:rgba(255,255,255,0.25); }
+
         @keyframes alert-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
-            50%       { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+            0%,100%{ box-shadow:0 0 0 0 rgba(239,68,68,.5); }
+            50%     { box-shadow:0 0 0 8px rgba(239,68,68,0); }
         }
         .alert-pulse { animation: alert-pulse 1.4s ease-in-out infinite; }
+
+        @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.4} }
+        .live-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-el-black text-el-white">
 
-<!-- ── NAV ────────────────────────────────────────── -->
+<!-- ─── NAV ──────────────────────────────────────────── -->
 <header class="fixed top-0 w-full z-50" style="background:rgba(10,10,10,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.05);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-center md:justify-between h-20 relative">
@@ -109,15 +101,15 @@
             </a>
 
             <nav class="hidden md:flex items-center gap-5 text-xs font-semibold">
-                <a href="#plataformas"  class="nav-link">Plataformas</a>
-                <a href="#cronograma"   class="nav-link">Cronograma</a>
-                <a href="#pilares"      class="nav-link">Pilares</a>
-                <a href="#legenda"      class="nav-link">Padrão de Legenda</a>
-                <a href="#fluxo"        class="nav-link">Fluxo de Aprovação</a>
-                <a href="#praticas"     class="nav-link">Boas Práticas</a>
+                <a href="#semana"      class="nav-link">Semana Atual</a>
+                <a href="#plataformas" class="nav-link">Plataformas</a>
+                <a href="#pilares"     class="nav-link">Pilares</a>
+                <a href="#legenda"     class="nav-link">Padrão de Legenda</a>
+                <a href="#fluxo"       class="nav-link">Fluxo de Aprovação</a>
+                <a href="#praticas"    class="nav-link">Boas Práticas</a>
             </nav>
 
-            <button onclick="toggleWa()" class="hidden md:block font-black text-xs uppercase tracking-wide px-4 py-2.5 rounded-lg transition-all duration-300" style="background:#E79E14;color:#0A0A0A;">
+            <button onclick="toggleWa()" class="hidden md:block font-black text-xs uppercase tracking-wide px-4 py-2.5 rounded-lg transition-all" style="background:#E79E14;color:#0A0A0A;">
                 Suporte ao Social
             </button>
 
@@ -127,8 +119,8 @@
         </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-[#0A0A0A] px-4 pb-4 pt-2 space-y-1">
+        <a href="#semana"      class="block nav-link py-2 text-sm font-semibold text-center">Semana Atual</a>
         <a href="#plataformas" class="block nav-link py-2 text-sm font-semibold text-center">Plataformas</a>
-        <a href="#cronograma"  class="block nav-link py-2 text-sm font-semibold text-center">Cronograma</a>
         <a href="#pilares"     class="block nav-link py-2 text-sm font-semibold text-center">Pilares</a>
         <a href="#legenda"     class="block nav-link py-2 text-sm font-semibold text-center">Padrão de Legenda</a>
         <a href="#fluxo"       class="block nav-link py-2 text-sm font-semibold text-center">Fluxo de Aprovação</a>
@@ -139,80 +131,165 @@
 
 <main class="flex-grow">
 
-<!-- ── HERO ───────────────────────────────────────── -->
-<section class="flex items-center justify-center pt-36 pb-10 bg-el-black">
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<section class="flex items-center justify-center pt-36 pb-12 bg-el-black">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
-        <p class="text-el-blue text-xs font-black uppercase tracking-[0.35em] mb-5">Instagram · TikTok</p>
+
+        <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em] mb-5">Instagram · TikTok</p>
         <h1 class="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase mb-6">
             Playbook do<br>
             <span class="gradient-text">Social</span><br>
             Colégio Uno Sales
         </h1>
-        <p class="text-white/50 text-lg md:text-xl font-light max-w-2xl mx-auto">
-            Você atua em <strong class="text-white font-bold">2 plataformas</strong>. Aqui estão todas as orientações para manter a consistência e gerar resultado.
+        <p class="text-white/50 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10">
+            Orientações semanais para o time de social. Atualizado toda semana.
         </p>
+
+        <!-- Drive CTA -->
+        <a id="hero-drive-link" href="#" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-3 font-black text-sm uppercase tracking-wider px-7 py-3.5 rounded-xl transition-all hover:opacity-90"
+           style="background:#E79E14;color:#0A0A0A;">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.28 3L2 10.5l4.28 7.5h11.44L22 10.5 17.72 3H6.28zm.42 1.5h10.6l3.44 6H3.27l3.43-6zm-.92 7.5h11.96l-3.43 6H9.73l-3.95-6z"/>
+            </svg>
+            Abrir Drive do Social
+        </a>
+
     </div>
 </section>
 
-<!-- ── PLATAFORMAS ─────────────────────────────────── -->
+<!-- ─── SEMANA ATUAL ──────────────────────────────────── -->
+<section id="semana" class="py-20 bg-[#0D0D0D]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-12">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <span class="live-dot w-2 h-2 rounded-full bg-el-yellow inline-block"></span>
+                <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em]">Atualizado semanalmente</p>
+            </div>
+            <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
+                Semana <span class="gradient-text">Atual</span>
+            </h2>
+            <p id="label-periodo" class="text-white/30 text-sm mt-2 uppercase tracking-widest font-semibold"></p>
+        </div>
+
+        <!-- Visita da semana -->
+        <div class="mb-8 rounded-3xl overflow-hidden" style="border:1px solid rgba(231,158,20,0.3);background:#111111;">
+            <div class="px-8 py-5 flex items-center gap-4" style="background:rgba(231,158,20,0.08);border-bottom:1px solid rgba(231,158,20,0.15);">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="#E79E14" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <p class="font-black text-el-yellow text-xs uppercase tracking-[0.3em]">Visita da Semana</p>
+            </div>
+            <div class="px-8 py-7 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="text-center md:text-left">
+                    <p class="text-white/30 text-xs uppercase tracking-widest mb-1">Data</p>
+                    <p id="visita-data" class="font-black text-white text-2xl"></p>
+                </div>
+                <div class="text-center">
+                    <p class="text-white/30 text-xs uppercase tracking-widest mb-1">Horário</p>
+                    <p id="visita-horario" class="font-black text-el-yellow text-3xl"></p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-white/30 text-xs uppercase tracking-widest mb-2">Objetivo</p>
+                    <p id="visita-descricao" class="text-white font-semibold text-sm leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orientações da visita -->
+        <div class="mb-10">
+            <p class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-4">O que produzir na visita</p>
+            <div id="orientacoes-lista" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Falas por dia -->
+        <div>
+            <p class="text-white/30 text-xs font-black uppercase tracking-[0.3em] mb-4">Falas para os stories — use uma por dia</p>
+            <div id="falas-lista" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Link drive rodapé -->
+        <div class="mt-10 rounded-2xl px-6 py-4 flex items-center justify-between flex-wrap gap-4" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
+            <div>
+                <p class="font-black text-white text-sm">Drive do Social</p>
+                <p class="text-white/35 text-xs mt-0.5">Mova cada material para a pasta do dia correspondente após gravar</p>
+            </div>
+            <a id="rodape-drive-link" href="#" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 font-black text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg"
+               style="background:#E79E14;color:#0A0A0A;">
+                Abrir Drive
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ─── PLATAFORMAS ───────────────────────────────────── -->
 <section id="plataformas" class="py-20 bg-el-black">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-12">
+            <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em] mb-3">Canais</p>
+            <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
+                Plataformas e <span class="gradient-text">Volume</span>
+            </h2>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <!-- Instagram Feed -->
             <div class="card group">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(11,174,248,0.1);border:1px solid rgba(11,174,248,0.2);">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(231,158,20,0.1);border:1px solid rgba(231,158,20,0.2);">
                     <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#E79E14" stroke-width="1.8">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E79E14" stroke="none"/>
+                        <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E79E14" stroke="none"/>
                     </svg>
                 </div>
                 <div class="bar mb-5"></div>
                 <h2 class="font-black text-2xl uppercase tracking-tight mb-1">Instagram Feed</h2>
-                <p class="text-el-blue/70 text-xs font-bold uppercase tracking-widest mb-4">5 posts por semana</p>
-                <p class="text-white/50 text-sm leading-relaxed mb-5">Conteúdo permanente que representa a escola. Cada post deve ser planejado, bem editado e seguir os pilares de conteúdo.</p>
+                <p class="text-el-yellow/70 text-xs font-bold uppercase tracking-widest mb-4">5 posts por semana</p>
+                <p class="text-white/50 text-sm leading-relaxed mb-5">Conteúdo permanente que representa a escola. Planejado, bem editado e dentro dos pilares.</p>
                 <ul class="space-y-2">
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Reels (prioridade de alcance)</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Carrossel (engajamento)</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Foto única (institucional)</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>1 post de captação/semana</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Reels (prioridade de alcance)</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Carrossel (engajamento)</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Foto única (institucional)</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>1 captação por semana (quarta)</li>
                 </ul>
             </div>
 
-            <!-- Instagram Stories -->
             <div class="card group">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(11,174,248,0.1);border:1px solid rgba(11,174,248,0.2);">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(231,158,20,0.1);border:1px solid rgba(231,158,20,0.2);">
                     <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#E79E14" stroke-width="1.8">
                         <rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="#E79E14" stroke="none"/>
                     </svg>
                 </div>
                 <div class="bar mb-5"></div>
-                <h2 class="font-black text-2xl uppercase tracking-tight mb-1">Instagram Stories</h2>
-                <p class="text-el-blue/70 text-xs font-bold uppercase tracking-widest mb-4">7/dia seg–sex · 3/dia sáb–dom</p>
-                <p class="text-white/50 text-sm leading-relaxed mb-5">Canal de relacionamento diário com os seguidores. Mantém a escola presente na cabeça das famílias todos os dias.</p>
+                <h2 class="font-black text-2xl uppercase tracking-tight mb-1">Stories</h2>
+                <p class="text-el-yellow/70 text-xs font-bold uppercase tracking-widest mb-4">7/dia seg–sex · 3/dia sáb–dom</p>
+                <p class="text-white/50 text-sm leading-relaxed mb-5">Relacionamento diário. Mantém a escola presente na cabeça das famílias todos os dias.</p>
                 <ul class="space-y-2">
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Enquetes e perguntas</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Bastidores do dia a dia</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Repost de alunos e famílias</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>CTA para matrícula (1x/dia)</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Enquetes e perguntas</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Bastidores do dia a dia</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Repost de alunos e famílias</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>CTA matrícula (1 por dia)</li>
                 </ul>
             </div>
 
-            <!-- TikTok -->
             <div class="card group">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(11,174,248,0.1);border:1px solid rgba(11,174,248,0.2);">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(231,158,20,0.1);border:1px solid rgba(231,158,20,0.2);">
                     <svg class="w-7 h-7" fill="#E79E14" viewBox="0 0 24 24">
                         <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l-.01-8.83a8.2 8.2 0 0 0 4.79 1.52V4.55a4.85 4.85 0 0 1-1.01-.14z"/>
                     </svg>
                 </div>
                 <div class="bar mb-5"></div>
                 <h2 class="font-black text-2xl uppercase tracking-tight mb-1">TikTok</h2>
-                <p class="text-el-blue/70 text-xs font-bold uppercase tracking-widest mb-4">Reaproveitamento dos Reels</p>
-                <p class="text-white/50 text-sm leading-relaxed mb-5">Todo Reel produzido para o Instagram deve ser publicado também no TikTok. Mesmo vídeo, mesma legenda adaptada.</p>
+                <p class="text-el-yellow/70 text-xs font-bold uppercase tracking-widest mb-4">Reaproveitamento dos Reels</p>
+                <p class="text-white/50 text-sm leading-relaxed mb-5">Todo Reel produzido para o Instagram vai também pro TikTok — mesmo vídeo, sem marca d'água.</p>
                 <ul class="space-y-2">
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Republicar os Reels do feed</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Sem marca d'água do Instagram</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Hashtags específicas do TikTok</li>
-                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-blue flex-shrink-0"></span>Publicar no mesmo dia do Reel</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Republicar os Reels do feed</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Sem marca d'água do Instagram</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Hashtags próprias do TikTok</li>
+                    <li class="flex items-center gap-2 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-el-yellow flex-shrink-0"></span>Publicar no mesmo dia do Reel</li>
                 </ul>
             </div>
 
@@ -220,159 +297,11 @@
     </div>
 </section>
 
-<!-- ── CRONOGRAMA ──────────────────────────────────── -->
-<section id="cronograma" class="py-20 bg-[#0D0D0D]">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <p class="text-el-blue text-xs font-black uppercase tracking-[0.35em] mb-3">Semana Padrão</p>
-            <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
-                Cronograma <span class="gradient-text">Semanal</span>
-            </h2>
-            <p class="text-white/40 mt-3 text-sm">Volume de publicações por dia e por plataforma</p>
-        </div>
-
-        <!-- Tabela semana -->
-        <div class="grid grid-cols-7 gap-2 mb-8">
-
-            <!-- Segunda -->
-            <div class="bg-[#111111] rounded-2xl p-4 border border-white/[0.06] flex flex-col gap-3">
-                <p class="font-black text-xs uppercase tracking-widest text-center" style="color:#E79E14;">SEG</p>
-                <div class="flex flex-col gap-2">
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(11,174,248,0.08);border:1px solid rgba(11,174,248,0.2);">
-                        <p class="font-black text-white text-lg leading-none">1</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Feed</p>
-                    </div>
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
-                        <p class="font-black text-white text-lg leading-none">7</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Stories</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Terça -->
-            <div class="bg-[#111111] rounded-2xl p-4 border border-white/[0.06] flex flex-col gap-3">
-                <p class="font-black text-xs uppercase tracking-widest text-center" style="color:#E79E14;">TER</p>
-                <div class="flex flex-col gap-2">
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(11,174,248,0.08);border:1px solid rgba(11,174,248,0.2);">
-                        <p class="font-black text-white text-lg leading-none">1</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Feed</p>
-                    </div>
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
-                        <p class="font-black text-white text-lg leading-none">7</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Stories</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quarta -->
-            <div class="bg-[#111111] rounded-2xl p-4 border border-el-blue/20 flex flex-col gap-3" style="border-color:rgba(11,174,248,0.25);">
-                <p class="font-black text-xs uppercase tracking-widest text-center" style="color:#E79E14;">QUA</p>
-                <div class="flex flex-col gap-2">
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(11,174,248,0.15);border:1px solid rgba(11,174,248,0.4);">
-                        <p class="font-black text-el-blue text-lg leading-none">1</p>
-                        <p class="text-el-blue/60 text-[10px] mt-0.5">Captação</p>
-                    </div>
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
-                        <p class="font-black text-white text-lg leading-none">7</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Stories</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quinta -->
-            <div class="bg-[#111111] rounded-2xl p-4 border border-white/[0.06] flex flex-col gap-3">
-                <p class="font-black text-xs uppercase tracking-widest text-center" style="color:#E79E14;">QUI</p>
-                <div class="flex flex-col gap-2">
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(11,174,248,0.08);border:1px solid rgba(11,174,248,0.2);">
-                        <p class="font-black text-white text-lg leading-none">1</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Feed</p>
-                    </div>
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
-                        <p class="font-black text-white text-lg leading-none">7</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Stories</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sexta -->
-            <div class="bg-[#111111] rounded-2xl p-4 border border-white/[0.06] flex flex-col gap-3">
-                <p class="font-black text-xs uppercase tracking-widest text-center" style="color:#E79E14;">SEX</p>
-                <div class="flex flex-col gap-2">
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(11,174,248,0.08);border:1px solid rgba(11,174,248,0.2);">
-                        <p class="font-black text-white text-lg leading-none">1</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Feed</p>
-                    </div>
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
-                        <p class="font-black text-white text-lg leading-none">7</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Stories</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sábado -->
-            <div class="bg-[#111111] rounded-2xl p-4 border border-white/[0.06] flex flex-col gap-3">
-                <p class="font-black text-xs uppercase tracking-widest text-center text-white/40">SÁB</p>
-                <div class="flex flex-col gap-2">
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
-                        <p class="font-black text-white/30 text-lg leading-none">—</p>
-                        <p class="text-white/20 text-[10px] mt-0.5">Feed</p>
-                    </div>
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
-                        <p class="font-black text-white text-lg leading-none">3</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Stories</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Domingo -->
-            <div class="bg-[#111111] rounded-2xl p-4 border border-white/[0.06] flex flex-col gap-3">
-                <p class="font-black text-xs uppercase tracking-widest text-center text-white/40">DOM</p>
-                <div class="flex flex-col gap-2">
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
-                        <p class="font-black text-white/30 text-lg leading-none">—</p>
-                        <p class="text-white/20 text-[10px] mt-0.5">Feed</p>
-                    </div>
-                    <div class="rounded-xl p-2 text-center" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
-                        <p class="font-black text-white text-lg leading-none">3</p>
-                        <p class="text-white/40 text-[10px] mt-0.5">Stories</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Totais -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-[#111111] rounded-2xl p-5 text-center border border-white/[0.06]">
-                <p class="font-black text-3xl text-el-blue">5</p>
-                <p class="text-white/40 text-xs uppercase tracking-widest mt-1">Posts no feed</p>
-                <p class="text-white/20 text-[10px] mt-0.5">por semana</p>
-            </div>
-            <div class="bg-[#111111] rounded-2xl p-5 text-center border border-white/[0.06]">
-                <p class="font-black text-3xl text-el-blue">41</p>
-                <p class="text-white/40 text-xs uppercase tracking-widest mt-1">Stories</p>
-                <p class="text-white/20 text-[10px] mt-0.5">por semana</p>
-            </div>
-            <div class="bg-[#111111] rounded-2xl p-5 text-center border border-el-blue/20" style="border-color:rgba(11,174,248,0.25);">
-                <p class="font-black text-3xl text-el-blue">1</p>
-                <p class="text-white/40 text-xs uppercase tracking-widest mt-1">Captação</p>
-                <p class="text-white/20 text-[10px] mt-0.5">toda quarta</p>
-            </div>
-            <div class="bg-[#111111] rounded-2xl p-5 text-center border border-white/[0.06]">
-                <p class="font-black text-3xl text-white">2</p>
-                <p class="text-white/40 text-xs uppercase tracking-widest mt-1">Plataformas</p>
-                <p class="text-white/20 text-[10px] mt-0.5">Instagram + TikTok</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- ── PILARES DE CONTEÚDO ─────────────────────────── -->
-<section id="pilares" class="py-20 bg-el-black">
+<!-- ─── PILARES ───────────────────────────────────────── -->
+<section id="pilares" class="py-20 bg-[#0D0D0D]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <p class="text-el-blue text-xs font-black uppercase tracking-[0.35em] mb-3">Feed & Stories</p>
+            <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em] mb-3">Feed & Stories</p>
             <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
                 Pilares de <span class="gradient-text">Conteúdo</span>
             </h2>
@@ -381,83 +310,51 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-            <!-- Pilar 1 -->
             <div class="card group">
                 <div class="flex items-center gap-4 mb-5">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-el-black text-sm flex-shrink-0" style="background:#E79E14;">01</div>
-                    <div>
-                        <h3 class="font-black text-lg uppercase tracking-tight">Institucional</h3>
-                        <div class="bar mt-1"></div>
-                    </div>
+                    <div><h3 class="font-black text-lg uppercase tracking-tight">Institucional</h3><div class="bar mt-1"></div></div>
                 </div>
-                <p class="text-white/40 text-sm leading-relaxed">Conteúdo que apresenta a escola: estrutura, corpo docente, valores, história e diferenciais. Faz a família reconhecer qualidade antes mesmo de visitar.</p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="tag">Estrutura</span>
-                    <span class="tag">Professores</span>
-                    <span class="tag">Valores</span>
-                </div>
+                <p class="text-white/40 text-sm leading-relaxed">Estrutura, corpo docente, valores, história e diferenciais. Faz a família reconhecer qualidade antes mesmo de visitar.</p>
+                <div class="mt-4 flex flex-wrap gap-2"><span class="tag">Estrutura</span><span class="tag">Professores</span><span class="tag">Valores</span></div>
             </div>
 
-            <!-- Pilar 2 -->
             <div class="card group">
                 <div class="flex items-center gap-4 mb-5">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-el-black text-sm flex-shrink-0" style="background:#E79E14;">02</div>
-                    <div>
-                        <h3 class="font-black text-lg uppercase tracking-tight">Bastidores</h3>
-                        <div class="bar mt-1"></div>
-                    </div>
+                    <div><h3 class="font-black text-lg uppercase tracking-tight">Bastidores</h3><div class="bar mt-1"></div></div>
                 </div>
-                <p class="text-white/40 text-sm leading-relaxed">Dia a dia da escola: aulas, eventos, projetos, recreio, atividades complementares. Cria proximidade e humaniza a marca para as famílias.</p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="tag">Aulas</span>
-                    <span class="tag">Eventos</span>
-                    <span class="tag">Atividades</span>
-                </div>
+                <p class="text-white/40 text-sm leading-relaxed">Dia a dia da escola: aulas, eventos, projetos, recreio, atividades complementares. Cria proximidade e humaniza a marca.</p>
+                <div class="mt-4 flex flex-wrap gap-2"><span class="tag">Aulas</span><span class="tag">Eventos</span><span class="tag">Atividades</span></div>
             </div>
 
-            <!-- Pilar 3 -->
             <div class="card group">
                 <div class="flex items-center gap-4 mb-5">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-el-black text-sm flex-shrink-0" style="background:#E79E14;">03</div>
-                    <div>
-                        <h3 class="font-black text-lg uppercase tracking-tight">Prova Social</h3>
-                        <div class="bar mt-1"></div>
-                    </div>
+                    <div><h3 class="font-black text-lg uppercase tracking-tight">Prova Social</h3><div class="bar mt-1"></div></div>
                 </div>
-                <p class="text-white/40 text-sm leading-relaxed">Depoimentos de pais e alunos, conquistas, aprovações, elogios recebidos. A melhor venda é feita por quem já vive a escola.</p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="tag">Depoimentos</span>
-                    <span class="tag">Conquistas</span>
-                    <span class="tag">Resultados</span>
-                </div>
+                <p class="text-white/40 text-sm leading-relaxed">Depoimentos de pais e alunos, conquistas, aprovações, elogios. A melhor venda é feita por quem já vive a escola.</p>
+                <div class="mt-4 flex flex-wrap gap-2"><span class="tag">Depoimentos</span><span class="tag">Conquistas</span><span class="tag">Resultados</span></div>
             </div>
 
-            <!-- Pilar 4 — Captação -->
-            <div class="card group" style="border-color:rgba(11,174,248,0.2);">
+            <div class="card group" style="border-color:rgba(231,158,20,0.2);">
                 <div class="flex items-center gap-4 mb-5">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-el-black text-sm flex-shrink-0" style="background:#E79E14;">04</div>
-                    <div>
-                        <h3 class="font-black text-lg uppercase tracking-tight">Captação</h3>
-                        <div class="bar mt-1"></div>
-                    </div>
+                    <div><h3 class="font-black text-lg uppercase tracking-tight">Captação</h3><div class="bar mt-1"></div></div>
                 </div>
-                <p class="text-white/40 text-sm leading-relaxed">Conteúdo direto de geração de matrícula. Aparece <strong class="text-white/60">1x por semana no feed</strong> (toda quarta) e 1x por dia nos stories como CTA final.</p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="tag">Matrícula aberta</span>
-                    <span class="tag">Vagas limitadas</span>
-                    <span class="tag">Agende visita</span>
-                </div>
+                <p class="text-white/40 text-sm leading-relaxed">Conteúdo direto de geração de matrícula. <strong class="text-white/60">1x por semana no feed</strong> (toda quarta) e 1 CTA por dia nos stories.</p>
+                <div class="mt-4 flex flex-wrap gap-2"><span class="tag">Matrícula aberta</span><span class="tag">Vagas limitadas</span><span class="tag">Agende visita</span></div>
             </div>
 
         </div>
     </div>
 </section>
 
-<!-- ── PADRÃO DE LEGENDA ───────────────────────────── -->
-<section id="legenda" class="py-20 bg-[#0D0D0D]">
+<!-- ─── PADRÃO DE LEGENDA ─────────────────────────────── -->
+<section id="legenda" class="py-20 bg-el-black">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <p class="text-el-blue text-xs font-black uppercase tracking-[0.35em] mb-3">Feed</p>
+            <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em] mb-3">Feed</p>
             <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
                 Padrão de <span class="gradient-text">Legenda</span>
             </h2>
@@ -465,46 +362,29 @@
         </div>
 
         <div class="bg-[#111111] rounded-3xl p-8 md:p-12 border border-white/[0.06]">
-
-            <!-- Fórmula -->
             <p class="text-white/30 text-xs font-bold uppercase tracking-widest text-center mb-6">Estrutura</p>
             <div class="flex flex-col gap-3 mb-10">
-                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(11,174,248,0.06);border:1px solid rgba(11,174,248,0.15);">
-                    <span class="step-num flex-shrink-0">1</span>
-                    <div>
-                        <p class="font-bold text-white text-sm">Gancho (1ª linha)</p>
-                        <p class="text-white/40 text-xs mt-0.5">Frase que para o scroll. Pergunta, afirmação forte ou dado impactante.</p>
-                    </div>
+                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(231,158,20,0.06);border:1px solid rgba(231,158,20,0.15);">
+                    <span class="step-num">1</span>
+                    <div><p class="font-bold text-white text-sm">Gancho (1ª linha)</p><p class="text-white/40 text-xs mt-0.5">Frase que para o scroll. Pergunta, afirmação forte ou dado impactante.</p></div>
                 </div>
-                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(11,174,248,0.06);border:1px solid rgba(11,174,248,0.15);">
-                    <span class="step-num flex-shrink-0">2</span>
-                    <div>
-                        <p class="font-bold text-white text-sm">Corpo (2–4 linhas)</p>
-                        <p class="text-white/40 text-xs mt-0.5">Desenvolva o contexto. Conecte com a realidade da família ou do aluno.</p>
-                    </div>
+                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(231,158,20,0.06);border:1px solid rgba(231,158,20,0.15);">
+                    <span class="step-num">2</span>
+                    <div><p class="font-bold text-white text-sm">Corpo (2–4 linhas)</p><p class="text-white/40 text-xs mt-0.5">Contexto que conecta com a realidade da família ou do aluno.</p></div>
                 </div>
-                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(11,174,248,0.06);border:1px solid rgba(11,174,248,0.15);">
-                    <span class="step-num flex-shrink-0">3</span>
-                    <div>
-                        <p class="font-bold text-white text-sm">CTA (última linha)</p>
-                        <p class="text-white/40 text-xs mt-0.5">Chame para uma ação: salvar, comentar, clicar no link, agendar visita.</p>
-                    </div>
+                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(231,158,20,0.06);border:1px solid rgba(231,158,20,0.15);">
+                    <span class="step-num">3</span>
+                    <div><p class="font-bold text-white text-sm">CTA (última linha)</p><p class="text-white/40 text-xs mt-0.5">Salvar, comentar, clicar no link ou agendar visita.</p></div>
                 </div>
-                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(11,174,248,0.06);border:1px solid rgba(11,174,248,0.15);">
-                    <span class="step-num flex-shrink-0">#</span>
-                    <div>
-                        <p class="font-bold text-white text-sm">Hashtags (no primeiro comentário)</p>
-                        <p class="text-white/40 text-xs mt-0.5">Nunca na legenda principal. Poste no primeiro comentário logo após publicar.</p>
-                    </div>
+                <div class="flex items-center gap-3 p-4 rounded-2xl" style="background:rgba(231,158,20,0.06);border:1px solid rgba(231,158,20,0.15);">
+                    <span class="step-num">#</span>
+                    <div><p class="font-bold text-white text-sm">Hashtags — no primeiro comentário</p><p class="text-white/40 text-xs mt-0.5">Nunca na legenda principal. Poste no primeiro comentário logo após publicar.</p></div>
                 </div>
             </div>
-
             <div class="border-t border-white/[0.06] mb-10"></div>
-
-            <!-- Exemplo -->
             <p class="text-white/30 text-xs font-bold uppercase tracking-widest text-center mb-6">Exemplo</p>
             <div class="bg-[#0A0A0A] rounded-2xl p-6 font-mono text-sm leading-loose" style="border:1px solid rgba(255,255,255,0.06);">
-                <p class="text-el-blue font-bold">Você sabia que a escolha da escola define mais do que as notas?</p>
+                <p class="text-el-yellow font-bold">Você sabia que a escolha da escola define mais do que as notas?</p>
                 <br>
                 <p class="text-white/60">No Colégio Uno Sales, do Infantil ao Médio, cada etapa é pensada para formar pessoas — não só estudantes.</p>
                 <br>
@@ -514,11 +394,11 @@
     </div>
 </section>
 
-<!-- ── FLUXO DE APROVAÇÃO ──────────────────────────── -->
-<section id="fluxo" class="py-20 bg-el-black">
+<!-- ─── FLUXO DE APROVAÇÃO ────────────────────────────── -->
+<section id="fluxo" class="py-20 bg-[#0D0D0D]">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <p class="text-el-blue text-xs font-black uppercase tracking-[0.35em] mb-3">Processo</p>
+            <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em] mb-3">Processo</p>
             <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
                 Fluxo de <span class="gradient-text">Aprovação</span>
             </h2>
@@ -526,116 +406,63 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
             <div class="flex gap-3 items-start bg-[#111] rounded-2xl p-5 border border-white/[0.06]">
                 <span class="step-num mt-0.5">1</span>
-                <div>
-                    <p class="font-bold text-sm text-white mb-1">Crie o conteúdo</p>
-                    <p class="text-white/40 text-xs leading-relaxed">Produza o vídeo ou arte seguindo o pilar da semana e o padrão visual aprovado.</p>
-                </div>
+                <div><p class="font-bold text-sm text-white mb-1">Crie o conteúdo</p><p class="text-white/40 text-xs leading-relaxed">Produza o vídeo ou arte seguindo o pilar da semana e o padrão visual.</p></div>
             </div>
-
             <div class="flex gap-3 items-start bg-[#111] rounded-2xl p-5 border border-white/[0.06]">
                 <span class="step-num mt-0.5">2</span>
-                <div>
-                    <p class="font-bold text-sm text-white mb-1">Escreva a legenda</p>
-                    <p class="text-white/40 text-xs leading-relaxed">Siga a estrutura: Gancho → Corpo → CTA. Hashtags no primeiro comentário.</p>
-                </div>
+                <div><p class="font-bold text-sm text-white mb-1">Escreva a legenda</p><p class="text-white/40 text-xs leading-relaxed">Gancho → Corpo → CTA. Hashtags no primeiro comentário.</p></div>
             </div>
-
             <div class="alert-pulse flex gap-3 items-start rounded-2xl p-5" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.35);">
                 <span class="step-num mt-0.5" style="background:rgba(239,68,68,0.8);">3</span>
-                <div>
-                    <p class="font-bold text-sm text-red-400 mb-1">Envie para aprovação</p>
-                    <p class="text-red-400/70 text-xs leading-relaxed">⚠️ Nenhum post vai ao ar sem aprovação prévia. Envie vídeo + legenda pelo grupo.</p>
-                </div>
+                <div><p class="font-bold text-sm text-red-400 mb-1">Envie para aprovação</p><p class="text-red-400/70 text-xs leading-relaxed">⚠️ Nenhum post vai ao ar sem aprovação prévia. Envie vídeo + legenda pelo grupo.</p></div>
             </div>
-
             <div class="flex gap-3 items-start bg-[#111] rounded-2xl p-5 border border-white/[0.06]">
                 <span class="step-num mt-0.5">4</span>
-                <div>
-                    <p class="font-bold text-sm text-white mb-1">Publique e monitore</p>
-                    <p class="text-white/40 text-xs leading-relaxed">Após aprovação, publique no horário certo. Responda comentários nas primeiras 2h.</p>
-                </div>
+                <div><p class="font-bold text-sm text-white mb-1">Publique e monitore</p><p class="text-white/40 text-xs leading-relaxed">Após aprovação, publique no horário certo. Responda comentários nas primeiras 2h.</p></div>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- ── BOAS PRÁTICAS ───────────────────────────────── -->
-<section id="praticas" class="py-20 bg-[#0D0D0D]">
+<!-- ─── BOAS PRÁTICAS ─────────────────────────────────── -->
+<section id="praticas" class="py-20 bg-el-black">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <p class="text-el-blue text-xs font-black uppercase tracking-[0.35em] mb-3">Regras</p>
+            <p class="text-el-yellow text-xs font-black uppercase tracking-[0.35em] mb-3">Regras</p>
             <h2 class="font-black text-3xl md:text-4xl uppercase tracking-tight">
                 Boas <span class="gradient-text">Práticas</span>
             </h2>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-            <!-- PODE -->
             <div class="bg-[#111111] rounded-3xl p-8 border border-white/[0.06]">
                 <p class="text-green-400 text-xs font-black uppercase tracking-[0.25em] mb-6">✓ &nbsp;Pode</p>
                 <ul class="space-y-3">
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Repostar conteúdo de alunos e famílias nos stories (sempre pedindo permissão)
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Usar tendências do TikTok/Reels desde que façam sentido para a escola
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Usar enquetes e perguntas nos stories para gerar interação
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Responder comentários e DMs dentro de 2h em dias úteis
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>
-                        Destacar stories de prova social nos destaques do perfil
-                    </li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>Repostar conteúdo de alunos e famílias nos stories (sempre com permissão)</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>Usar tendências do TikTok/Reels quando fizerem sentido para a escola</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>Usar enquetes e perguntas nos stories para gerar interação</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>Responder comentários e DMs dentro de 2h em dias úteis</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1.5"></span>Mover o material gravado para a pasta correta do Drive no mesmo dia</li>
                 </ul>
             </div>
-
-            <!-- NÃO PODE -->
             <div class="bg-[#111111] rounded-3xl p-8 border border-white/[0.06]">
                 <p class="text-red-400 text-xs font-black uppercase tracking-[0.25em] mb-6">✕ &nbsp;Não pode</p>
                 <ul class="space-y-3">
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>
-                        Publicar fotos de alunos sem autorização dos responsáveis
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>
-                        Postar no TikTok com marca d'água do Instagram (baixe pelo CapCut ou natively)
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>
-                        Publicar conteúdo sem aprovação prévia — mesmo que seja urgente
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>
-                        Usar hashtags genéricas demais como #escola ou #educação na legenda
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-white/70">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>
-                        Subir mais de 1 post de captação por semana no feed (queima a audiência)
-                    </li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>Publicar fotos de alunos sem autorização dos responsáveis</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>Postar no TikTok com marca d'água do Instagram</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>Publicar conteúdo sem aprovação prévia — mesmo urgente</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>Deixar material no celular — tudo vai para o Drive no mesmo dia</li>
+                    <li class="flex items-start gap-3 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5"></span>Subir mais de 1 captação por semana no feed</li>
                 </ul>
             </div>
-
         </div>
     </div>
 </section>
 
 </main>
 
-<!-- ── FOOTER ──────────────────────────────────────── -->
+<!-- ─── FOOTER ────────────────────────────────────────── -->
 <footer class="py-12" style="background:#050505;border-top:1px solid rgba(255,255,255,0.04);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-5">
         <div class="flex items-center gap-3">
@@ -650,50 +477,136 @@
     </div>
 </footer>
 
-<!-- ── WHATSAPP POPUP ──────────────────────────────── -->
+<!-- ─── WHATSAPP POPUP ────────────────────────────────── -->
 <div id="wa-overlay" onclick="closeWa()" class="fixed inset-0 z-[90] bg-black/50 backdrop-blur-sm hidden"></div>
-
 <div id="wa-popup" class="fixed bottom-24 right-5 z-[100] w-80 rounded-2xl overflow-hidden shadow-2xl hidden">
     <div class="flex items-center justify-between px-5 py-4" style="background:#25D366;">
         <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 fill-white flex-shrink-0">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 fill-white flex-shrink-0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
             <span class="font-black text-white text-base">Educ Lead</span>
         </div>
         <button onclick="closeWa()" class="text-white/80 hover:text-white">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
     </div>
     <div class="px-5 py-3 text-xs text-white/50 font-semibold uppercase tracking-wider" style="background:#1a1a1a;border-bottom:1px solid rgba(255,255,255,0.07);">Fale com o suporte:</div>
     <div style="background:#111111;">
-        <a href="https://wa.me/5562982587808?text=Olá!%20Preciso%20de%20suporte%20no%20Playbook%20do%20Social%20do%20Colégio%20Uno%20Sales."
-           target="_blank" rel="noopener" class="flex items-center justify-between px-5 py-4 hover:bg-white/[0.04] transition-colors" style="text-decoration:none;">
-            <div>
-                <p class="font-bold text-white text-sm">Cesar Marçal · Educ Lead</p>
-                <p class="text-white/35 text-[10px] uppercase tracking-widest mt-0.5">Clique para iniciar o chat</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 flex-shrink-0" style="fill:#25D366;">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-            </svg>
+        <a href="https://wa.me/5562982587808?text=Olá!%20Preciso%20de%20suporte%20no%20Playbook%20do%20Social%20do%20Colégio%20Uno%20Sales." target="_blank" rel="noopener" class="flex items-center justify-between px-5 py-4 hover:bg-white/[0.04] transition-colors" style="text-decoration:none;">
+            <div><p class="font-bold text-white text-sm">Cesar Marçal · Educ Lead</p><p class="text-white/35 text-[10px] uppercase tracking-widest mt-0.5">Clique para iniciar o chat</p></div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 flex-shrink-0" style="fill:#25D366;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
         </a>
     </div>
 </div>
-
-<button id="wa-btn" onclick="toggleWa()"
-    class="fixed bottom-5 right-5 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110 active:scale-95"
-    style="background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,0.5);">
-    <svg id="wa-icon-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 fill-white">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-    </svg>
-    <svg id="wa-icon-close" class="w-6 h-6 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-    </svg>
+<button id="wa-btn" onclick="toggleWa()" class="fixed bottom-5 right-5 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110 active:scale-95" style="background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,0.5);">
+    <svg id="wa-icon-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 fill-white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.845L.054 23.25a.75.75 0 0 0 .917.94l5.562-1.461A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.218-1.444l-.374-.224-3.876 1.018 1.037-3.78-.245-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    <svg id="wa-icon-close" class="w-6 h-6 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
 </button>
 
+<!-- ═══════════════════════════════════════════════════
+     DADOS DA SEMANA — atualize aqui toda semana
+     ═══════════════════════════════════════════════════ -->
 <script>
+const SEMANA = {
+    periodo: '23 – 29 jun 2026',
+    drive: 'https://drive.google.com/drive/folders/1q4dVCWOGzdR0ex9hFmU2BeFb3nJyNpIH?usp=drive_link',
+
+    visita: {
+        data:      '24/06/2026 · Terça-feira',
+        horario:   '08h00',
+        descricao: 'Cobertura do café da manhã típico junino dos alunos',
+    },
+
+    orientacoes: [
+        'Gravar de uniforme da escola durante toda a visita',
+        'Registrar o café da manhã junino com fotos e vídeos (banco de imagens)',
+        'Filmar chamadas gravadas para cada um dos 7 dias da semana (usar as falas abaixo)',
+        'Sempre tirar fotos e banco de vídeos gerais da escola e dos alunos',
+        'Após gravar, mover cada material para a pasta do dia correspondente no Drive',
+        'Pastas de stories: Segunda, Terça, Quarta, Quinta, Sexta, Sábado, Domingo',
+        'Demais materiais (feed, reels): usar as pastas específicas do Drive',
+    ],
+
+    falas: [
+        {
+            dia: 'Segunda',
+            stories: 7,
+            fala: 'Segunda-feira! Começa mais uma semana aqui no Colégio Uno Sales. Um lugar onde cada dia é uma oportunidade de aprender, crescer e fazer amizades pra vida. Vem conhecer — link na bio!',
+        },
+        {
+            dia: 'Terça',
+            stories: 7,
+            fala: 'É terça-feira no Colégio Uno Sales! Hoje a escola vibrou com um café da manhã junino que ficou na memória de todo mundo. Aqui a educação tem sabor, tem cultura e tem muito amor. Agende uma visita.',
+        },
+        {
+            dia: 'Quarta',
+            stories: 7,
+            fala: 'Quarta-feira! Já passamos da metade da semana e a energia aqui no Colégio Uno Sales continua total. Do Infantil ao Médio, cada aluno sendo formado com propósito. Vagas abertas — link na bio!',
+        },
+        {
+            dia: 'Quinta',
+            stories: 7,
+            fala: 'Quinta-feira! Mais um dia cheio de aprendizado aqui no Colégio Uno Sales. Escola boa vai além da sala de aula — tem estrutura, tem cuidado, tem comunidade. Venha nos visitar!',
+        },
+        {
+            dia: 'Sexta',
+            stories: 7,
+            fala: 'Sexta-feira! Semana reta com muita dedicação dos nossos alunos. No Colégio Uno Sales, cada semana é uma nova conquista. Garanta a vaga do seu filho — link na bio!',
+        },
+        {
+            dia: 'Sábado',
+            stories: 3,
+            fala: 'Sábado é dia de descanso, mas a gente nunca para de pensar em educação de qualidade. As vagas para o próximo semestre no Colégio Uno Sales estão abertas. Não deixe passar — link na bio!',
+        },
+        {
+            dia: 'Domingo',
+            stories: 3,
+            fala: 'Domingo é o dia perfeito pra planejar. Que tal agendar uma visita ao Colégio Uno Sales pra essa semana? A gente te espera de braços abertos. Link na bio!',
+        },
+    ],
+};
+
+// ─── Renderização ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Drive links
+    document.getElementById('hero-drive-link').href   = SEMANA.drive;
+    document.getElementById('rodape-drive-link').href = SEMANA.drive;
+
+    // Período
+    document.getElementById('label-periodo').textContent = 'Semana ' + SEMANA.periodo;
+
+    // Visita
+    document.getElementById('visita-data').textContent      = SEMANA.visita.data;
+    document.getElementById('visita-horario').textContent   = SEMANA.visita.horario;
+    document.getElementById('visita-descricao').textContent = SEMANA.visita.descricao;
+
+    // Orientações
+    const oriEl = document.getElementById('orientacoes-lista');
+    SEMANA.orientacoes.forEach(function (txt, i) {
+        oriEl.innerHTML += '<div class="flex gap-3 items-start bg-[#111111] rounded-2xl p-4" style="border:1px solid rgba(255,255,255,0.06);">'
+            + '<span class="step-num flex-shrink-0 mt-0.5">' + (i + 1) + '</span>'
+            + '<p class="text-white/70 text-sm leading-relaxed">' + txt + '</p>'
+            + '</div>';
+    });
+
+    // Falas por dia
+    const falasEl = document.getElementById('falas-lista');
+    const fimSemana = ['Sábado', 'Domingo'];
+    SEMANA.falas.forEach(function (d) {
+        const isFds = fimSemana.includes(d.dia);
+        falasEl.innerHTML += '<div class="dia-card' + (isFds ? ' fim-semana' : '') + '">'
+            + '<div class="flex items-center justify-between mb-4">'
+                + '<p class="dia-label font-black text-sm uppercase tracking-widest" style="color:' + (isFds ? 'rgba(255,255,255,0.25)' : '#E79E14') + ';">' + d.dia + '</p>'
+                + '<span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.3);">'
+                    + d.stories + ' stories'
+                + '</span>'
+            + '</div>'
+            + '<p class="text-white/60 text-sm leading-relaxed italic">"' + d.fala + '"</p>'
+            + '</div>';
+    });
+});
+
+// ─── WhatsApp ──────────────────────────────────────────────────────
 function toggleWa() {
     var popup   = document.getElementById('wa-popup');
     var overlay = document.getElementById('wa-overlay');
