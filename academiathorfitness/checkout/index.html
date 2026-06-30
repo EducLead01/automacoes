@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thor Fitness | Garanta sua Vaga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background: #0A0A0A; color: #fff; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0A0A0A; }
+    ::-webkit-scrollbar-thumb { background: #E79E14; border-radius: 2px; }
+
+    .el-yellow { color: #E79E14; }
+    .bg-el-yellow { background: #E79E14; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    .unit-card {
+      background: #111111;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .unit-card:hover {
+      border-color: rgba(231,158,20,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .btn-cta {
+      background: #E79E14;
+      color: #0A0A0A;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 10px;
+      padding: 14px 28px;
+      display: block;
+      width: 100%;
+      text-align: center;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-cta:hover {
+      background: #fbbf24;
+      transform: scale(1.02);
+    }
+    .btn-cta:active { transform: scale(0.98); }
+
+    .number-badge {
+      width: 36px;
+      height: 36px;
+      background: rgba(231,158,20,0.12);
+      border: 1px solid rgba(231,158,20,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      color: #E79E14;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center relative overflow-hidden">
+
+    <!-- fundo sutil -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04]" style="background:radial-gradient(circle, #E79E14, transparent 70%);"></div>
+    </div>
+
+    <!-- eyebrow -->
+    <p class="fade-up text-xs font-black uppercase tracking-[0.35em] el-yellow mb-6">Thor Fitness · Matrícula Online</p>
+
+    <!-- título -->
+    <h1 class="fade-up delay-1 font-black uppercase tracking-tight text-4xl sm:text-5xl md:text-6xl leading-none mb-4" style="max-width:720px;">
+      Escolha sua<br/>
+      <span style="background:linear-gradient(135deg,#E79E14,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Unidade</span>
+    </h1>
+
+    <p class="fade-up delay-2 text-white/40 text-base sm:text-lg mb-16" style="max-width:480px;">
+      Selecione a academia mais próxima de você e garanta sua vaga agora.
+    </p>
+
+    <!-- CARDS DAS UNIDADES -->
+    <div class="fade-up delay-3 w-full grid grid-cols-1 sm:grid-cols-3 gap-5" style="max-width:860px;">
+
+      <!-- Balneário -->
+      <div class="unit-card p-8 flex flex-col gap-6 text-left">
+        <div class="flex items-center gap-3">
+          <div class="number-badge">01</div>
+          <div>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Unidade</p>
+            <h2 class="font-black uppercase tracking-tight text-lg leading-tight">Balneário</h2>
+          </div>
+        </div>
+        <a href="https://evo-totem.w12app.com.br/thorfitness/2/site/+eIL+fzZNcy7Gt/Pl5KIrQ==" target="_blank" class="btn-cta">
+          Matricular aqui
+        </a>
+      </div>
+
+      <!-- Garavelo -->
+      <div class="unit-card p-8 flex flex-col gap-6 text-left">
+        <div class="flex items-center gap-3">
+          <div class="number-badge">02</div>
+          <div>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Unidade</p>
+            <h2 class="font-black uppercase tracking-tight text-lg leading-tight">Garavelo</h2>
+          </div>
+        </div>
+        <a href="https://evo-totem.w12app.com.br/thorfitness/1/site/QhXXzoY7OMy+FpULG15Wrw==" target="_blank" class="btn-cta">
+          Matricular aqui
+        </a>
+      </div>
+
+      <!-- Guanabara -->
+      <div class="unit-card p-8 flex flex-col gap-6 text-left">
+        <div class="flex items-center gap-3">
+          <div class="number-badge">03</div>
+          <div>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Unidade</p>
+            <h2 class="font-black uppercase tracking-tight text-lg leading-tight">Guanabara</h2>
+          </div>
+        </div>
+        <a href="https://evo-totem.w12app.com.br/THORFITNESS/3/site/uRcgN1BLXvcYzmC/ZHe3rg==" target="_blank" class="btn-cta">
+          Matricular aqui
+        </a>
+      </div>
+
+    </div>
+
+    <!-- rodapé discreto -->
+    <p class="fade-up delay-4 text-white/20 text-xs mt-16 uppercase tracking-widest">Thor Fitness © 2026</p>
+
+  </section>
+
+</body>
+</html>
