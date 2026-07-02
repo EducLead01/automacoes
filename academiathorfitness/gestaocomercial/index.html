@@ -150,5 +150,86 @@
 
   </section>
 
+  <!-- CRÉDITOS WHATSAPP -->
+  <section style="background:#0D0D0D; border-top:1px solid rgba(255,255,255,0.05);" class="px-6 py-20">
+    <div class="mx-auto" style="max-width:860px;">
+
+      <div class="text-center mb-12">
+        <p class="text-xs font-black uppercase tracking-[0.35em] el-yellow mb-3">WhatsApp Business</p>
+        <h2 class="font-black uppercase tracking-tight text-3xl sm:text-4xl">Créditos de Disparo</h2>
+        <p id="creditos-data" class="text-white/30 text-sm mt-2"></p>
+      </div>
+
+      <div id="creditos-lista" class="grid grid-cols-1 sm:grid-cols-3 gap-5"></div>
+
+    </div>
+  </section>
+
+<script>
+const CREDITOS = {
+    atualizadoEm: '02/07/2026',
+    unidades: [
+        {
+            nome: 'Balneário',
+            marketing:   { usado: 43,  limite: 300  },
+            utilitarios: { usado: 0,   limite: 1500 },
+        },
+        {
+            nome: 'Garavelo',
+            marketing:   { usado: 0,   limite: 300  },
+            utilitarios: { usado: 0,   limite: 1500 },
+        },
+        {
+            nome: 'Guanabara',
+            marketing:   { usado: 0,   limite: 300  },
+            utilitarios: { usado: 0,   limite: 1500 },
+        },
+    ],
+};
+
+function barColor(pct) {
+    if (pct >= 80) return '#ef4444';
+    if (pct >= 50) return '#E79E14';
+    return '#22c55e';
+}
+
+function renderBar(label, usado, limite) {
+    const pct = Math.min(100, Math.round((usado / limite) * 100));
+    const cor = barColor(pct);
+    return `
+        <div>
+            <div class="flex justify-between items-baseline mb-1">
+                <span class="text-xs font-black uppercase tracking-wide text-white/50">${label}</span>
+                <span class="text-xs font-black" style="color:${cor};">${usado}<span class="text-white/30 font-normal">/${limite}</span></span>
+            </div>
+            <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:99px;overflow:hidden;">
+                <div style="height:100%;width:${pct}%;background:${cor};border-radius:99px;transition:width 0.8s ease;"></div>
+            </div>
+            <p class="text-right text-[10px] text-white/25 mt-1">${pct}% usado</p>
+        </div>`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('creditos-data').textContent = 'Atualizado em ' + CREDITOS.atualizadoEm;
+
+    const lista = document.getElementById('creditos-lista');
+    lista.innerHTML = CREDITOS.unidades.map((u, i) => `
+        <div class="unit-card p-7 flex flex-col gap-5">
+            <div class="flex items-center gap-3">
+                <div class="number-badge">0${i + 1}</div>
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Unidade</p>
+                    <h3 class="font-black uppercase tracking-tight text-base leading-tight">${u.nome}</h3>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                ${renderBar('Marketing', u.marketing.usado, u.marketing.limite)}
+                ${renderBar('Utilitários', u.utilitarios.usado, u.utilitarios.limite)}
+            </div>
+        </div>
+    `).join('');
+});
+</script>
+
 </body>
 </html>
