@@ -150,6 +150,21 @@
 
   </section>
 
+  <!-- TRÁFEGO E CAPTAÇÃO -->
+  <section style="background:#0A0A0A; border-top:1px solid rgba(255,255,255,0.05);" class="px-6 py-20">
+    <div class="mx-auto" style="max-width:860px;">
+
+      <div class="text-center mb-12">
+        <p class="text-xs font-black uppercase tracking-[0.35em] el-yellow mb-3">Instagram · Link na Bio</p>
+        <h2 class="font-black uppercase tracking-tight text-3xl sm:text-4xl">Tráfego e Captação</h2>
+        <p id="trafego-data" class="text-white/30 text-sm mt-2"></p>
+      </div>
+
+      <div id="trafego-lista" class="grid grid-cols-1 sm:grid-cols-3 gap-5"></div>
+
+    </div>
+  </section>
+
   <!-- CRÉDITOS WHATSAPP -->
   <section style="background:#0D0D0D; border-top:1px solid rgba(255,255,255,0.05);" class="px-6 py-20">
     <div class="mx-auto" style="max-width:860px;">
@@ -166,6 +181,27 @@
   </section>
 
 <script>
+const TRAFEGO = {
+    atualizadoEm: '02/07/2026',
+    unidades: [
+        {
+            nome: 'Balneário',
+            visitasBio:    0,
+            novosUsuarios: 0,
+        },
+        {
+            nome: 'Garavelo',
+            visitasBio:    0,
+            novosUsuarios: 0,
+        },
+        {
+            nome: 'Guanabara',
+            visitasBio:    0,
+            novosUsuarios: 0,
+        },
+    ],
+};
+
 const CREDITOS = {
     atualizadoEm: '02/07/2026',
     unidades: [
@@ -210,6 +246,34 @@ function renderBar(label, usado, limite) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // TRÁFEGO
+    document.getElementById('trafego-data').textContent = 'Atualizado em ' + TRAFEGO.atualizadoEm;
+    document.getElementById('trafego-lista').innerHTML = TRAFEGO.unidades.map((u, i) => `
+        <div class="unit-card p-7 flex flex-col gap-6">
+            <div class="flex items-center gap-3">
+                <div class="number-badge">0${i + 1}</div>
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Unidade</p>
+                    <h3 class="font-black uppercase tracking-tight text-base leading-tight">${u.nome}</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;" class="p-4 flex flex-col gap-1">
+                    <p class="text-[10px] font-black uppercase tracking-[0.25em] text-white/30">Visitas Bio</p>
+                    <p class="font-black text-2xl leading-none" style="color:#E79E14;">${u.visitasBio.toLocaleString('pt-BR')}</p>
+                    <p class="text-[10px] text-white/25">cliques no link</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;" class="p-4 flex flex-col gap-1">
+                    <p class="text-[10px] font-black uppercase tracking-[0.25em] text-white/30">Novos Leads</p>
+                    <p class="font-black text-2xl leading-none" style="color:#22c55e;">${u.novosUsuarios.toLocaleString('pt-BR')}</p>
+                    <p class="text-[10px] text-white/25">usuários entrados</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // CRÉDITOS
     document.getElementById('creditos-data').textContent = 'Atualizado em ' + CREDITOS.atualizadoEm;
 
     const lista = document.getElementById('creditos-lista');
