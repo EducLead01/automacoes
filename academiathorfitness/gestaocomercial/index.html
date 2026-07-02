@@ -189,18 +189,21 @@ const TRAFEGO = {
             visitasBio:    0,
             novosUsuarios: 0,
             linkWhatsApp:  'https://docs.google.com/spreadsheets/d/1ugOpyJzjfIcm8ky4tHRG_q4yLJH0_fGln1t3NhxuG8w/edit?usp=sharing',
+            linkFases:     '',
         },
         {
             nome: 'Garavelo',
             visitasBio:    0,
             novosUsuarios: 0,
             linkWhatsApp:  '#',
+            linkFases:     'https://docs.google.com/spreadsheets/d/1IM-eb_BPoCqjO9UAmGlNTRhco21_SyfE/edit?usp=sharing&ouid=102399187444579619321&rtpof=true&sd=true',
         },
         {
             nome: 'Guanabara',
             visitasBio:    0,
             novosUsuarios: 0,
             linkWhatsApp:  '#',
+            linkFases:     '',
         },
     ],
 };
@@ -276,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="${u.linkWhatsApp}" target="_blank" class="btn-cta">
                 Entrada de Leads
             </a>
+            ${u.linkFases ? `<a href="${u.linkFases}" target="_blank" class="btn-cta">Fases do Lead</a>` : ''}
         </div>
     `).join('');
 
