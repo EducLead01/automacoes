@@ -329,12 +329,99 @@
 
     </main>
 
+    <section class="py-14 bg-educ-black border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-lg font-black uppercase tracking-tight mb-2">Levar essa referência para o Claude Code</h2>
+            <p class="text-gray-400 text-sm max-w-md mx-auto mb-6">Baixe todo o conteúdo desta página em Markdown para colar no seu <code class="text-educ-gold">CLAUDE.md</code> global.</p>
+            <button id="downloadMd" onclick="downloadReferenciaMd()"
+                class="inline-flex items-center gap-2 bg-educ-gold text-educ-black font-black text-sm uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-yellow-400 transition-all duration-300">
+                <i class="fas fa-download"></i> Baixar como .md
+            </button>
+        </div>
+    </section>
+
     <footer class="py-8 bg-educ-black border-t border-white/5 text-center">
         <p class="text-sm font-black uppercase tracking-tight">EDUC <span class="text-educ-gold">LEAD</span></p>
         <p class="text-xs text-gray-500 mt-2">Referência baseada nos atalhos padrão do VS Code no Windows. Alguns podem variar conforme extensões instaladas.</p>
     </footer>
 
     <script>
+        function downloadReferenciaMd() {
+            var md = [
+                '# Referência Rápida — VS Code & Claude Code',
+                '',
+                '## Navegação',
+                '- **Ctrl+P** — Abrir arquivo rapidamente (Quick Open)',
+                '- **Ctrl+Shift+P** — Paleta de comandos',
+                '- **Ctrl+G** — Ir para uma linha específica',
+                '- **Ctrl+Tab** — Alternar entre abas abertas',
+                '- **Ctrl+Shift+O** — Ir para símbolo/função no arquivo',
+                '- **Alt+←/→** — Voltar / avançar no histórico',
+                '- **Ctrl+\\\\** — Dividir o editor',
+                '',
+                '## Edição & Multi-cursor',
+                '- **Ctrl+D** — Selecionar próxima ocorrência igual',
+                '- **Ctrl+Shift+L** — Selecionar todas as ocorrências',
+                '- **Alt+Click** — Adicionar cursor no ponto clicado',
+                '- **Ctrl+Alt+↑/↓** — Cursor na linha acima/abaixo',
+                '- **Alt+↑/↓** — Mover a linha para cima/baixo',
+                '- **Shift+Alt+↑/↓** — Duplicar a linha',
+                '- **Ctrl+/** — Comentar / descomentar linha',
+                '- **Shift+Alt+F** — Formatar o documento inteiro',
+                '',
+                '## Busca & Substituição',
+                '- **Ctrl+F** — Buscar no arquivo atual',
+                '- **Ctrl+H** — Substituir no arquivo atual',
+                '- **Ctrl+Shift+F** — Buscar em todo o projeto',
+                '- **Ctrl+Shift+H** — Substituir em todo o projeto',
+                '',
+                '## Painéis & Layout',
+                '- **Ctrl+B** — Mostrar/ocultar barra lateral',
+                '- **Ctrl+`** — Abrir/fechar terminal integrado',
+                '- **Ctrl+Shift+E** — Explorer',
+                '- **Ctrl+Shift+X** — Extensões',
+                '- **Ctrl+Shift+G** — Controle de versão (Git)',
+                '- **Ctrl+K Z** — Modo foco (Zen Mode)',
+                '',
+                '## Debug',
+                '- **F5** — Iniciar / continuar depuração',
+                '- **Shift+F5** — Parar depuração',
+                '- **F9** — Alternar breakpoint na linha',
+                '- **F10** — Step over',
+                '- **F11** — Step into',
+                '',
+                '## Emmet — HTML & CSS',
+                '- **Tab** — Expandir abreviação Emmet',
+                '- **!** — Boilerplate HTML5 completo',
+                '- **lorem10** — Gerar texto de teste',
+                '',
+                '## Claude Code — Orquestração de Agentes',
+                '- **/effort** — Ajusta a profundidade de raciocínio do modelo durante a conversa (low, medium, high, xhigh, max, auto).',
+                '- **/effort ultracode** — xhigh + orquestração automática de fluxo entre agentes.',
+                '- **/code-review ultra** — Revisão de código multi-agente na nuvem do branch atual (paga, acionada manualmente).',
+                '- **/code-review ultra <PR#>** — Mesma revisão aplicada a um Pull Request específico.',
+                '',
+                '## Boas Práticas',
+                '- Um `settings.json` por projeto (`formatOnSave`).',
+                '- Live Server para páginas HTML.',
+                '- Multi-cursor em vez de repetição manual.',
+                '- Snippets personalizados para blocos repetidos.',
+                '- `.gitignore` por projeto.',
+                '- `Ctrl+Shift+P` como atalho universal.',
+                ''
+            ].join('\n');
+
+            var blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'referencia-vscode-claude-code.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
         (function () {
             var inputs = [document.getElementById('filterInput'), document.getElementById('filterInputMobile')];
             var cards = Array.prototype.slice.call(document.querySelectorAll('[data-card]'));
