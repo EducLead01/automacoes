@@ -104,6 +104,28 @@
         }
         .emmet-box .in { color: #E79E14; font-family: 'Consolas', ui-monospace, monospace; font-size: 0.85rem; }
         .emmet-box .out { color: rgba(255,255,255,0.5); font-family: 'Consolas', ui-monospace, monospace; font-size: 0.76rem; margin-top: 0.4rem; white-space: pre-wrap; }
+
+        .cc-row {
+            padding: 0.65rem 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .cc-row:first-of-type { border-top: none; }
+        .cc-row .cc-cmd {
+            font-family: 'Consolas', ui-monospace, 'SFMono-Regular', monospace;
+            font-size: 0.8rem;
+            color: #E79E14;
+            background: #1A1A1A;
+            border: 1px solid rgba(231,158,20,0.25);
+            border-radius: 6px;
+            padding: 0.2rem 0.55rem;
+            display: inline-block;
+        }
+        .cc-row .cc-desc {
+            font-size: 0.83rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.4rem;
+            line-height: 1.45;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-educ-black text-educ-white">
@@ -123,6 +145,7 @@
                     <a href="#paineis" class="nav-link">Painéis</a>
                     <a href="#debug" class="nav-link">Debug</a>
                     <a href="#emmet" class="nav-link">Emmet</a>
+                    <a href="#claudecode" class="nav-link">Claude Code</a>
                     <a href="#boaspraticas" class="nav-link">Boas Práticas</a>
                 </nav>
                 <div class="hidden md:block relative">
@@ -144,6 +167,7 @@
             <a href="#paineis" class="block nav-link py-2 text-sm font-semibold text-center">Painéis</a>
             <a href="#debug" class="block nav-link py-2 text-sm font-semibold text-center">Debug</a>
             <a href="#emmet" class="block nav-link py-2 text-sm font-semibold text-center">Emmet</a>
+            <a href="#claudecode" class="block nav-link py-2 text-sm font-semibold text-center">Claude Code</a>
             <a href="#boaspraticas" class="block nav-link py-2 text-sm font-semibold text-center">Boas Práticas</a>
         </div>
     </header>
@@ -233,6 +257,26 @@
   &lt;p&gt;&lt;/p&gt;
   &lt;p&gt;&lt;/p&gt;
 &lt;/div&gt;</div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card bg-educ-gray rounded-2xl p-6" id="claudecode" data-card>
+                        <h2 class="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-educ-gold mb-1"><i class="fas fa-robot"></i>Claude Code — Orquestração de Agentes</h2>
+                        <div class="cc-row" data-row>
+                            <span class="cc-cmd">/effort</span>
+                            <p class="cc-desc">Ajusta a profundidade de raciocínio do modelo durante a própria conversa. Níveis: <b>low, medium, high, xhigh, max, auto</b> (auto volta ao padrão).</p>
+                        </div>
+                        <div class="cc-row" data-row>
+                            <span class="cc-cmd">/effort ultracode</span>
+                            <p class="cc-desc">Nível especial: raciocínio xhigh + orquestração automática de fluxo entre agentes, para tarefas complexas de múltiplas etapas.</p>
+                        </div>
+                        <div class="cc-row" data-row>
+                            <span class="cc-cmd">/code-review ultra</span>
+                            <p class="cc-desc">Revisão de código multi-agente na nuvem do branch atual — várias IAs revisam em paralelo e o resultado é consolidado. É paga e acionada manualmente.</p>
+                        </div>
+                        <div class="cc-row" data-row>
+                            <span class="cc-cmd">/code-review ultra &lt;PR#&gt;</span>
+                            <p class="cc-desc">Mesma revisão multi-agente, aplicada a um Pull Request específico do GitHub em vez do branch local.</p>
                         </div>
                     </div>
 
