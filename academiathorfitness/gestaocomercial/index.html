@@ -165,6 +165,30 @@
     </div>
   </section>
 
+  <!-- PASSO A PASSO: ADICIONAR CRÉDITOS -->
+  <section style="background:#0D0D0D; border-top:1px solid rgba(255,255,255,0.05);" class="px-6 py-20">
+    <div class="mx-auto" style="max-width:700px;">
+
+      <div class="text-center mb-12">
+        <p class="text-xs font-black uppercase tracking-[0.35em] el-yellow mb-3">Tutorial</p>
+        <h2 class="font-black uppercase tracking-tight text-3xl sm:text-4xl">Como Adicionar Créditos</h2>
+        <p class="text-white/30 text-sm mt-2">Passo a passo no painel do BotConversa</p>
+      </div>
+
+      <div id="tutorial-lista" class="flex flex-col gap-6"></div>
+
+      <div class="text-center mt-16 mb-8">
+        <p class="text-xs font-black uppercase tracking-[0.35em] el-yellow mb-3">Como Funciona</p>
+        <h3 class="font-black uppercase tracking-tight text-2xl sm:text-3xl">Simples e rápido em 3 passos</h3>
+      </div>
+      <div id="como-funciona-lista" class="grid grid-cols-1 sm:grid-cols-3 gap-5"></div>
+
+      <p class="text-center text-xs font-black uppercase tracking-[0.3em] text-white/30 mt-14 mb-6">ID de Companhia por Unidade</p>
+      <div id="companhias-lista" class="grid grid-cols-1 sm:grid-cols-3 gap-5"></div>
+
+    </div>
+  </section>
+
   <!-- TRÁFEGO E CAPTAÇÃO -->
   <section style="background:#0A0A0A; border-top:1px solid rgba(255,255,255,0.05);" class="px-6 py-20">
     <div class="mx-auto" style="max-width:860px;">
@@ -229,6 +253,58 @@ const CREDITOS = {
     ],
 };
 
+const TUTORIAL_CREDITOS = [
+    {
+        titulo: 'Acesse Configurações',
+        descricao: 'No menu lateral esquerdo do BotConversa, clique em "Configurações" (ícone de engrenagem, no final do menu).',
+        imagem: 'images/passo-1-configuracoes.png',
+    },
+    {
+        titulo: 'Clique em Modelos de Mensagem',
+        descricao: 'Dentro de Configurações, na aba "WhatsApp", clique em "Modelos de mensagem" ao lado da aba "Conta".',
+        imagem: 'images/passo-2-modelos-mensagem.png',
+    },
+    {
+        titulo: 'Verifique e Aumente seu Limite',
+        descricao: 'Confira o "Limite de modelos de marketing" e o "Limite de modelos utilitários" (uso atual/limite). Se estiver próximo do limite, clique em "Aumentar limite".',
+        imagem: 'images/passo-3-aumentar-limite.png',
+    },
+    {
+        titulo: 'Clique em Comprar Créditos',
+        descricao: 'Na página "Recarga de Créditos de Mensagem WhatsApp", confira os valores (Marketing: R$ 0,50/msg · Utilidade: R$ 0,05/msg) e clique em "Comprar Créditos".',
+        imagem: 'images/passo-4-comprar-creditos.png',
+    },
+    {
+        titulo: 'Digite o ID da Companhia',
+        descricao: 'Informe o ID numérico da unidade (veja os IDs de cada companhia logo abaixo) e clique em "Buscar Companhia".',
+        imagem: 'images/passo-5-id-companhia.png',
+    },
+];
+
+const COMO_FUNCIONA = [
+    {
+        icone: '🔍',
+        titulo: 'Informe o ID da Companhia',
+        descricao: 'Digite o ID numérico da sua companhia no BotConversa para identificar sua conta.',
+    },
+    {
+        icone: '💬',
+        titulo: 'Escolha os créditos',
+        descricao: 'Selecione entre mensagens de Marketing ou Utilidade e defina a quantidade desejada.',
+    },
+    {
+        icone: '✅',
+        titulo: 'Pague e receba',
+        descricao: 'Realize o pagamento no checkout seguro e receba os créditos automaticamente.',
+    },
+];
+
+const COMPANHIAS_ID = [
+    { nome: 'Balneário', id: '206887' },
+    { nome: 'Garavelo',  id: '207464' },
+    { nome: 'Guanabara', id: '207190' },
+];
+
 function barColor(pct) {
     if (pct >= 80) return '#ef4444';
     if (pct >= 50) return '#E79E14';
@@ -252,6 +328,38 @@ function renderBar(label, usado, limite) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // TUTORIAL CRÉDITOS
+    document.getElementById('tutorial-lista').innerHTML = TUTORIAL_CREDITOS.map((p, i) => `
+        <div class="unit-card p-7 flex flex-col sm:flex-row gap-6 items-start">
+            <div class="number-badge" style="width:40px;height:40px;font-size:15px;flex-shrink:0;">${i + 1}</div>
+            <div class="flex-1 flex flex-col gap-4">
+                <div>
+                    <h3 class="font-black uppercase tracking-tight text-lg leading-tight mb-1">${p.titulo}</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">${p.descricao}</p>
+                </div>
+                <img src="${p.imagem}" alt="${p.titulo}" style="border-radius:14px;border:1px solid rgba(255,255,255,0.08);max-width:280px;width:100%;" onerror="this.style.display='none';" />
+            </div>
+        </div>
+    `).join('');
+
+    // COMO FUNCIONA
+    document.getElementById('como-funciona-lista').innerHTML = COMO_FUNCIONA.map((c, i) => `
+        <div class="unit-card p-7 flex flex-col items-center text-center gap-3">
+            <div class="number-badge" style="width:40px;height:40px;font-size:15px;">${i + 1}</div>
+            <div class="text-2xl">${c.icone}</div>
+            <h4 class="font-black uppercase tracking-tight text-sm leading-tight">${c.titulo}</h4>
+            <p class="text-white/50 text-xs leading-relaxed">${c.descricao}</p>
+        </div>
+    `).join('');
+
+    // ID DE COMPANHIA
+    document.getElementById('companhias-lista').innerHTML = COMPANHIAS_ID.map((c, i) => `
+        <div class="unit-card p-6 flex flex-col gap-3 text-center items-center">
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Thor ${c.nome}</p>
+            <p class="font-black text-2xl" style="color:#E79E14;">${c.id}</p>
+        </div>
+    `).join('');
 
     // TRÁFEGO
     document.getElementById('trafego-data').textContent = 'Atualizado em ' + TRAFEGO.atualizadoEm;
