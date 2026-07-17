@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Danilo Rios | Estratégia de Mídia Eleitoral 2026</title>
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
@@ -72,10 +73,46 @@
       color: #E79E14;
       flex-shrink: 0;
     }
+
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: #0A0A0A;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      z-index: 999;
+      padding: 24px;
+      text-align: center;
+    }
+    #gate input {
+      background: #111111;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 16px;
+      text-align: center;
+      width: 260px;
+      outline: none;
+    }
+    #gate input:focus { border-color: rgba(231,158,20,0.5); }
+    #gate p.error { color: #ef4444; font-size: 13px; height: 16px; margin: 0; }
   </style>
 </head>
 <body>
 
+  <div id="gate">
+    <p class="text-xs font-black uppercase tracking-[0.35em] el-yellow">Acesso Restrito</p>
+    <h1 class="font-black uppercase tracking-tight text-2xl">Proposta Danilo Rios</h1>
+    <input type="password" id="gate-input" placeholder="Senha" autocomplete="off" />
+    <p class="error" id="gate-error"></p>
+    <button onclick="checkPassword()" class="btn-cta" style="border:none; cursor:pointer;">Entrar</button>
+  </div>
+
+  <div id="page-content" style="display:none;">
   <div data-module="sections/capa.html"></div>
   <div data-module="sections/contexto.html"></div>
   <div data-module="sections/objetivos.html"></div>
@@ -92,12 +129,41 @@
   <div data-module="sections/responsabilidades.html"></div>
   <div data-module="sections/central-inteligencia.html"></div>
   <div data-module="sections/proximos-passos.html"></div>
+  </div>
 
   <script>
-    document.querySelectorAll('[data-module]').forEach(async (el) => {
-      const res = await fetch(el.dataset.module);
-      el.outerHTML = await res.text();
+    const PASSWORD = 'depdanilorios';
+
+    function loadModules() {
+      document.querySelectorAll('[data-module]').forEach(async (el) => {
+        const res = await fetch(el.dataset.module);
+        el.outerHTML = await res.text();
+      });
+    }
+
+    function unlock() {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('page-content').style.display = '';
+      loadModules();
+    }
+
+    function checkPassword() {
+      const val = document.getElementById('gate-input').value.trim().toLowerCase();
+      if (val === PASSWORD) {
+        localStorage.setItem('danilo-rios-auth', '1');
+        unlock();
+      } else {
+        document.getElementById('gate-error').textContent = 'Senha incorreta';
+      }
+    }
+
+    document.getElementById('gate-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkPassword();
     });
+
+    if (localStorage.getItem('danilo-rios-auth') === '1') {
+      unlock();
+    }
   </script>
 
 </body>
