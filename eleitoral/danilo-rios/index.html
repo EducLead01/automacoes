@@ -12,6 +12,17 @@
   <style>
     * { font-family: 'Inter', sans-serif; }
     body { background: #0A0A0A; color: #fff; }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      #gate { display: none !important; }
+      #page-content { display: block !important; }
+      section { break-inside: avoid; }
+    }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #0A0A0A; }
     ::-webkit-scrollbar-thumb { background: #E79E14; border-radius: 2px; }
