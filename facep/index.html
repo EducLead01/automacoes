@@ -103,8 +103,8 @@
       flex-shrink: 0;
       cursor: pointer;
     }
-    .flow-node {
-      transition: box-shadow 0.5s ease, transform 0.5s ease;
+    #flywheel > div {
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
     #calc-bar {
       position: sticky;
@@ -134,7 +134,7 @@
         pending -= 1;
         if (pending === 0) {
           if (typeof initCalculadora === 'function') initCalculadora();
-          if (typeof initFlowRoleta === 'function') initFlowRoleta();
+          if (typeof initFlywheel === 'function') initFlywheel();
         }
       });
     }
@@ -175,36 +175,99 @@
       recalcTotal();
     }
 
-    /* Roleta do fluxo de atribuição — Kommo → Servidor → Meta → devolutiva */
-    function initFlowRoleta() {
-      const steps = [
-        { id: 'flow-kommo', caption: 'Lead vira matrícula no Kommo CRM' },
-        { id: 'flow-servidor', caption: 'Servidor de Atribuição traduz o evento e envia via CAPI' },
-        { id: 'flow-meta', caption: 'Meta Andrômeda recebe o evento e ajusta o leilão' },
-        { id: 'flow-meta', caption: '↺ Devolutiva: sinal de otimização volta pra próxima campanha' },
+    /* Flywheel — Meta Ads → TikTok Ads → Servidor (IA) → Kommo → devolução */
+    function initFlywheel() {
+      const svg = document.getElementById('flywheel-svg');
+      const wheel = document.getElementById('flywheel');
+      const captionEl = document.getElementById('flow-caption');
+      if (!svg || !wheel || !captionEl) return;
+
+      const cx = 150, cy = 150, rOuter = 140, rInner = 85, rLabel = 166;
+
+      function polar(r, angleDeg) {
+        const theta = (angleDeg - 90) * Math.PI / 180;
+        return { x: cx + r * Math.cos(theta), y: cy + r * Math.sin(theta) };
+      }
+
+      function arcPath(startAngle, endAngle) {
+        const so = polar(rOuter, startAngle);
+        const eo = polar(rOuter, endAngle);
+        const si = polar(rInner, startAngle);
+        const ei = polar(rInner, endAngle);
+        const largeArc = (endAngle - startAngle) > 180 ? 1 : 0;
+        return 'M ' + so.x + ' ' + so.y +
+          ' A ' + rOuter + ' ' + rOuter + ' 0 ' + largeArc + ' 1 ' + eo.x + ' ' + eo.y +
+          ' L ' + ei.x + ' ' + ei.y +
+          ' A ' + rInner + ' ' + rInner + ' 0 ' + largeArc + ' 0 ' + si.x + ' ' + si.y + ' Z';
+      }
+
+      const segments = [
+        { id: 'meta', label: 'Meta Ads', color: '#1877F2', start: 3, end: 87 },
+        { id: 'tiktok', label: 'TikTok Ads', color: '#FE2C55', start: 93, end: 177 },
+        { id: 'servidor', label: 'Servidor (IA)', color: '#E79E14', start: 183, end: 267 },
+        { id: 'kommo', label: 'Kommo', color: '#A855F7', start: 273, end: 357 },
       ];
-      const nodeIds = ['flow-kommo', 'flow-servidor', 'flow-meta'];
-      const nodes = nodeIds.map((id) => document.getElementById(id)).filter(Boolean);
-      const caption = document.getElementById('flow-caption');
-      if (nodes.length !== 3 || !caption) return;
+
+      const ns = 'http://www.w3.org/2000/svg';
+      segments.forEach((seg) => {
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('d', arcPath(seg.start, seg.end));
+        path.setAttribute('fill', seg.color);
+        path.setAttribute('fill-opacity', '0.55');
+        path.setAttribute('id', 'seg-' + seg.id);
+        path.style.transition = 'fill-opacity 0.4s ease, filter 0.4s ease';
+        svg.appendChild(path);
+
+        const mid = (seg.start + seg.end) / 2;
+        const pos = polar(rLabel, mid);
+        const label = document.createElement('div');
+        label.id = 'label-' + seg.id;
+        label.className = 'absolute text-center font-black text-[11px] uppercase tracking-wide';
+        label.style.left = (pos.x / 300 * 100) + '%';
+        label.style.top = (pos.y / 300 * 100) + '%';
+        label.style.transform = 'translate(-50%, -50%) scale(1)';
+        label.style.width = '26%';
+        label.style.color = seg.color;
+        label.style.opacity = '0.6';
+        label.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        label.textContent = seg.label;
+        wheel.appendChild(label);
+      });
+
+      const captions = {
+        meta: 'Meta Ads envia o lead pro funil',
+        tiktok: 'TikTok Ads envia o lead pro funil',
+        servidor: 'Servidor de Atribuição captura o evento — server-side, feito pra IA',
+        kommo: 'Kommo CRM registra a matrícula',
+        devolucao: '↺ Devolução: sinal de matrícula volta pro Meta Ads e pro TikTok Ads',
+      };
+      const order = ['meta', 'tiktok', 'servidor', 'kommo', 'devolucao'];
 
       let i = 0;
       function tick() {
-        const step = steps[i % steps.length];
-        nodes.forEach((node) => {
-          const active = node.id === step.id;
-          node.style.boxShadow = active ? node.dataset.activeShadow : node.dataset.baseShadow;
-          node.style.transform = active ? 'scale(1.05)' : 'scale(1)';
+        const key = order[i % order.length];
+        segments.forEach((seg) => {
+          const path = document.getElementById('seg-' + seg.id);
+          const label = document.getElementById('label-' + seg.id);
+          const active = seg.id === key || (key === 'devolucao' && (seg.id === 'meta' || seg.id === 'tiktok'));
+          if (path) {
+            path.setAttribute('fill-opacity', active ? '1' : '0.55');
+            path.style.filter = active ? 'drop-shadow(0 0 8px ' + seg.color + ')' : 'none';
+          }
+          if (label) {
+            label.style.opacity = active ? '1' : '0.6';
+            label.style.transform = 'translate(-50%, -50%) scale(' + (active ? 1.1 : 1) + ')';
+          }
         });
-        caption.style.opacity = '0';
+        captionEl.style.opacity = '0';
         setTimeout(() => {
-          caption.textContent = step.caption;
-          caption.style.opacity = '1';
+          captionEl.textContent = captions[key];
+          captionEl.style.opacity = '1';
         }, 200);
         i += 1;
       }
       tick();
-      setInterval(tick, 2000);
+      setInterval(tick, 2200);
     }
   </script>
 
