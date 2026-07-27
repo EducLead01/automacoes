@@ -103,6 +103,9 @@
       flex-shrink: 0;
       cursor: pointer;
     }
+    .flow-node {
+      transition: box-shadow 0.5s ease, transform 0.5s ease;
+    }
     #calc-bar {
       position: sticky;
       bottom: 0;
@@ -129,7 +132,10 @@
         const res = await fetch(el.dataset.module);
         el.outerHTML = await res.text();
         pending -= 1;
-        if (pending === 0 && typeof initCalculadora === 'function') initCalculadora();
+        if (pending === 0) {
+          if (typeof initCalculadora === 'function') initCalculadora();
+          if (typeof initFlowRoleta === 'function') initFlowRoleta();
+        }
       });
     }
 
@@ -167,6 +173,38 @@
         box.addEventListener('change', recalcTotal);
       });
       recalcTotal();
+    }
+
+    /* Roleta do fluxo de atribuição — Kommo → Servidor → Meta → devolutiva */
+    function initFlowRoleta() {
+      const steps = [
+        { id: 'flow-kommo', caption: 'Lead vira matrícula no Kommo CRM' },
+        { id: 'flow-servidor', caption: 'Servidor de Atribuição traduz o evento e envia via CAPI' },
+        { id: 'flow-meta', caption: 'Meta Andrômeda recebe o evento e ajusta o leilão' },
+        { id: 'flow-meta', caption: '↺ Devolutiva: sinal de otimização volta pra próxima campanha' },
+      ];
+      const nodeIds = ['flow-kommo', 'flow-servidor', 'flow-meta'];
+      const nodes = nodeIds.map((id) => document.getElementById(id)).filter(Boolean);
+      const caption = document.getElementById('flow-caption');
+      if (nodes.length !== 3 || !caption) return;
+
+      let i = 0;
+      function tick() {
+        const step = steps[i % steps.length];
+        nodes.forEach((node) => {
+          const active = node.id === step.id;
+          node.style.boxShadow = active ? node.dataset.activeShadow : node.dataset.baseShadow;
+          node.style.transform = active ? 'scale(1.05)' : 'scale(1)';
+        });
+        caption.style.opacity = '0';
+        setTimeout(() => {
+          caption.textContent = step.caption;
+          caption.style.opacity = '1';
+        }, 200);
+        i += 1;
+      }
+      tick();
+      setInterval(tick, 2000);
     }
   </script>
 

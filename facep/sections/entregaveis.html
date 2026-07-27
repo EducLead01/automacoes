@@ -62,21 +62,28 @@
           <p class="text-white/60 text-sm leading-relaxed">
             O Servidor de Atribuição fecha essa lacuna com um túnel de dados privado — servidor a
             servidor, sem passar pelo navegador do candidato. Cada evento real do funil — mensagem
-            respondida, lead qualificado, matrícula fechada no <strong class="text-white/80">Koomo CRM</strong>
+            respondida, lead qualificado, matrícula fechada no <strong class="text-white/80">Kommo CRM</strong>
             — chega até a IA do Meta via CAPI no exato instante em que acontece.
           </p>
 
-          <!-- Diagrama visual -->
-          <div class="flex items-center justify-center gap-3 my-5 flex-wrap">
-            <div class="rounded-2xl px-5 py-4 text-center" style="background:#111111; border:1px solid rgba(231,158,20,0.45); box-shadow: 0 0 28px rgba(231,158,20,0.12);">
+          <!-- Diagrama visual (roleta) -->
+          <div class="flex items-center justify-center gap-2 my-5 flex-wrap">
+            <div class="flow-node rounded-2xl px-4 py-4 text-center" id="flow-kommo" data-base-shadow="0 0 14px rgba(59,130,246,0.06)" data-active-shadow="0 0 30px rgba(59,130,246,0.35)" style="background:#0d1520; border:1px solid rgba(59,130,246,0.3); box-shadow: 0 0 14px rgba(59,130,246,0.06);">
+              <p class="text-[9px] font-black uppercase tracking-widest text-blue-400 mb-0.5">Origem</p>
+              <p class="font-black text-xs">Kommo CRM</p>
+            </div>
+            <span class="text-white/25 text-lg font-black">→</span>
+            <div class="flow-node rounded-2xl px-5 py-4 text-center" id="flow-servidor" data-base-shadow="0 0 14px rgba(231,158,20,0.06)" data-active-shadow="0 0 30px rgba(231,158,20,0.35)" style="background:#111111; border:1px solid rgba(231,158,20,0.3); box-shadow: 0 0 14px rgba(231,158,20,0.06);">
               <p class="font-black text-[11px] uppercase tracking-wide leading-snug">Servidor de<br/>Atribuição</p>
             </div>
-            <span class="el-yellow text-lg font-black">→</span>
-            <div class="rounded-2xl px-5 py-4 text-center" style="background:#0d1f14; border:1px solid rgba(74,222,128,0.4);">
+            <span class="text-white/25 text-lg font-black">→</span>
+            <div class="flow-node rounded-2xl px-5 py-4 text-center" id="flow-meta" data-base-shadow="0 0 14px rgba(74,222,128,0.06)" data-active-shadow="0 0 30px rgba(74,222,128,0.35)" style="background:#0d1f14; border:1px solid rgba(74,222,128,0.3); box-shadow: 0 0 14px rgba(74,222,128,0.06);">
               <p class="text-[9px] font-black uppercase tracking-widest text-green-400 mb-0.5">Destino</p>
               <p class="font-black text-xs">Meta Andrômeda</p>
             </div>
           </div>
+          <p class="text-center text-white/30 text-[11px] uppercase tracking-widest mb-1">↺ devolutiva do evento</p>
+          <p id="flow-caption" class="text-center text-white/50 text-xs h-8 flex items-center justify-center transition-opacity duration-300">Lead vira matrícula no Kommo</p>
 
           <p class="el-yellow text-[11px] font-black uppercase tracking-[0.25em] mt-4 mb-1">Por que agora</p>
           <p class="text-white/60 text-sm leading-relaxed">
