@@ -161,9 +161,19 @@
         }
       });
       const onceEl = document.getElementById('calc-once');
+      const onceParceladoEl = document.getElementById('calc-once-parcelado');
       const annualEl = document.getElementById('calc-annual');
       const monthlyEl = document.getElementById('calc-monthly');
       if (onceEl) onceEl.textContent = 'R$ ' + formatBRL(once);
+      if (onceParceladoEl) {
+        const entrada = 500;
+        if (once > entrada) {
+          const parcela = (once - entrada) / 2;
+          onceParceladoEl.textContent = 'ou entrada de R$ ' + formatBRL(entrada) + ' + 2x de R$ ' + formatBRL(parcela);
+        } else {
+          onceParceladoEl.textContent = '';
+        }
+      }
       if (annualEl) annualEl.textContent = 'R$ ' + formatBRL(annual);
       if (monthlyEl) monthlyEl.textContent = 'R$ ' + formatBRL(monthly);
     }
